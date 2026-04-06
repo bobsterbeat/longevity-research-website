@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longevity Research</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .sidebar {
+            background-color: #1a2332;
+            color: white;
+        }
+        .sidebar-link {
+            color: #d1d5db;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+        .sidebar-link:hover {
+            color: #0d9488;
+        }
+        .sidebar-link.active {
+            color: #0d9488;
+            border-left-color: #0d9488;
+            background-color: rgba(13, 148, 136, 0.1);
+        }
+        .accent {
+            color: #0d9488;
+        }
+        .key-finding {
+            border-left: 4px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .chapter-summary {
+            border-left: 4px solid #10b981;
+            background-color: rgba(16, 185, 129, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .key-finding strong {
+            color: #1e40af;
+        }
+        .chapter-summary strong {
+            color: #065f46;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        th {
+            background-color: #1a2332;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        td {
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+        }
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+        .section-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .section-card:hover {
+            border-color: #0d9488;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+        .section-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 2.5rem 0 1.25rem;
+            color: #1a2332;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0d9488;
+            letter-spacing: -0.02em;
+        }
+        h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 2rem 0 0.75rem;
+            color: #0f766e;
+            padding-left: 0.75rem;
+            border-left: 3px solid #0d9488;
+        }
+        a {
+            color: #0d9488;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #0f766e;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #0d9488;
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 40;
+        }
+        .back-to-top.show {
+            opacity: 1;
+        }
+        .provider-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .provider-category {
+            font-weight: 600;
+            color: #0d9488;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.4rem;
+        }
+        .hamburger span {
+            width: 1.5rem;
+            height: 0.2rem;
+            background-color: white;
+            transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(0.5rem, 0.5rem);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(0.5rem, -0.5rem);
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .mobile-sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 75%;
+                max-width: 280px;
+                height: 100vh;
+                transition: transform 0.3s ease;
+                transform: translateX(-100%);
+                z-index: 50;
+                overflow-y: auto;
+                padding-top: 4rem;
+            }
+            .mobile-sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 45;
+            }
+            .mobile-overlay.active {
+                display: block;
+            }
+            .main-content {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar hidden md:flex flex-col w-64 fixed h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-700">
+                <h2 class="text-xl font-bold text-white">Longevity</h2>
+                <p class="text-xs text-gray-400 mt-1">Research & Protocols</p>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium">Home</a>
+                <a href="#section-1" class="sidebar-link block py-2 text-sm font-medium">Biology of Aging</a>
+                <a href="#section-2" class="sidebar-link block py-2 text-sm font-medium">Exercise</a>
+                <a href="#section-3" class="sidebar-link block py-2 text-sm font-medium">Diet & Microbiome</a>
+                <a href="#section-4" class="sidebar-link block py-2 text-sm font-medium">Fasting</a>
+                <a href="#section-5" class="sidebar-link block py-2 text-sm font-medium">Body Stresses</a>
+                <a href="#section-6" class="sidebar-link block py-2 text-sm font-medium">Supplements</a>
+                <a href="#section-7" class="sidebar-link block py-2 text-sm font-medium">Things to Avoid</a>
+                <a href="#section-8" class="sidebar-link block py-2 text-sm font-medium">Sleep & Recovery</a>
+                <a href="#section-9" class="sidebar-link block py-2 text-sm font-medium">Daily Protocols</a>
+                <a href="#section-10" class="sidebar-link block py-2 text-sm font-medium">Biomarkers & Lipids</a>
+                <a href="#section-11" class="sidebar-link block py-2 text-sm font-medium">Women's Health</a>
+                <a href="#section-12" class="sidebar-link block py-2 text-sm font-medium">Research Gaps</a>
+                <a href="#find-testing" class="sidebar-link block py-2 text-sm font-medium">Find Testing</a>
+                <a href="#sources" class="sidebar-link block py-2 text-sm font-medium">Sources & Credits</a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <a href="#download" class="block w-full bg-accent text-white text-center py-2 rounded text-sm font-medium">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="md:hidden fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 flex justify-between items-center">
+            <h2 class="text-lg font-bold">Longevity Research</h2>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileSidebar()"></div>
+
+        <!-- Mobile Sidebar -->
+        <div class="mobile-sidebar md:hidden bg-gray-900" id="mobile-sidebar">
+            <nav class="p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Home</a>
+                <a href="#section-1" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Biology of Aging</a>
+                <a href="#section-2" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Exercise</a>
+                <a href="#section-3" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Diet & Microbiome</a>
+                <a href="#section-4" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Fasting</a>
+                <a href="#section-5" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Body Stresses</a>
+                <a href="#section-6" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Supplements</a>
+                <a href="#section-7" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Things to Avoid</a>
+                <a href="#section-8" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Sleep & Recovery</a>
+                <a href="#section-9" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Daily Protocols</a>
+                <a href="#section-10" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Biomarkers & Lipids</a>
+                <a href="#section-11" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Women's Health</a>
+                <a href="#section-12" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Research Gaps</a>
+                <a href="#find-testing" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Find Testing</a>
+                <a href="#sources" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Sources & Credits</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content md:ml-64 w-full md:w-[calc(100%-256px)]">
+            <div class="md:pt-0 pt-20">
+                <!-- Home Section -->
+                <section id="home" class="content-section p-8 md:p-12 max-w-4xl mx-auto">
+                    <h1 class="text-4xl font-bold mb-2">Longevity Research</h1>
+                    <p class="text-xl text-gray-600 mb-8">Evidence-Based Review of the Science of Aging, Intervention Strategies & Practical Protocols</p>
+
+                    <div class="mb-4 text-gray-700">
+                        <p><strong>By R. Aldwinckle</strong></p>
+                        <p class="text-sm text-gray-600">Last Updated: April 4, 2026</p>
+                    </div>
+
+                    <div class="mb-12 p-4 bg-gray-50 border-l-4 border-accent rounded">
+                        <p class="text-gray-700">This comprehensive review synthesizes current evidence on the biology of aging, evidence-based interventions, and practical protocols for promoting healthspan and longevity. Navigate through sections using the sidebar to explore specific topics, or use the provider finder to locate testing services in your area.</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-8">Research Topics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="section-card" onclick="window.location.hash='#section-1'">
+                            <div class="section-card-icon">🧬</div>
+                            <h3 class="font-bold mb-2">Biology of Aging</h3>
+                            <p class="text-sm text-gray-600">Epigenetics, senescence, and nutrient-sensing pathways that drive aging</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-2'">
+                            <div class="section-card-icon">🏃</div>
+                            <h3 class="font-bold mb-2">Exercise</h3>
+                            <p class="text-sm text-gray-600">Zone 2, HIIT, resistance training, and optimal frequency</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-3'">
+                            <div class="section-card-icon">🥗</div>
+                            <h3 class="font-bold mb-2">Diet & Microbiome</h3>
+                            <p class="text-sm text-gray-600">Foods for longevity, Mediterranean diet, and gut health</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-4'">
+                            <div class="section-card-icon">⏱️</div>
+                            <h3 class="font-bold mb-2">Fasting</h3>
+                            <p class="text-sm text-gray-600">Types, duration, frequency, and metabolic benefits</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-5'">
+                            <div class="section-card-icon">🌡️</div>
+                            <h3 class="font-bold mb-2">Body Stresses</h3>
+                            <p class="text-sm text-gray-600">Sauna, cold exposure, and photobiomodulation</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-6'">
+                            <div class="section-card-icon">💊</div>
+                            <h3 class="font-bold mb-2">Supplements</h3>
+                            <p class="text-sm text-gray-600">Evidence-based supplements and pharmacological agents</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-7'">
+                            <div class="section-card-icon">⚠️</div>
+                            <h3 class="font-bold mb-2">Things to Avoid</h3>
+                            <p class="text-sm text-gray-600">Substances and practices that accelerate aging</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-8'">
+                            <div class="section-card-icon">😴</div>
+                            <h3 class="font-bold mb-2">Sleep & Recovery</h3>
+                            <p class="text-sm text-gray-600">Sleep architecture, circadian optimization, and recovery</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-9'">
+                            <div class="section-card-icon">📋</div>
+                            <h3 class="font-bold mb-2">Daily Protocols</h3>
+                            <p class="text-sm text-gray-600">Practical daily routines for longevity implementation</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-10'">
+                            <div class="section-card-icon">📊</div>
+                            <h3 class="font-bold mb-2">Biomarkers & Lipids</h3>
+                            <p class="text-sm text-gray-600">Lipid metabolism (ApoB, Lp(a), ApoE), inflammatory markers, metabolic panel & monitoring</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-11'">
+                            <div class="section-card-icon">♀️</div>
+                            <h3 class="font-bold mb-2">Women's Health</h3>
+                            <p class="text-sm text-gray-600">Menopause transition, HRT timing, bone density & sex-specific strategies</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#section-12'">
+                            <div class="section-card-icon">🔬</div>
+                            <h3 class="font-bold mb-2">Research Gaps</h3>
+                            <p class="text-sm text-gray-600">Open questions and future research directions</p>
+                        </div>
+                        <div class="section-card" onclick="window.location.hash='#find-testing'">
+                            <div class="section-card-icon">🔍</div>
+                            <h3 class="font-bold mb-2">Find Testing</h3>
+                            <p class="text-sm text-gray-600">Locate providers for longevity testing in your area</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 1: Biology of Aging -->
+                <section id="section-1" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Biology of Aging</h2>
+
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Aging is driven by progressive loss of epigenetic information and declining activity of nutrient-sensing longevity pathways (AMPK, mTOR, sirtuins). Understanding these mechanisms is essential for rational intervention design.
+                    </div>
+
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Aging is driven by progressive loss of epigenetic information (DNA methylation, histone modifications), not primarily by DNA mutation</li>
+                            <li>• Three nutrient-sensing pathways (AMPK, mTOR, sirtuins) form the mechanistic basis for dietary and fasting interventions</li>
+                            <li>• Senescent cells accumulate with age and secrete pro-inflammatory SASP signals; senolytics selectively clear them</li>
+                            <li>• Visceral adipose tissue (VAT) is superior to BMI for mortality prediction; 5-10% weight loss produces 25-30% VAT reduction</li>
+                            <li>• Mitochondrial dysfunction is an early marker of metabolic disease, preceding clinical diabetes by 10-15 years</li>
+                            <li>• β-Hydroxybutyrate functions as both fuel and epigenetic modifier, linking fasting, ketosis, and cellular repair</li>
+                        </ul>
+                    </div>
+
+                    <h3>The Information Theory of Aging (Sinclair)</h3>
+                    <p>David Sinclair's central thesis is that aging is fundamentally an information problem. In Sinclair's framework, DNA remains 99.999% intact throughout life. What degrades is the epigenome: chemical markers (DNA methylation, histone modifications) that tell each cell which genes to express. A skin cell 'knows' it is a skin cell because of these epigenetic markers; as they erode, cells lose identity and begin expressing genes inappropriately.</p>
+
+                    <p>The primary driver is chromosomal breakage. Every cell sustains at least one broken chromosome per day (approximately 20 trillion events body-wide daily). When breaks occur, sirtuin proteins abandon their posts to repair the damage. They mostly return, but not perfectly. Over decades, accumulated positional drift produces the aging phenotype.</p>
+
+                    <p>Sinclair's lab validated this with ICE mice (Inducible Changes to the Epigenome) in which chromosomal breaks were triggered without causing mutations. These mice aged 50% faster than untreated twins, demonstrating that epigenetic disruption alone is sufficient to accelerate aging phenotypes.</p>
+
+                    <h3>The Three Nutrient-Sensing Longevity Pathways</h3>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">AMPK - The Energy Sensor</h4>
+                    <p>AMPK (AMP-activated protein kinase) is activated when cellular AMP:ATP ratios rise during caloric deficit. It promotes autophagy, improves insulin sensitivity, and is associated with extended lifespan. Downstream effects include autophagy induction, mitochondrial biogenesis, mTOR inhibition, and FOXO activation. AMPK activates sirtuins through positive feedback by raising NAD+ availability.</p>
+                    <ul class="ml-4 space-y-1 my-3">
+                        <li><strong>Activated by:</strong> Fasting, caloric restriction, exercise</li>
+                        <li><strong>Pharmacological activators:</strong> Metformin, berberine</li>
+                    </ul>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">mTOR - The Growth Regulator</h4>
+                    <p>mTOR (mechanistic target of rapamycin) complex 1 is activated by amino acids, insulin, and growth factors. It promotes protein synthesis, cell growth, and proliferation. Chronically elevated mTOR is a hallmark of aging, associated with impaired autophagy, cellular senescence, and age-related disease. Fasting and plant-based protein preferentially suppress mTOR compared to animal-source amino acids.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Sirtuins - The Longevity Switches</h4>
+                    <p>Sirtuins (SIRT1-7) are NAD+-dependent histone deacetylases functioning as epigenetic regulators. They are activated by elevated NAD+, which rises during fasting. NAD+ levels decline approximately 50% by age 50. SIRT1 activates AMPK, promotes DNA repair, and suppresses inflammatory signalling. SIRT3 promotes mitochondrial homeostasis and reduces oxidative damage.</p>
+
+                    <h3>Cellular Senescence and Senolytics</h3>
+                    <p>Cellular senescence is characterized by irreversible cell cycle arrest. Senescent cells accumulate with age and 30-70% develop a senescence-associated secretory phenotype (SASP), releasing pro-inflammatory cytokines that damage surrounding tissue. Transplanting as few as 1 in 10,000 senescent cells into middle-aged mice induces frailty and premature death.</p>
+
+                    <p>Senolytics exploit the survival mechanisms of senescent cells. Different cell types depend on different survival nodes: preadipocytes on Src kinases (targeted by dasatinib), endothelial cells on BCL-2/BCL-xL (targeted by quercetin). The D+Q combination covers both. A single 4-hour exposure initiates irreversible apoptosis.</p>
+
+                    <h3>Visceral Adiposity and Inflammaging</h3>
+                    <p>Visceral adipose tissue (VAT) is emerging as a stronger predictor of all-cause mortality than BMI or total body fat. VAT can accumulate in individuals with normal BMI - the "metabolically obese normal weight" phenotype. The four-compartment fat model distinguishes: (1) visceral fat (harmful, secretes pro-inflammatory signals), (2) deep subcutaneous fat (also harmful), (3) superficial subcutaneous fat (protective, produces adiponectin), and (4) intramuscular fat (harmful).</p>
+
+                    <p>The five drivers of visceral fat accumulation are: processed foods, alcohol, impaired sleep, chronic stress, and potentially excessive endurance exercise. A 5-10% weight loss produces 25-30% VAT reduction through caloric deficit and improved diet quality.</p>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#home" class="text-accent font-medium">← Back to Home</a>
+                            <a href="#section-2" class="text-accent font-medium">Next: Exercise →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Exercise -->
+                <section id="section-2" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Exercise: Type, Amount & Frequency</h2>
+
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Longevity requires a mixed approach: Zone 2 aerobic work (130-150 bpm) 150+ min/week for mitochondrial capacity, HIIT 2x/week for VO2max, and resistance training 2-3x/week for muscle preservation and metabolic health.
+                    </div>
+
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• VO2max is the strongest modifiable mortality predictor (JAMA 2018, n=122,007); 1 MET increase = 10% mortality reduction; no upper limit of benefit</li>
+                            <li>• Zone 2 training (130-150 bpm, "talk test") activates mitochondrial biogenesis via PGC-1α; 150+ min/week is the longevity target</li>
+                            <li>• Resistance training prevents sarcopenia (3-8% muscle loss/decade from age 30); grip strength is an independent mortality predictor</li>
+                            <li>• Balance training reduces fall risk 30-40%; inability to hold 10-second single-leg stance = 84% higher mortality (2022 study)</li>
+                            <li>• Exercise improves lipid profile: LDL-C −7 mg/dL, TG −8 mg/dL, HDL +2 mg/dL; also improves HDL function and lowers hs-CRP</li>
+                            <li>• Sprinting produces highest Lac-Phe (Nature 2022) — appetite-suppressing, fat-oxidation signalling molecule</li>
+                            <li>• Optimal programme: Zone 2 (3-5×/wk) + HIIT (2×/wk) + resistance (2-3×/wk) + balance/mobility (2-3×/wk)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Zone 2 Training: The Foundation</h3>
+                    <p>Zone 2 aerobic work (approximately 130-150 bpm depending on age and fitness) represents the highest intensity at which lactate production remains balanced by intramuscular clearance (~2 mmol/L blood lactate). This zone activates mitochondrial biogenesis via PGC-1α, improves fat oxidation capacity, and builds aerobic base without excessive sympathetic activation or cortisol release.</p>
+                    <p>Zone 2 training increases mitochondrial density, capillarisation, and type I muscle fibre efficiency — enhancing the body's ability to extract and utilise oxygen at the cellular level. This is foundational for longevity because mitochondrial dysfunction is an early marker of metabolic disease, preceding clinical diabetes by 10-15 years. The metabolic "crossover point" (where fat oxidation equals carbohydrate oxidation) shifts rightward with Zone 2 training, meaning you burn more fat at higher intensities — critical for visceral fat reduction and insulin sensitivity.</p>
+                    <p><strong>Practical guidance:</strong> 150+ minutes per week, distributed across 3-5 sessions (30-60 min each). The "talk test" is a reliable proxy — you should be able to hold a conversation but prefer not to. Activities: brisk walking, cycling, swimming, rowing, elliptical. Nasal breathing only is another intensity anchor. Heart rate monitors are helpful but not essential. Consistency matters more than precision — the most important session is the one you actually do.</p>
+
+                    <h3>VO2max and HIIT</h3>
+                    <p>Maximal aerobic capacity (VO2max) is the <strong>strongest modifiable predictor of all-cause mortality</strong> — stronger than smoking, hypertension, or diabetes as a risk factor. A landmark 2018 JAMA Network Open study (n=122,007) found that cardiorespiratory fitness was inversely associated with long-term mortality with no upper limit of benefit. Each 1 MET increase in fitness corresponds to approximately 10% mortality reduction. The difference between "below average" and "above average" fitness carries a hazard ratio comparable to the difference between smoking and non-smoking.</p>
+                    <p>VO2max declines approximately 10% per decade after age 30 in sedentary individuals — but 5% per decade in trained individuals and can actually <strong>improve</strong> with targeted training at any age. The goal is to maintain VO2max at or above the 75th percentile for your age, which provides substantial mortality protection.</p>
+                    <p><strong>HIIT protocols:</strong> High-intensity interval training is the most time-efficient method for VO2max improvement. Evidence-based protocols include: (1) Norwegian 4×4 — four 4-min intervals at 90-95% max HR with 3-min active recovery (the most studied protocol); (2) 30/30 — 30 seconds hard, 30 seconds easy for 20-30 min; (3) Tabata — 20 seconds all-out, 10 seconds rest × 8 rounds (most intense, shortest duration). Two HIIT sessions per week is sufficient; more may impair recovery without additional benefit. Allow 48+ hours between sessions.</p>
+
+                    <h3>Resistance Training</h3>
+                    <p>Resistance training 2-3 times per week is essential for maintaining lean muscle mass (sarcopenia prevention), preserving insulin sensitivity, maintaining bone density, and stimulating anabolic pathways. Sarcopenia (age-related muscle loss) begins around age 30 at ~3-8% per decade and accelerates after 60. It is independently associated with increased mortality, disability, falls, and metabolic disease. Resistance training is the only intervention that reliably reverses sarcopenia.</p>
+                    <p><strong>Programming principles:</strong> Progressive overload (systematically increasing weight, volume, or density) is necessary for continued adaptation. Compound movements (squats, deadlifts, rows, presses, pull-ups) are most efficient — they load multiple muscle groups and produce the strongest anabolic hormonal response. For longevity specifically, grip strength is a powerful mortality predictor (a 2022 BMJ meta-analysis found each 5 kg lower grip strength = 17% higher all-cause mortality). Include dedicated grip and forearm work.</p>
+                    <p><strong>For older adults:</strong> Resistance training is safe and effective at any age. An 80-year-old can double their strength in 8-12 weeks with appropriate programming. Begin with machine-based exercises or bodyweight movements if unfamiliar; progress to free weights as competency develops. Professional instruction for the first 4-6 weeks reduces injury risk and accelerates learning.</p>
+
+                    <h3>Flexibility, Balance & Stability</h3>
+                    <p>Often neglected in longevity discussions, <strong>functional movement quality</strong> is a critical determinant of healthspan. Falls are the leading cause of injury-related death in adults over 65. Balance training (single-leg stance, tandem walking, yoga, tai chi) 2-3 times/week reduces fall risk by 30-40% in meta-analyses. A 2022 study found inability to complete a 10-second single-leg stance was associated with <strong>84% higher all-cause mortality</strong> over 7 years, independent of age, sex, and comorbidities. Mobility work (dynamic stretching, foam rolling) maintains joint range of motion and reduces movement compensations that lead to injury.</p>
+
+                    <h3>The Lac-Phe Connection</h3>
+                    <p>Research published in Nature (2022) revealed that high-intensity exercise produces lactate-phenylalanine (Lac-Phe), a blood-borne signalling molecule that suppresses food intake and promotes fat oxidation. Sprinting produces the highest Lac-Phe levels, followed by resistance training, with endurance running producing the lowest. This provides mechanistic support for incorporating varied intensity and suggests that moderate-intensity steady-state exercise alone may be suboptimal for metabolic optimisation. Lac-Phe acts centrally to reduce appetite — a molecular explanation for the commonly observed appetite suppression after intense exercise.</p>
+
+                    <h3>Exercise and Lipid Metabolism</h3>
+                    <p>A 2024 meta-analysis found exercise training reduces LDL-C by ~7 mg/dL, triglycerides by ~8 mg/dL, and raises HDL-C by ~2 mg/dL. <strong>Type matters:</strong> aerobic exercise is superior for lipid improvements (each additional weekly session reduces total cholesterol by ~7.7 mg/dL), while resistance training is superior for glucose metabolism and body composition. Combined aerobic + resistance training produces the best comprehensive cardiovascular risk reduction. Exercise also reduces Lp(a) modestly (though this is mostly genetically fixed), improves HDL function (cholesterol efflux capacity), and lowers hs-CRP — addressing multiple residual risk pathways simultaneously.</p>
+
+                    <h3>Optimal Programming</h3>
+                    <p>A comprehensive longevity exercise programme combines:</p>
+                    <table>
+                        <thead>
+                            <tr><th>Component</th><th>Frequency</th><th>Duration</th><th>Primary Benefit</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Zone 2 aerobic</strong></td><td>3-5×/week</td><td>30-60 min/session</td><td>Mitochondrial biogenesis, fat oxidation, aerobic base</td></tr>
+                            <tr><td><strong>HIIT</strong></td><td>2×/week</td><td>15-30 min/session</td><td>VO2max, cardiac output, Lac-Phe production</td></tr>
+                            <tr><td><strong>Resistance training</strong></td><td>2-3×/week</td><td>45-60 min/session</td><td>Sarcopenia prevention, bone density, insulin sensitivity</td></tr>
+                            <tr><td><strong>Balance/mobility</strong></td><td>2-3×/week</td><td>10-20 min/session</td><td>Fall prevention, joint health, functional movement</td></tr>
+                        </tbody>
+                    </table>
+                    <p>A sample week: Mon (resistance + 10 min balance), Tue (Zone 2 45 min), Wed (HIIT 20 min + mobility), Thu (resistance + 10 min balance), Fri (Zone 2 45 min), Sat (Zone 2 60 min or recreational activity), Sun (rest or gentle yoga/walk). Recovery between high-intensity sessions is essential — adaptation occurs during rest, not during training. Sleep, nutrition, and stress management are as important as the training stimulus itself.</p>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-1" class="text-accent font-medium">← Biology of Aging</a>
+                            <a href="#section-3" class="text-accent font-medium">Diet & Microbiome →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Diet -->
+                <section id="section-3" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Diet: Foods to Eat, Foods to Avoid & the Microbiome</h2>
+
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> A Mediterranean-style diet rich in whole foods, healthy fats, and fiber, combined with low processed food intake, is the most evidence-supported dietary pattern for longevity. Microbiome diversity is a strong predictor of healthspan.
+                    </div>
+
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Mediterranean diet with olive oil, fish, vegetables, legumes, nuts shows consistent mortality benefit in RCTs</li>
+                            <li>• Processed foods are the #1 modifiable driver of visceral fat accumulation and inflammaging</li>
+                            <li>• Microbiome diversity (≥1,000 species, ≥30 plant variety weekly) predicts healthspan better than any single nutrient</li>
+                            <li>• Fiber intake (35+ g/day from whole foods, not supplements) is critical for butyrate production and gut health</li>
+                            <li>• Ultra-processed foods trigger post-prandial inflammation lasting 6+ hours; effect amplified by metabolic dysfunction</li>
+                            <li>• Plant-based proteins preferentially suppress mTOR vs animal proteins; legumes provide protein + fiber + polyphenols</li>
+                            <li>• RCTs show plant protein matches animal protein for muscle building at matched intakes; Harvard NHS finds 38–40% increased odds of healthy ageing per 3% caloric shift to plant protein</li>
+                        </ul>
+                    </div>
+
+                    <h3>Mediterranean Diet as Gold Standard</h3>
+                    <p>The Mediterranean diet is the most evidence-supported dietary pattern for longevity. The PREDIMED trial (Spain, n=7,500) demonstrated that a Mediterranean diet supplemented with olive oil or nuts reduced cardiovascular events by 30% vs control. Components include abundant vegetables, whole grains, legumes, fish 2-3x/week, moderate wine consumption, and liberal olive oil use.</p>
+
+                    <p>Key foods: olive oil (polyphenols, anti-inflammatory), fatty fish (EPA/DHA), legumes (fiber, plant protein, polyphenols), berries (anthocyanins), leafy greens (nitrates, folate), nuts and seeds (vitamin E, magnesium), moderate red wine (resveratrol, though alcohol's net effect remains debated).</p>
+
+                    <h3>Processed Foods as the Core Problem</h3>
+                    <p>Ultra-processed foods are the #1 modifiable driver of visceral fat accumulation, inflammaging, and metabolic disease. In ZOE's PREDICT 1 trial (n=1,000), meals high in refined carbohydrates and saturated fat produced elevated post-prandial inflammation lasting up to 6 hours. Participants with more visceral fat and lower microbiome diversity experienced the most prolonged responses, establishing that even single meals produce measurable acute inflammation that, repeated daily, becomes chronic.</p>
+
+                    <p>Ultra-processed foods lack fiber, contain pro-inflammatory seed oils, have high sodium, are calorie-dense relative to satiety, and contain additives that disrupt the microbiome. Eliminating processed foods was the single strongest intervention observed in O'Mara's cohort for visceral fat reduction.</p>
+
+                    <h3>Microbiome Diversity as Biomarker</h3>
+                    <p>Microbiome diversity (>1,000 bacterial species, >30 different plant sources per week) is a stronger predictor of healthspan than any single nutrient. The mechanism: diverse bacteria produce short-chain fatty acids (particularly butyrate), which reduce intestinal permeability, suppress pro-inflammatory IL-6 production, and provide histone deacetylase (HDAC) inhibition - an epigenetic mechanism.</p>
+
+                    <p>Diversity is built through: (1) consuming 30+ different plant foods weekly (vegetables, fruits, legumes, whole grains, nuts, seeds); (2) fiber intake of 35+ grams daily from whole foods (supplements lack the fiber diversity that builds diversity); (3) avoiding unnecessary antibiotics and antimicrobial products; (4) fermented foods (though less critical than overall plant diversity).</p>
+
+                    <h3>Fiber and Butyrate</h3>
+                    <p>Dietary fiber (35+ g/day target) is converted by colonic bacteria to short-chain fatty acids, primarily butyrate. Butyrate serves multiple functions: (1) HDAC inhibitor (epigenetic effect similar to sirtuins), (2) histone acetylation promoter (opens chromatin for DNA repair genes), (3) intestinal barrier strengthening (tight junction regulation), (4) anti-inflammatory (G-protein coupled receptor 43 signaling). This directly links dietary fiber to the epigenetic and inflammaging pathways discussed in Section 1.</p>
+
+                    <h3>Protein Considerations</h3>
+                    <p>Plant-based proteins (legumes, tofu, tempeh, seitan) preferentially suppress mTOR vs animal proteins, consistent with the carbohydrate-insulin model. However, plant proteins are typically lower in leucine and bioavailability. Balanced approach: 1.6-2.2 g/kg body weight daily from mixed sources (plants, fish, poultry, limited red meat). Fish 2-3x/week for EPA/DHA. Legumes provide the triple benefit of protein, fiber, and polyphenols.</p>
+
+                    <h2 class="mt-12">Health-Promoting Beverages: Coffee, Tea, Matcha & Yerba Maté</h2>
+
+                    <div class="key-finding">
+                        <strong>KEY FINDING:</strong> All four beverages contain bioactive compounds that activate longevity-relevant pathways (AMPK, Nrf2, SIRT1, autophagy) when consumed without caloric additives. Coffee has the deepest evidence base (3–5 cups/day = 13–15% all-cause mortality reduction). Genetic variation in CYP1A2 modifies individual risk-benefit profiles significantly.
+                    </div>
+
+                    <h3>Coffee — The Strongest Evidence Base</h3>
+                    <p>Meta-analyses show <strong>13–15% lower all-cause mortality</strong> at 3–5 cups/day (RR 0.85 at 3.5 cups/day, U-shaped dose-response), a <strong>29% reduced type 2 diabetes risk</strong>, <strong>15% reduced CVD mortality</strong>, and significant liver protection (up to 44% lower cirrhosis risk). The molecular mechanisms are well-characterised: caffeine activates AMPK and stimulates autophagy independently of caloric restriction (Pietrocola et al., <em>Cell Cycle</em> 2014); chlorogenic acids activate Nrf2 and SIRT1; trigonelline provides NAD+ precursors via the Preiss-Handler pathway.</p>
+
+                    <p><strong>Brewing method matters most.</strong> Paper filtration removes >95% of the diterpenes cafestol and kahweol, which raise LDL cholesterol by up to 16 mg/dL in unfiltered preparations (French press, espresso, boiled/Turkish). For lipid-conscious individuals, paper-filtered coffee maximises benefits while eliminating the primary cardiovascular risk.</p>
+
+                    <p><strong>Cautions:</strong> CYP1A2 slow metabolisers (~40–50% of the population) may face increased MI risk at ≥4 cups/day. Caffeine consumed 6 hours before bed reduces sleep by 1.2 hours (Drake 2013). Acute BP rise of 5–10 mmHg in non-habitual drinkers (attenuates with tolerance). Morning consumption is associated with greater mortality benefit than all-day drinking (European Heart Journal 2025).</p>
+
+                    <h3>Tea (Green & Black)</h3>
+                    <p>A 2024 meta-analysis (38 cohorts, <strong>1.96 million participants</strong>) found <strong>10% lower all-cause mortality</strong> (RR 0.90) and <strong>14% lower CVD mortality</strong> (RR 0.86) for regular tea drinkers, with optimal intake at ~2 cups/day. EGCG (epigallocatechin-3-gallate), the dominant catechin in green tea, inhibits PI3K/Akt/mTOR and activates AMPK — the same dual pathway that fasting activates. L-theanine increases α-wave EEG activity and reduces salivary cortisol, with moderate evidence for stress reduction. Black tea theaflavins modulate gut microbiota and act as prebiotics via thearubigins.</p>
+
+                    <p><strong>Caution:</strong> Green tea <em>extract supplements</em> at ≥800 mg EGCG/day carry hepatotoxicity risk (EFSA); brewed tea is safe at normal consumption. Tannins inhibit non-haem iron absorption by 60–70% — consume between meals if iron status is a concern.</p>
+
+                    <h3>Matcha — Concentrated Green Tea</h3>
+                    <p>Shade-grown, stone-ground whole-leaf green tea delivering <strong>2–3× the EGCG</strong> and up to <strong>5× the L-theanine</strong> of standard green tea. The high L-theanine:caffeine ratio produces "calm alertness" — sustained attention with α-wave relaxation rather than the sympathetic spike of coffee. One RCT showed significantly reduced anxiety versus placebo (Unno et al., 2018). Because the entire leaf is consumed, lead contamination is a concern — Japanese-grown matcha consistently tests below safety limits; source brands with third-party testing.</p>
+
+                    <h3>Yerba Maté</h3>
+                    <p>A unique bioactive profile combining caffeine, theobromine, chlorogenic acids, and saponins. A 2025 RCT (Bravo et al., <em>Molecular Nutrition & Food Research</em>) found 8 weeks of 3 daily servings <strong>reduced blood pressure, inflammatory cytokines, and LDL cholesterol</strong> in both healthy adults and those at moderate cardiovascular risk.</p>
+
+                    <p><strong>Critical cautions:</strong> (1) Traditional hot maté (>65°C) is associated with increased oesophageal cancer risk (IARC Group 2A for very hot beverages) — allow water to cool below 65°C. (2) PAH contamination from smoke-drying (benzo[a]pyrene at 25–600 ng/g in some samples) — source air-dried or smoke-free processed brands.</p>
+
+                    <h3>Fasting Interaction</h3>
+                    <p>All four beverages consumed <strong>black/plain are fasting-compatible</strong> and actively enhance autophagy through AMPK activation and mTOR inhibition. Black coffee is the strongest autophagy promoter. Any addition of milk attenuates the autophagic benefit via leucine-driven mTOR activation and lactose-driven insulin release. During a fed state, milk addition has minimal net negative effect. <strong>Practical protocol:</strong> morning filtered black coffee during the fasting window → green tea/matcha by late morning → stop caffeine 8–10h before sleep.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Beverage</th>
+                                <th>Caffeine (mg/serving)</th>
+                                <th>Key Compound</th>
+                                <th>Primary Longevity Pathways</th>
+                                <th>Key Caution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Coffee (filtered)</strong></td>
+                                <td>80–120</td>
+                                <td>Chlorogenic acid, caffeine, trigonelline</td>
+                                <td>AMPK ↑↑↑, Nrf2 ↑↑↑, SIRT1 ↑↑, autophagy ↑↑↑</td>
+                                <td>CYP1A2 slow metabolisers; sleep disruption</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Green tea</strong></td>
+                                <td>25–50</td>
+                                <td>EGCG, L-theanine</td>
+                                <td>mTOR ↓↓↓, AMPK ↑↑↑, autophagy ↑↑↑</td>
+                                <td>Iron absorption; supplement hepatotoxicity</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Matcha</strong></td>
+                                <td>25–70</td>
+                                <td>EGCG (2–3×), L-theanine (5×)</td>
+                                <td>mTOR ↓↓↓, AMPK ↑↑↑, α-wave ↑↑</td>
+                                <td>Lead (source Japanese); cost/quality variation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Black tea</strong></td>
+                                <td>40–70</td>
+                                <td>Theaflavins, thearubigins</td>
+                                <td>AMPK ↑↑, gut microbiome ↑↑↑</td>
+                                <td>Iron absorption; oxalate (kidney stones)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Yerba maté</strong></td>
+                                <td>30–50</td>
+                                <td>CGA, saponins, theobromine</td>
+                                <td>AMPK ↑↑↑, Nrf2 ↑↑, cholesterol ↓</td>
+                                <td>Temperature >65°C; PAH contamination</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Protein Sources Section -->
+                    <h2 class="mt-12">Protein Sources — Plant vs Animal: Evidence-Based Guidance</h2>
+
+                    <p class="mb-4">Emerging evidence challenges the long-held assumption that animal protein is inherently superior for muscle building and overall health. The question is not simply "how much protein?" but "protein from what source, and what else comes with it?"</p>
+
+                    <h3>The Complete vs Incomplete Protein Myth</h3>
+                    <p class="mb-4">All plants contain all nine essential amino acids. The term "incomplete protein" arose because a single plant source eaten exclusively (e.g. only rice) would fall short on one amino acid — in rice's case, lysine. In practice, even modest dietary diversity eliminates this concern entirely. The older recommendation to pair grains with legumes at every meal has been superseded; consuming adequate calories from varied plant sources across the day meets all essential amino acid requirements.</p>
+
+                    <h3>Bioavailability: Historical Overestimation</h3>
+                    <p class="mb-4">Plant protein is somewhat less bioavailable than animal protein when consumed as whole food — but this is because it arrives packaged with fibre, polyphenols, and phytates that modulate digestion, not because the protein itself is inferior. Early studies (1970s–90s) were performed in animal models fed raw, uncooked grains and legumes, dramatically overestimating the gap. Christopher Gardner's Stanford review concludes the real bioavailability difference in humans consuming prepared food is <strong>"probably only a few percent."</strong></p>
+
+                    <h3>RCT Evidence: Plant Protein Matches Animal for Muscle Building</h3>
+                    <p class="mb-4">Randomised controlled trials now demonstrate equivalence:</p>
+                    <ul class="list-disc ml-6 mb-4 space-y-2">
+                        <li><strong>Brazil RCT:</strong> Young adult males on all-plant vs omnivorous diets at 1.6 g/kg/day with matched resistance training over 8–12 weeks — no significant differences in muscle hypertrophy or strength.</li>
+                        <li><strong>Canada RCT:</strong> Male and female adults replicated the finding at matched protein intakes.</li>
+                        <li><strong>2024 acute MPS study:</strong> Plant protein blend ingestion stimulated postexercise myofibrillar protein synthesis equivalently to whey in resistance-trained adults.</li>
+                    </ul>
+                    <p class="mb-4">Once digested, amino acids enter the bloodstream without a "tag" indicating their food source. The rate-limiting step for hypertrophy is the training stimulus, not the protein source.</p>
+
+                    <h3>The Longevity Signal: Harvard Nurses' Health Study</h3>
+                    <p class="mb-4">A landmark analysis from Walter Willett's group at Harvard (40,000+ women, 40+ years follow-up) found that for every <strong>3% of calories substituted from animal to plant protein, the odds of "healthy ageing" increased by ~38–40%</strong>. "Healthy ageing" was defined as free from 11 chronic diseases, no cognitive impairment, no physical impairment, and good mental health.</p>
+
+                    <h3>Protein Source Hierarchy for Longevity</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th>Source</th>
+                                <th>Key Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>Legumes (beans, lentils, chickpeas, tofu, tempeh, edamame)</td>
+                                <td>Highest fibre + polyphenol co-delivery; Blue Zone foundation; best longevity evidence</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>Oily fish (salmon, sardines, mackerel)</td>
+                                <td>Omega-3 rich; top-ranked among animal sources</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>Fermented dairy (yoghurt, kefir, aged cheese)</td>
+                                <td>Probiotic + microbiome benefits; ranked above non-fermented dairy</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>Eggs</td>
+                                <td>Good protein source; near fermented dairy in hierarchy</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5</strong></td>
+                                <td>Nuts, seeds, whole grains, seitan</td>
+                                <td>Complementary protein + healthy fats; seitan very protein-dense</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6</strong></td>
+                                <td>Poultry, non-fermented dairy</td>
+                                <td>Better than red/processed meat</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7</strong></td>
+                                <td>Red meat</td>
+                                <td>IARC Group 2A probable carcinogen; increased CVD risk; TMAO, haem iron, HCA concerns</td>
+                            </tr>
+                            <tr>
+                                <td><strong>8</strong></td>
+                                <td>Ultra-processed meats</td>
+                                <td>IARC Group 1 carcinogen; clearly associated with mortality, cancer, CVD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Counterpoints & Limitations</h3>
+                    <p class="mb-4">The evidence is not entirely one-sided. Important caveats include:</p>
+                    <ul class="list-disc ml-6 mb-4 space-y-2">
+                        <li><strong>Leucine threshold in older adults:</strong> Plant proteins contain less leucine per gram (pea ~7% vs whey ~11%). Older adults exhibit "anabolic resistance" requiring ~3–4 g leucine/meal to maximally stimulate muscle protein synthesis. Plant-predominant diets in over-65s may need larger portions or leucine supplementation.</li>
+                        <li><strong>Sarcopenia observational data:</strong> A 2024 cross-sectional study found animal protein (not plant) significantly associated with lower sarcopenia risk in older adults — though this may reflect leucine density and confounding activity patterns.</li>
+                        <li><strong>Harvard study limitations:</strong> Observational design with predominantly white female healthcare workers; residual confounding acknowledged (higher plant protein correlates with higher overall diet quality, more exercise, less smoking); benefits may derive partly from the food matrix (fibre, polyphenols) rather than the protein per se.</li>
+                        <li><strong>RCT duration:</strong> Both cited muscle-building trials were 8–12 weeks in young, trained participants. A 2025 meta-analysis of acute MPS studies found 75% showed no difference, but 25% still showed lower MPS with plant protein.</li>
+                        <li><strong>DIAAS scores:</strong> The FAO's protein quality scoring system still ranks most plant proteins below animal proteins, though the metric has known biases against cooked/processed plant foods.</li>
+                    </ul>
+
+                    <h3>Practical Transition Strategies</h3>
+                    <ul class="list-disc ml-6 mb-4 space-y-2">
+                        <li><strong>The 50/50 swap:</strong> Replace half the mince in a bolognese with lentils — dramatically improves nutritional profile while retaining familiar taste.</li>
+                        <li><strong>Target intake:</strong> 1.2–1.6 g protein/kg/day is sufficient for muscle remodelling; achievable on plant-predominant diets with intentional food choices.</li>
+                        <li><strong>Ethnic cuisines:</strong> Japanese, Thai, Indian, Italian, and Mexican cuisines naturally offer plant-protein-rich dishes.</li>
+                        <li><strong>Tofu & tempeh:</strong> Treat as flavour vehicles — they absorb marinades, spices, and sauces. The key mistake is cooking them plain.</li>
+                        <li><strong>Plant protein supplements:</strong> Pea or rice protein isolate (or blends) can replace whey for convenience in high-training-load individuals.</li>
+                        <li><strong>Not all-or-nothing:</strong> Shifting from a typical 70–85% animal / 15–30% plant protein split towards 50:50 or 25:75 delivers significant cardiometabolic benefit.</li>
+                    </ul>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-2" class="text-accent font-medium">← Exercise</a>
+                            <a href="#section-4" class="text-accent font-medium">Fasting →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Fasting -->
+                <section id="section-4" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Fasting: Type, Duration, Frequency & Evidence</h2>
+
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Fasting activates AMPK and sirtuins, triggers autophagy, and produces β-hydroxybutyrate (epigenetic modifier). Optimal approaches include daily time restriction (12-16 hour fasting window) and periodic longer fasts (24-72 hours monthly) rather than extreme protocols.
+                    </div>
+
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Time-restricted eating (8-12 hour eating window, 12-16 hour fast) activates AMPK without the adherence burden of daily caloric restriction</li>
+                            <li>• β-hydroxybutyrate production begins at ~12-18 hours fasting, rises substantially by 24-48 hours</li>
+                            <li>• 24-48 hour fasts monthly produce robust autophagy and IGF-1 reduction; 72+ hour fasts show diminishing returns</li>
+                            <li>• Fasting suppresses mTOR more effectively than protein restriction; cycling mTOR optimizes anabolic/catabolic balance</li>
+                            <li>• Autophagy is maximum at 24-48 hours; >3 days may trigger protein catabolism without additional benefit</li>
+                            <li>• Women may require modified fasting due to estrogen-AMPK interactions; shorter fasts or higher eating window are reasonable modifications</li>
+                        </ul>
+                    </div>
+
+                    <h3>Time-Restricted Eating (Daily Fasting)</h3>
+                    <p>Time-restricted eating (TRE) - consuming all daily calories within an 8-12 hour window - activates AMPK and circadian alignment without requiring daily caloric restriction. Studies show that an 8-hour eating window produces similar metabolic benefits to 20-30% caloric restriction, and is more adherent. Typical approach: eating window 12 pm - 8 pm or 10 am - 6 pm, creating a 12-16 hour overnight fast.</p>
+
+                    <p>Mechanisms: (1) AMPK activation from extended fasting state, (2) improved insulin sensitivity from compressed feeding window, (3) circadian alignment (most eating early-to-mid day, minimal after sunset), (4) increased growth hormone during sleep (extends by ~4-5 hours from overnight fasting vs grazing pattern). Most adherent approach: natural meal times (breakfast skip or early meal) rather than late eating followed by extended fast.</p>
+
+                    <h3>Intermittent Fasting (24-72 hours)</h3>
+                    <p>A 24-hour fast (e.g., dinner to dinner, 1200 calories on day) once weekly or bi-weekly provides more robust autophagy than daily TRE. Complete water fasts (zero calories) vs minimal eating (500 calories) produce similar cellular effects; minimal eating is more adherent for most.</p>
+
+                    <p>Longer fasts: 48-hour fasts produce substantial IGF-1 reduction (10-20% decline) and robust autophagy. 72-hour fasts show additional autophagy but diminishing returns relative to burden, and increase protein catabolism risk. Optimal approach for most: 24-hour fast monthly or bi-weekly, with 12-16 hour daily TRE as baseline. Alternate-day fasting (alternating 500-cal and ad-lib days) shows effectiveness in RCTs but is less adherent than TRE or periodic fasting.</p>
+
+                    <h3>β-Hydroxybutyrate Signaling</h3>
+                    <p>β-Hydroxybutyrate (BHB) is the primary ketone produced during fasting and functions as both fuel and epigenetic modifier. BHB production begins at approximately 12-18 hours fasting and rises substantially by 24-48 hours. Blood BHB levels of 0.5-3 mM represent nutritional ketosis.</p>
+
+                    <p>Functions: (1) HDAC inhibitor (epigenetic effect, similar to sirtuins), (2) NLRP3 inflammasome inhibitor (reduces systemic inflammation), (3) GPR109A agonist (promotes intestinal regulatory T cells and anti-inflammatory state), (4) neuroprotective (supports BDNF synthesis, mitochondrial function). This links fasting directly to the epigenetic and inflammaging mechanisms of aging.</p>
+
+                    <h3>mTOR Cycling</h3>
+                    <p>mTOR remains constitutively elevated in a high-carbohydrate, frequent-eating pattern, suppressing autophagy. Fasting is the most robust mTOR suppressor (more effective than protein restriction). A cycling approach - alternating fed states (activating mTOR for protein synthesis) with fasted states (suppressing mTOR for autophagy) - optimizes anabolic/catabolic balance. Daily TRE achieves this naturally: eating window = mTOR up, fasting window = mTOR down.</p>
+
+                    <h3>Sex Differences and Modifications</h3>
+                    <p>Women show more variable responses to fasting, partly due to estrogen-AMPK interactions across the menstrual cycle. Shorter fasts (12-14 hours) or longer eating windows (10-12 hours) may be preferable for women, particularly in luteal phase. Some studies suggest higher body fat %, lower basal metabolic rate, and increased cortisol response to very long fasts (48+ hours) in women. Individual assessment and modification are important.</p>
+
+                    <h3>Extended Water-Only Fasting — Clinical Evidence (Goldhamer)</h3>
+                    <p>Alan Goldhamer (True North Health Center) has published the largest clinical datasets on medically supervised water-only fasting over 40 years of practice. These 5–40 day water-only fasts represent a qualitatively different intervention from the TRE and periodic fasts above.</p>
+
+                    <p><strong>Hypertension:</strong> In a study with T. Colin Campbell (n=174), all consecutive hypertensive patients normalised blood pressure without medication. A prospective replication (n=27, Mayo Clinic colleague) showed 26/27 achieving normal BP; at one year, 76% maintained results. Patients with stage 3 hypertension lost an average of 60 points on systolic BP. Evidence level: prospective case series (not RCTs), but the magnitude and consistency are noteworthy.</p>
+
+                    <p><strong>Body composition (DEXA):</strong> Over a 2-week fast, patients lost ~10% body weight, 20% total fat, but 40% visceral fat — with only 6% lean tissue loss that fully recovered by 6-week follow-up. Post-fast weight regain was predominantly glycogen, water, and gut fibre rather than fat. This preferential visceral fat mobilisation aligns with the inflammaging model in Section 1.</p>
+
+                    <h3>Microbiome Reboot</h3>
+                    <p>A 2024 study found a 7-day water fast reduced harmful Fusobacteria by >80%, producing a more dramatic microbiome shift than intermittent fasting. Upon careful refeeding with whole plant foods, the microbiome repopulates with a healthier community. Clinical improvements have been observed in IBD, IBS, and mood disorders (case-series level evidence), consistent with the gut–brain axis where 90–95% of serotonin is produced.</p>
+
+                    <h3>Dietary Pleasure Trap & Taste Neuroadaptation</h3>
+                    <p>Goldhamer identifies salt, oil, and sugar ("SOS") as hyperconcentrated components that exploit the dopamine reward system. Extended fasting recalibrates the hedonic setpoint — studies show enhanced sensitivity to sugar and salt post-fast, making whole plant foods palatable. This provides a behavioural mechanism for durable dietary change beyond willpower alone.</p>
+
+                    <h3>Medically Supervised Protocol</h3>
+                    <p>The True North protocol: fractionally distilled water only, 5–40 days (median 2–4 weeks), complete rest, twice-daily electrolyte monitoring (K⁺ &lt;3.0 triggers termination), graduated refeeding (~1 day per week of fasting). <strong>This is emphatically not a self-directed intervention.</strong> Safety concerns include orthostatic hypotension, dehydration, electrolyte shifts, and potentially fatal refeeding syndrome. Goldhamer also reports consistent PCOS improvement and menstrual normalisation (typically by second post-fast cycle) through estradiol-to-estriol conversion mediated by gut and liver changes.</p>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-3" class="text-accent font-medium">← Diet & Microbiome</a>
+                            <a href="#section-5" class="text-accent font-medium">Body Stresses →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Remaining sections as hidden divs -->
+                <section id="section-5" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Body Stresses: Sauna, Cold Exposure & Photobiomodulation</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Acute stressors (heat, cold, light) trigger hormesis - adaptive stress responses that improve resilience and repair capacity. These should complement, not replace, primary interventions (exercise, diet, fasting).
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Sauna 4-7x/week for 15-20 min at 80-100°C shows dose-dependent cardiovascular and mortality benefits</li>
+                            <li>• Cold exposure (2-3x/week, 1-3 min in 10-15°C water) activates brown fat, improves glucose handling, and enhances parasympathetic recovery</li>
+                            <li>• Heat shock proteins (HSPs) are induced by sauna; HSP70 has epigenetic effects and anti-inflammatory properties</li>
+                            <li>• Photobiomodulation (near-infrared light) may enhance mitochondrial function and reduce inflammation; evidence is emerging</li>
+                            <li>• Hormesis - beneficial stress-induced adaptation - requires proper recovery and should not be overused</li>
+                            <li>• Contrast therapy (hot/cold alternation) may combine benefits but evidence is less robust than isolated modalities</li>
+                        </ul>
+                    </div>
+                    <h3>Sauna and Heat Stress</h3>
+                    <p>The strongest evidence comes from the Kuopio Ischaemic Heart Disease Risk Factor Study (KIHD), a 20-year Finnish prospective cohort (n=2,315 men). Compared to once-weekly sauna use, 4-7 sessions per week (15-20 min at 80-100°C) was associated with a <strong>40% reduction in all-cause mortality</strong>, 50% reduction in cardiovascular death, and 65% reduction in sudden cardiac death. A dose-response relationship was clear: more frequent and longer sessions produced greater benefit. These associations persisted after adjustment for exercise, alcohol, BMI, and socioeconomic factors.</p>
+                    <p><strong>Mechanisms:</strong> (1) Heat shock protein (HSP70) induction — HSP70 functions as an HDAC inhibitor (similar to butyrate and sirtuins), suppresses NF-κB inflammatory signalling, and chaperones protein folding during cellular stress; (2) VEGF upregulation and angiogenesis — new capillary formation improves tissue perfusion; (3) Endothelial function improvement — repeated heat exposure increases nitric oxide bioavailability and reduces arterial stiffness; (4) Autonomic conditioning — sympathetic activation during heat followed by parasympathetic rebound enhances heart rate variability over time.</p>
+                    <p><strong>Practical protocol:</strong> Start with 2-3 sessions/week at 80°C for 10-15 min, progressing to 4-7 sessions at 80-100°C for 15-20 min. Hydrate before and after (500 mL minimum). Contraindications: unstable angina, recent MI, severe aortic stenosis, pregnancy. Post-exercise sauna is acceptable and may enhance recovery; avoid immediately pre-exercise (transient hypovolaemia impairs performance).</p>
+
+                    <h3>Cold Exposure</h3>
+                    <p>Cold water immersion (CWI) activates brown adipose tissue (BAT) via noradrenaline release, increasing non-shivering thermogenesis and glucose uptake. A 2022 meta-analysis found regular cold exposure improves insulin sensitivity, reduces fasting glucose, and increases adiponectin (anti-inflammatory adipokine). Cold also triggers a <strong>200-300% increase in plasma noradrenaline</strong> — the magnitude depends on temperature and duration, with immersion at 14°C for 1 minute producing similar levels to 6 minutes at 20°C.</p>
+                    <p><strong>Autonomic benefits:</strong> The transient sympathetic surge followed by parasympathetic rebound improves vagal tone and heart rate variability with repeated exposure. Cold-adapted individuals show enhanced stress resilience and reduced inflammatory responses to subsequent challenges (cross-adaptation). There is also evidence for mood enhancement — likely mediated by the sustained noradrenaline elevation, which persists for 1-2 hours post-exposure.</p>
+                    <p><strong>Practical protocol:</strong> 2-3 sessions/week, 1-3 minutes in 10-15°C water (cold plunge, lake, or cold shower). Start with 30 seconds and progress. End-of-shower cold exposure (last 30-90 seconds) is the most accessible entry point. <strong>Important timing note:</strong> avoid cold immersion within 4 hours after resistance training if hypertrophy is the goal — cold blunts the mTOR-mediated anabolic response. Cold after endurance training is fine and may enhance mitochondrial adaptation.</p>
+
+                    <h3>Contrast Therapy (Heat-Cold Alternation)</h3>
+                    <p>Alternating sauna and cold exposure (e.g., 15 min sauna → 1-2 min cold plunge × 2-3 rounds) is widely practised but has less rigorous evidence than either modality alone. Proposed mechanism: the rapid vasodilation-vasoconstriction cycling may enhance vascular compliance and endothelial function beyond what either stimulus achieves independently. Nordic populations with long traditions of contrast therapy show cardiovascular benefits in observational data, though isolating the effect from culture and lifestyle is difficult.</p>
+
+                    <h3>Photobiomodulation</h3>
+                    <p>Near-infrared light (600-1000 nm wavelengths) penetrates tissue and enhances mitochondrial function by augmenting cytochrome c oxidase (Complex IV) activity, increasing ATP production and reducing reactive oxygen species. Evidence is most robust for wound healing, musculoskeletal pain, and post-exercise recovery. Emerging data suggests cognitive benefits (transcranial photobiomodulation) in neurodegeneration and traumatic brain injury. A 2023 systematic review found moderate evidence for reduced inflammation and enhanced tissue repair. Dosing varies widely across studies, limiting definitive protocol recommendations — typical clinical parameters are 810 nm wavelength, 10-50 mW/cm² irradiance, 3-5 sessions/week.</p>
+
+                    <h3>The Hormesis Principle</h3>
+                    <p>All these modalities work through <strong>hormesis</strong> — the biphasic dose-response where low-to-moderate stress triggers adaptive responses that leave the organism stronger than baseline, while excessive stress causes damage. The key requirements are: (1) stress intensity sufficient to trigger the adaptive pathway (HSPs, cold shock proteins, mitochondrial biogenesis), (2) adequate recovery between exposures (the adaptation occurs during recovery, not during the stress), (3) appropriate periodicity — 2-4 sessions/week appears optimal for most modalities; daily high-intensity stress may lead to maladaptation. These interventions are complementary to and synergistic with exercise (which is itself the most potent hormetic stressor) but should not replace the primary pillars: exercise, diet, sleep, and fasting.</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-4" class="text-accent font-medium">← Fasting</a>
+                            <a href="#section-6" class="text-accent font-medium">Supplements →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-6" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Supplements & Pharmacological Agents</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Most longevity benefit comes from lifestyle (exercise, diet, sleep). Supplements are adjunctive. Evidence-supported compounds include metformin, NAD+ precursors, and spermidine, but risk-benefit profiles vary. Pharmacological agents like rapamycin remain investigational.
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• <strong>Tier 1 (strong evidence):</strong> Vitamin D (target 40-60 ng/mL; 6% all-cause mortality reduction), omega-3s (Omega-3 Index &gt;8%; REDUCE-IT: 25% CV event reduction), magnesium (cofactor in 300+ enzymes; ~50% of adults deficient), creatine (sarcopenia prevention + cognitive benefits)</li>
+                            <li>• <strong>Tier 2 (promising):</strong> Metformin (TAME trial recruiting; may blunt exercise adaptations), NAD+ precursors (NMN/NR — sirtuin activation; human RCTs emerging), spermidine (autophagy inducer; Bruneck Study mortality association)</li>
+                            <li>• <strong>Tier 3 (investigational):</strong> Rapamycin (only drug extending lifespan in mice; pulsed dosing hypothesis being tested), senolytics D+Q/fisetin (compelling preclinical; human trials ongoing at Mayo/Harvard/Hopkins)</li>
+                            <li>• Supplement quality is critical: 10-30% of products fail independent testing; always use USP, NSF, or IFOS certified products</li>
+                            <li>• Discuss all supplements with your physician — interactions with prescription medications are common</li>
+                        </ul>
+                    </div>
+                    <h3>Tier 1: Strong Human Evidence</h3>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Vitamin D</h4>
+                    <p>Vitamin D deficiency (&lt;20 ng/mL) affects an estimated 40-50% of adults and is associated with increased all-cause mortality, cardiovascular disease, cancer, autoimmune disease, and cognitive decline. A 2024 meta-analysis of 50+ RCTs found vitamin D supplementation reduces all-cause mortality by ~6% (NNT ~150 over 3-5 years). The VITAL trial (n=25,871) showed a 17% reduction in cancer death in the supplemented group, with greater benefit in those with BMI &lt;25. Target serum level: <strong>40-60 ng/mL (100-150 nmol/L)</strong>. Most adults need 2,000-5,000 IU/day to achieve this, depending on baseline, skin colour, latitude, and sun exposure. Test 25-OH-vitamin D annually. Take with fat for absorption. Vitamin K2 (MK-7, 100-200 µg/day) is synergistic — it directs calcium to bone rather than vasculature.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Omega-3 Fatty Acids (EPA/DHA)</h4>
+                    <p>Marine omega-3s (EPA and DHA) reduce triglycerides, lower inflammation (hs-CRP, IL-6), improve endothelial function, and may reduce cardiovascular events. The REDUCE-IT trial showed icosapent ethyl (pure EPA, 4 g/day) reduced major CV events by 25% in high-risk statin-treated patients with elevated triglycerides. For general longevity, the <strong>Omega-3 Index</strong> (EPA+DHA as % of red blood cell membranes) is a useful biomarker — target &gt;8% (associated with lowest CV risk; most Western adults are 4-5%). Typical supplemental dose: 2-4 g combined EPA+DHA daily. Choose products with third-party testing for oxidation and heavy metals (IFOS certification). EPA appears more anti-inflammatory; DHA more neuroprotective.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Magnesium</h4>
+                    <p>Magnesium is a cofactor in &gt;300 enzymatic reactions including ATP production, DNA repair, and protein synthesis. Subclinical deficiency is common (~50% of US adults fail to meet RDA) due to soil depletion and processed food consumption. Low magnesium is associated with insulin resistance, hypertension, arrhythmia, poor sleep, and increased all-cause mortality. Supplemental dose: 200-400 mg/day elemental magnesium. Forms matter: magnesium glycinate (best tolerated, good bioavailability, calming), magnesium threonate (crosses blood-brain barrier — cognitive benefits), magnesium citrate (good absorption, mild laxative). Avoid magnesium oxide (poor absorption). Evening dosing may enhance sleep quality.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Creatine</h4>
+                    <p>Beyond athletic performance, creatine monohydrate has emerging evidence for neuroprotection, cognitive function (particularly under stress/sleep deprivation), and sarcopenia prevention. A 2023 meta-analysis confirmed creatine + resistance training produces significantly greater lean mass gains and strength improvements than resistance training alone in older adults. Dose: 3-5 g/day (no loading phase needed). Extremely well-studied safety profile — decades of data show no kidney harm in healthy individuals. The most cost-effective and evidence-based sports/longevity supplement available.</p>
+
+                    <h3>Tier 2: Promising but Emerging Evidence</h3>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Metformin</h4>
+                    <p>Metformin is an AMPK activator used off-label by some longevity practitioners. The TAME (Targeting Aging with Metformin) trial is recruiting to test whether metformin extends healthspan in non-diabetic older adults. Current human evidence is modest — retrospective data shows potential reduced mortality in diabetics vs. non-diabetics, but confounded by diabetes selection bias. <strong>Important caveat:</strong> metformin may blunt exercise-induced mitochondrial adaptations (VO2max improvement reduced by ~50% in some studies). This creates a dilemma: if exercise is the most potent longevity intervention, should we take a drug that attenuates its benefits? Some practitioners cycle metformin (skip on exercise days). Typical off-label dose: 500-1000 mg daily. Side effects: GI distress (typically transient), vitamin B12 reduction (monitor annually). Contraindications: eGFR &lt;30, acute illness, contrast dye procedures.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">NAD+ Precursors (NMN/NR)</h4>
+                    <p>NAD+ declines ~50% by age 50, impairing sirtuin activity and mitochondrial function. Precursors include NMN (nicotinamide mononucleotide) and NR (nicotinamide riboside). Animal data is compelling: improved endothelial function, exercise capacity, and insulin sensitivity. Human evidence is emerging — small RCTs show improved endothelial function, VO2max, and muscle mitochondrial capacity, but large definitive trials are lacking. Typical doses: 250-500 mg daily (NMN) or 500-1000 mg daily (NR). Cost remains high. Note: the body also makes NAD+ from niacin (vitamin B3) and tryptophan — ensuring adequate dietary intake of these precursors is the first step before supplementing expensive precursors.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Spermidine</h4>
+                    <p>Spermidine is a polyamine that potently induces autophagy — sometimes called "nature's rapamycin." Found naturally in wheat germ (24.3 mg/100g), mushrooms, aged cheese, and soybeans. The Bruneck Study showed higher dietary spermidine intake was associated with reduced all-cause mortality over 20 years of follow-up. An Austrian RCT found spermidine supplementation improved memory in older adults at risk for dementia. Supplemental dose in studies: 1-1.2 mg daily. Dietary approach (wheat germ 2 tbsp daily, mushrooms 3-4 servings/week) may provide equivalent benefit with food-synergy advantages.</p>
+
+                    <h3>Tier 3: Investigational / Off-Label</h3>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Rapamycin</h4>
+                    <p>Rapamycin is the only drug consistently extending lifespan across multiple species (ITP: up to 60% extension in mice). It is an mTOR inhibitor and potent immunosuppressant at transplant doses. Some longevity physicians prescribe low, intermittent doses (0.5-2 mg weekly or biweekly) off-label — the hypothesis is that pulsed dosing inhibits mTORC1 (anti-aging) without chronically suppressing mTORC2 (metabolic harm). Human evidence is limited. The PEARL trial and similar ongoing studies are testing low-dose rapamycin in healthy older adults. Major concerns: (1) immunosuppression at higher doses, (2) unknown long-term safety in healthy humans, (3) metabolic side effects (hyperglycaemia, lipid elevation). <strong>Current consensus: rapamycin should be used only in carefully monitored clinical trials.</strong> Self-prescription is not recommended.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Senolytics (D+Q, Fisetin)</h4>
+                    <p>Senolytic drugs selectively kill senescent cells. Preclinical evidence is compelling across multiple aging phenotypes. Clinical trials (Mayo, Harvard, Hopkins) are ongoing. D+Q protocol in trials: dasatinib 100 mg + quercetin 1000 mg oral, taken for 3 consecutive days monthly. Fisetin: 20 mg/kg (~1400 mg for 70 kg person) is being studied as a plant-derived alternative. Early human data (Mayo Clinic) shows reduced senescent cell burden and improved physical function in idiopathic pulmonary fibrosis patients. However, dasatinib is a prescription chemotherapy agent with significant side effects. <strong>Until Phase 2/3 data is available and regulatory approval is granted, patients should not self-prescribe.</strong></p>
+
+                    <h3>Supplement Quality & Safety</h3>
+                    <p>The supplement industry is poorly regulated. Independent testing consistently shows 10-30% of products fail to contain the labelled amount, and some contain contaminants. <strong>Always choose products with third-party certification:</strong> USP (United States Pharmacopeia), NSF International, ConsumerLab, or IFOS (for fish oils). Avoid proprietary blends (which hide individual ingredient doses), mega-dose formulations (more is not better — fat-soluble vitamins A, D, E, K can accumulate to toxic levels), and products making disease-treatment claims (a red flag for quality). Discuss all supplements with your physician, particularly if taking prescription medications — interactions are common (e.g., omega-3s with anticoagulants, magnesium with antibiotics, vitamin K with warfarin).</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-5" class="text-accent font-medium">← Body Stresses</a>
+                            <a href="#section-7" class="text-accent font-medium">Things to Avoid →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-7" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Things to Avoid</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Avoidance of accelerating factors is often more impactful than optimization of promoting factors. Chronic stress, poor sleep, smoking, excess alcohol, and ultra-processed foods are primary drivers of accelerated aging.
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Smoking: single most avoidable cause of aging; no safe level (including vaping); accelerates epigenetic age by 2-5 years</li>
+                            <li>• Chronic psychological stress: elevates cortisol, promotes visceral fat, accelerates telomere shortening; caregivers age 4-8 years faster</li>
+                            <li>• Alcohol: 2023 meta-analysis (n>4.8M) — no safe level for all-cause mortality after correcting for bias; Group 1 carcinogen</li>
+                            <li>• Sleep debt and circadian disruption: one night of 4h sleep reduces NK cell activity 70%; shift work is IARC Group 2A carcinogen</li>
+                            <li>• Ultra-processed foods: BMJ 2024 umbrella review — associated with 32 adverse outcomes; NIH RCT shows +500 kcal/day overconsumption</li>
+                            <li>• Chronic sedentariness: independent metabolic risk factor beyond lack of exercise; 30-40 min MVPA/day offsets but doesn't eliminate harm</li>
+                            <li>• Air pollution: PM2.5 accelerates epigenetic aging and CV mortality even below regulatory limits; 4.2M deaths/year globally</li>
+                        </ul>
+                    </div>
+                    <h3>Smoking</h3>
+                    <p>Smoking is the single most avoidable cause of accelerated aging and premature death. There is no safe level — including "social smoking" and vaping (which delivers nicotine-mediated vasoconstriction plus novel pulmonary toxins). Mechanisms include: direct DNA adduct formation (benzo[a]pyrene), massive oxidative stress (each puff generates ~10¹⁵ free radicals), endothelial dysfunction, and epigenetic dysregulation. Smoking accelerates epigenetic age by 2-5 years for a 20-year history and increases telomere shortening rate by ~25%.</p>
+                    <p><strong>Recovery timeline:</strong> Cardiovascular risk begins declining within 2 weeks of cessation (endothelial function improves). By 1 year, excess coronary risk drops ~50%. By 5-15 years, stroke risk normalises. However, some epigenetic scarring and lung cancer risk persist for decades — reinforcing that never starting is far superior to quitting, though quitting at any age still produces measurable benefit.</p>
+
+                    <h3>Chronic Stress — Mechanisms of Accelerated Ageing</h3>
+                    <p>Chronic psychological stress is one of the most underappreciated drivers of biological ageing. The primary pathway is hypothalamic-pituitary-adrenal (HPA) axis dysregulation: sustained cortisol elevation suppresses DHEA (the "anti-ageing" adrenal hormone), impairs hippocampal neurogenesis, increases insulin resistance, promotes visceral fat accumulation, and drives systemic inflammation via NF-κB activation. These converge on every hallmark of ageing — from telomere attrition to mitochondrial dysfunction to cellular senescence.</p>
+
+                    <p><strong>Telomere shortening.</strong> The landmark Epel et al. study (PNAS, 2004) demonstrated that women with the highest perceived chronic stress had telomeres shortened by the equivalent of ~10 years of additional ageing compared to low-stress controls. Cortisol and glucocorticoids directly interfere with telomerase activity, reducing the cell's capacity for telomere maintenance. Caregivers of chronically ill family members show epigenetic ageing acceleration of 4–8 years on GrimAge clocks.</p>
+
+                    <p><strong>Epigenetic clock acceleration.</strong> Cumulative lifetime stress is associated with accelerated GrimAge — one of the most mortality-predictive epigenetic clocks. Stress-related physiological markers including elevated cortisol:ACTH ratio and insulin resistance correlate with this acceleration, suggesting that HPA dysregulation directly alters the methylome.</p>
+
+                    <p><strong>Brain ageing.</strong> Major depression is associated with a brain-age gap of ~0.9 years (ENIGMA consortium, MDD working group), while anxiety and alcohol-use disorders show gaps of 3–4 years. Chronic stress elevates IL-6 and TNF-α in cerebrospinal fluid and prefrontal cortex, driving neuroinflammation, neuronal loss, and β-amyloid accumulation. Repeated depressive episodes shift allostatic processes to dysfunctional states, progressively increasing allostatic load — the relationship between depression and ageing is bidirectional.</p>
+
+                    <p><strong>Immune dysregulation.</strong> Chronic stress activates the conserved transcriptional response to adversity (CTRA), upregulating pro-inflammatory gene expression while downregulating antiviral and antibody-related genes. This creates an immune profile associated with accelerated ageing and increased susceptibility to infection, autoimmune disease, and cancer.</p>
+
+                    <h3>Loneliness & Social Isolation</h3>
+                    <p>Social isolation and loneliness are now recognised as independent risk factors for mortality with effect sizes comparable to smoking, obesity, and physical inactivity. A 2023 Nature Human Behaviour meta-analysis of 90 prospective cohort studies found social isolation carried a pooled hazard ratio of <strong>1.32 (95% CI 1.26–1.39)</strong> for all-cause mortality, while loneliness carried an HR of <strong>1.14 (1.08–1.20)</strong>. A 2025 comprehensive meta-analysis confirmed these findings in older adults specifically: social isolation HR 1.35, loneliness HR 1.14, living alone HR 1.21.</p>
+
+                    <p><strong>Biological mechanisms.</strong> Loneliness activates the CTRA immune profile (see above), increasing inflammatory tone and suppressing antiviral defences. Lonely individuals show elevated cortisol awakening responses, higher C-reactive protein, and accelerated epigenetic ageing. The hypothalamic threat-surveillance pathway maintains a chronic state of vigilance that disrupts sleep architecture, raises blood pressure, and impairs glucose regulation.</p>
+
+                    <p><strong>Sense of purpose (Ikigai).</strong> Purpose in life provides an additional, independent protective effect. The Ohsaki Study (Japan, n=43,000+, 7-year follow-up) found that subjects without ikigai had a multivariate-adjusted HR for all-cause mortality of <strong>1.5 (1.3–1.7)</strong>, with particularly strong associations for cardiovascular mortality (HR 1.6) and external causes (HR 1.9). The Japan Collaborative Cohort Study (19-year follow-up) confirmed greater ikigai was associated with lower CVD mortality. Alimujiang et al. (JAMA Network Open, 2019; n=13,159 Health and Retirement Study) found that strong purpose in life reduced all-cause mortality over 5 years, even after controlling for other psychological well-being measures.</p>
+
+                    <h3>Depression, Anxiety & Accelerated Ageing</h3>
+                    <p>Mental health conditions are not merely consequences of ageing — they actively accelerate it. A UK Biobank analysis (n=424,299) found an <strong>11.3% increase in risk of incident depression and anxiety per standard deviation of biological age acceleration</strong> over 8.7 years of follow-up, establishing a bidirectional relationship. Depressed individuals show decreased telomere length, elevated inflammatory markers (IL-6, TNF-α, CRP), and metabolic dysfunction — markers that independently predict mortality.</p>
+
+                    <p><strong>Clinical significance.</strong> Untreated depression increases cardiovascular mortality by 50–80%, accelerates cognitive decline and dementia risk, impairs immune surveillance (reduced NK cell activity), and drives health-damaging behaviours (poor diet, sedentariness, substance use, social withdrawal). From a longevity perspective, treating depression and anxiety is not a "soft" intervention — it is as biologically consequential as managing hypertension or diabetes.</p>
+
+                    <h3>Evidence-Based Stress & Mental Health Interventions</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Intervention</th>
+                                <th>Evidence Level</th>
+                                <th>Key Findings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Exercise</strong></td>
+                                <td>Meta-analyses; RCTs</td>
+                                <td>Most potent cortisol buffer; effect size for depression comparable to SSRIs (BMJ 2024 umbrella review); dual benefit of stress reduction + direct anti-ageing pathways</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MBSR / Meditation</strong></td>
+                                <td>RCTs; systematic reviews</td>
+                                <td>8-week MBSR reduces cortisol and inflammatory markers; meta-analysis shows small-to-medium effects on telomere length/telomerase; Age-Well RCT (18-month meditation) showed protective effect on telomere length in older adults</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CBT / Psychotherapy</strong></td>
+                                <td>Strong RCT evidence</td>
+                                <td>CBT-I for insomnia (effect size 1.0–1.2, first-line per ACP 2016); CBT for depression reduces inflammatory biomarkers alongside symptom improvement</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nature exposure</strong></td>
+                                <td>Cross-sectional; interventional</td>
+                                <td>≥120 min/week in green spaces significantly reduces cortisol and improves well-being (UK national study, n=20,000); diminishing returns beyond 200–300 min; greenspace exposure associated with decreased salivary cortisol (2018 meta-analysis of 143 studies)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Social connection</strong></td>
+                                <td>Prospective cohorts</td>
+                                <td>Addressing isolation reverses CTRA immune profile; community engagement, volunteering, and maintaining close relationships all show independent mortality benefit</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Purpose cultivation</strong></td>
+                                <td>Prospective cohorts</td>
+                                <td>Ikigai / sense of purpose: HR 0.67 for all-cause mortality (Ohsaki Study); protective across cultures and age groups; does not require grand ambitions — consistent engagement in meaningful activity suffices</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sleep optimisation</strong></td>
+                                <td>RCTs; meta-analyses</td>
+                                <td>Bidirectional with stress — poor sleep amplifies cortisol; improved sleep reduces inflammatory markers within days; see Sleep section for protocols</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="mt-4"><strong>Key message:</strong> Stress management, social connection, and mental health treatment are not lifestyle luxuries — they are biologically essential interventions for longevity, with effect sizes rivalling exercise and diet. Yet they remain the most commonly under-prescribed components of any longevity programme.</p>
+
+                    <h3>The Five Resets — A Practical Stress Management Framework</h3>
+                    <p>Dr Aditi Nerurkar (Harvard physician, stress researcher) developed the Five Resets framework based on neuroscience evidence. The core insight: 72% of people report struggling with stress, and 70% show at least one feature of burnout — yet most stress management advice focuses on elimination rather than neuroplastic rewiring. The amygdala (threat-detection centre) and prefrontal cortex (rational decision-making) exist in a see-saw relationship: when the amygdala is hyperactivated by chronic stress, PFC function is suppressed, creating a self-reinforcing cycle.</p>
+
+                    <p><strong>Atypical burnout &amp; toxic resilience.</strong> Burnout has evolved beyond the classic presentation (exhaustion, cynicism, inefficacy). Atypical burnout can manifest as hyperproductivity masking emotional depletion — "toxic resilience" where the inability to stop working is mistaken for strength. The WHO now classifies burnout as an occupational phenomenon (ICD-11), and its biological signature overlaps with chronic stress: HPA dysregulation, elevated inflammatory markers, and accelerated epigenetic ageing.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reset</th>
+                                <th>Core Principle</th>
+                                <th>Key Technique</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Find Your Most Stressful Thing</strong></td>
+                                <td>Identify the single biggest stressor — the "Rule of Two" (most people have only 1–2 dominant stressors, not dozens)</td>
+                                <td>Naming and externalising the stressor reduces amygdala reactivity (Lieberman et al., affect labelling studies)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Reset Your Brain via Breath</strong></td>
+                                <td>Diaphragmatic breathing activates the vagus nerve, shifting from sympathetic to parasympathetic dominance</td>
+                                <td>"Stop-Breathe-Be": stop current activity → 1 diaphragmatic breath (5s in, 5s out) → notice surroundings. Even a single breath cycle measurably reduces cortisol</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Change Your Relationship with Digital</strong></td>
+                                <td>"Popcorn brain" — the brain becomes addicted to rapid-fire digital stimulation, making it unable to tolerate slower real-world input</td>
+                                <td>Average person checks phone 2,617 times/day; implement a "media diet" — curate feeds, remove toxic content, set boundaries. Evidence: digital detox studies show cortisol reduction within 5 days</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Resolve Loneliness</strong></td>
+                                <td>330 million people globally go 2+ weeks without meaningful human contact; loneliness has the mortality equivalence of smoking 15 cigarettes/day (Holt-Lunstad meta-analysis)</td>
+                                <td>Prioritise one meaningful connection per week; quality over quantity; even brief genuine interactions (barista, neighbour) activate oxytocin pathways</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Therapeutic Writing</strong></td>
+                                <td>James Pennebaker protocol: expressive writing about stressful experiences for 20 min/day over 4 consecutive days</td>
+                                <td>RCT evidence shows reduced physician visits, improved immune markers (T-helper cell counts), and decreased distress at 3-month follow-up. The mechanism: externalising emotion engages PFC and reduces amygdala activation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>The mind-body connection.</strong> The gut-brain axis provides a concrete biological pathway: the vagus nerve carries bidirectional signals between gut microbiome and brain. Stress alters gut microbial composition within hours (reduced Lactobacillus and Bifidobacterium, increased inflammatory species), while gut dysbiosis amplifies anxiety and depression via altered serotonin and GABA production. The "psychobiome" — the subset of gut microbes that influence mood and cognition — is now a recognised field of study. This creates a vicious cycle: stress damages the gut, and a damaged gut amplifies stress signalling.</p>
+
+                    <p><strong>Practical integration.</strong> These resets are designed to be additive and low-friction: the Rule of Two narrows focus (avoiding overwhelm), Stop-Breathe-Be takes 30 seconds, and therapeutic writing requires only a notebook. The evidence suggests that small, consistent stress interventions produce greater neuroplastic change than occasional intensive retreats — aligning with the general principle that sustainability trumps intensity across all longevity interventions.</p>
+
+                    <h3>Alcohol</h3>
+                    <p>The "J-curve" suggesting moderate alcohol is protective has been substantially challenged. A 2023 meta-analysis (n>4.8 million) found that after correcting for "sick quitter" bias (former drinkers misclassified as abstainers) and confounders, <strong>no level of alcohol consumption is associated with reduced all-cause mortality</strong>. Any amount increases cancer risk — alcohol is a Group 1 carcinogen (IARC) for oropharynx, oesophagus, liver, colorectum, and breast. Even 1 drink/day increases breast cancer risk by ~7-10%.</p>
+                    <p><strong>Mechanisms of harm:</strong> Acetaldehyde (ethanol metabolite) directly damages DNA. Alcohol disrupts folate metabolism, increases oestrogen levels (breast cancer pathway), promotes gut permeability ("leaky gut"), depletes NAD+ (competing with sirtuin activation), disrupts sleep architecture (suppresses REM in second half of night), and is a primary driver of visceral fat accumulation. A 2024 cohort (n=57,691) found alcohol cessation was associated with increased LDL-C and decreased HDL-C short-term, but overall health benefits (blood pressure, liver function, cancer risk, sleep quality) far outweigh these transient lipid changes.</p>
+                    <p><strong>Conservative guidance:</strong> If you drink, limit to &lt;7 drinks/week (women) or &lt;14/week (men), with multiple alcohol-free days. Avoid binge drinking (≥4-5 drinks/occasion). For optimal longevity, the evidence increasingly supports zero or near-zero intake.</p>
+
+                    <h3>Sleep Debt and Circadian Disruption</h3>
+                    <p>Chronic sleep debt (&lt; 7 hours nightly) and circadian disruption (irregular sleep, shift work, late eating) accelerate aging more than most nutrient deficiency states. Sleep consolidates memory, clears metabolic waste via the glymphatic system (including amyloid-beta — Alzheimer's precursor), restores immune function, and regulates appetite hormones (ghrelin and leptin). A single night of 4-hour sleep reduces natural killer cell activity by 70%. Chronic short sleep (&lt;6 hours) increases all-cause mortality by 10-15% and accelerates epigenetic aging.</p>
+                    <p><strong>Shift work</strong> deserves special mention: rotating night shifts are classified as a probable carcinogen (IARC Group 2A) due to circadian disruption and melatonin suppression. Target: 7-9 hours nightly in a consistent schedule (within 1 hour variance), with darkness (&lt; 5 lux) and cool temperature (16-19°C). See the Sleep & Recovery section for detailed optimisation protocols.</p>
+
+                    <h3>Ultra-Processed Foods</h3>
+                    <p>Ultra-processed foods (NOVA Group 4) were identified as the #1 modifiable driver of visceral fat accumulation. A 2024 BMJ umbrella review of 45 meta-analyses found UPF consumption associated with <strong>increased risk of 32 adverse health outcomes</strong>, including cardiovascular disease (+50%), type 2 diabetes (+40%), depression (+50%), and all-cause mortality (+21%). Mechanisms include: low nutrient density, absence of fibre, pro-inflammatory omega-6 seed oils, high sodium, emulsifiers and additives that disrupt the gut microbiome, and hyperpalatable formulation that overrides satiety signalling.</p>
+                    <p>A landmark NIH crossover RCT (Hall et al., 2019) found participants eating ultra-processed diets consumed <strong>~500 kcal/day more</strong> than those eating unprocessed diets — matched for macronutrients, fibre, and palatability ratings — and gained 0.9 kg in just 2 weeks. A single dietary intervention (processed food elimination) without exercise or other changes resulted in progressive visceral fat reduction in O'Mara's cohort. This suggests avoidance is higher priority than optimisation of other factors.</p>
+
+                    <h3>Sedentariness</h3>
+                    <p>Chronic sedentariness (sitting &gt;8 hours daily) is associated with increased all-cause mortality independent of formal exercise — sitting is not simply the absence of exercise but an independent metabolic risk factor. Prolonged sitting reduces lipoprotein lipase activity (impairing triglyceride clearance), decreases glucose uptake, and promotes endothelial dysfunction within hours. Even light activity breaks (2-3 min every 30 min) interrupt these harmful metabolic cascades.</p>
+                    <p><strong>Key finding:</strong> A 2023 meta-analysis found that 30-40 minutes of moderate-to-vigorous physical activity per day can offset the mortality risk of 10+ hours of daily sitting — but this does not eliminate the metabolic harm of prolonged bouts. Target: &lt;30 min continuous sitting, with standing or walking breaks. Consider a standing desk, walking meetings, and structured movement reminders.</p>
+
+                    <h3>Air Pollution & Environmental Toxins</h3>
+                    <p>Ambient air pollution (PM2.5, NO₂, ozone) is an underappreciated accelerator of aging. PM2.5 particles penetrate alveoli and enter the systemic circulation, driving oxidative stress, endothelial dysfunction, and systemic inflammation. Long-term PM2.5 exposure is associated with accelerated epigenetic aging, increased cardiovascular mortality, cognitive decline, and lung cancer — even at levels below current regulatory limits. The Global Burden of Disease study attributes ~4.2 million deaths annually to ambient air pollution.</p>
+                    <p><strong>Practical mitigation:</strong> HEPA filtration at home (reduces indoor PM2.5 by 50-80%), avoid exercising near high-traffic roads during peak hours (PM2.5 inhalation increases 5-10× during exercise due to increased minute ventilation), monitor local AQI and adjust outdoor activity accordingly, and consider location factors in long-term planning. Indoor air quality (VOCs from furniture, cleaning products, cooking fumes) also contributes — adequate ventilation and low-VOC products reduce exposure.</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-6" class="text-accent font-medium">← Supplements</a>
+                            <a href="#section-8" class="text-accent font-medium">Sleep & Recovery →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-8" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Sleep & Recovery</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Sleep is not luxury; it is biology. Sleep deprivation accelerates aging more than most interventions can reverse. Optimization requires: 7-9 hours consolidated sleep, circadian alignment, cool dark environment, and consistent schedule.
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• REM and non-REM sleep have distinct functions; both are required for neuroplasticity, memory consolidation, and cellular repair</li>
+                            <li>• Sleep deprivation (< 7 hours) increases mortality risk 10-15%, impairs glucose handling, and accelerates epigenetic aging</li>
+                            <li>• Circadian alignment (consistent sleep time within 1 hour) is often more important than total sleep duration</li>
+                            <li>• Temperature (16-19°C), darkness (< 5 lux), and absence of blue light (>8 PM) are critical environmental factors</li>
+                            <li>• Sleep apnea (OSA) is a major hidden driver of aging; screening and treatment can reverse multiple aging phenotypes</li>
+                            <li>• Slow-wave sleep (deep sleep) is where growth hormone is released; declines with age unless exercise and fasting are maintained</li>
+                            <li>• Napping (20-30 min) can enhance alertness without sleep inertia; >1 hour naps may impair nocturnal sleep</li>
+                        </ul>
+                    </div>
+                    <h3>Sleep Architecture and Functions</h3>
+                    <p>Sleep consists of non-REM stages (1-3) and REM sleep, cycling approximately every 90 minutes. Non-REM sleep (particularly stage 3, slow-wave sleep) is when slow oscillations promote glymphatic clearance of metabolic waste (including amyloid-beta), and when growth hormone is released. REM sleep is when memory consolidation occurs and when the brain essentially "reboots" neurochemical systems.</p>
+                    <p>Sleep deprivation impairs: glucose regulation (insulin sensitivity declines), immune function (T-cell response reduced), cardiovascular function (blood pressure elevation), memory consolidation, and epigenetic stability. All-cause mortality increases 10-15% in those sleeping < 7 hours. This effect size is comparable to or exceeds benefits from many interventions.</p>
+                    <h3>Sleep Duration and Circadian Alignment</h3>
+                    <p>Optimal duration: 7-9 hours nightly for most adults. More critical than total duration is circadian alignment - sleeping within a consistent 1-hour window (e.g., 10:30 PM - 7:00 AM, not 10 PM one night and 1 AM the next). Consistency is protective against metabolic dysfunction and all-cause mortality more than absolute duration in some studies.</p>
+                    <p>Sleep need varies individually; some require 9+ hours, others do well at 7. The biomarker is daytime function and wake without alarm. If you need an alarm and grogginess lasts >20 min, sleep duration is likely insufficient.</p>
+                    <h3>Sleep Environment Optimization</h3>
+                    <p>Temperature: 16-19°C (61-66°F) is optimal for most. Core body temperature drops 0.5-1°C to initiate sleep; a cool environment facilitates this. Darkness: < 5 lux (essentially black dark). Even dim light (e.g., phone screen, bedside light) suppresses melatonin. Blue light avoidance: screens >8 PM should be minimized or blue-light filtered. Air quality and white noise (to mask disruptions) are secondary but helpful.</p>
+                    <h3>Sleep Apnea (OSA) Screening</h3>
+                    <p>Obstructive sleep apnea is a major hidden driver of aging - it fragments sleep, causes intermittent hypoxia, and promotes inflammation, visceral fat, and cardiovascular disease. Risk factors: BMI > 30, age > 50, male sex, neck circumference > 40 cm (men) or > 37 cm (women). Screening: STOP-BANG questionnaire (>3 positive = high risk). Diagnosis: sleep study (home or lab). Treatment: CPAP, oral appliances, or positional therapy. Effective treatment reverses many aging phenotypes.</p>
+                    <h3>Growth Hormone and Deep Sleep</h3>
+                    <p>Growth hormone is released primarily during slow-wave sleep (stage 3 non-REM). With aging, slow-wave sleep declines, and growth hormone secretion drops ~10% per decade. Exercise and fasting maintain slow-wave sleep; this is one mechanism by which they slow aging. Sleep opportunity (>7 hours) is required for adequate slow-wave duration.</p>
+                    <h3>Napping</h3>
+                    <p>Strategic napping (20-30 minutes in early afternoon) can enhance alertness and cognitive function without impairing nocturnal sleep. Longer naps (>1 hour) may cause sleep inertia (grogginess) and can fragment nighttime sleep. Short naps may be particularly beneficial for cardiovascular health in some populations. Time naps for circadian dip (~1-3 PM in most chronotypes).</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-7" class="text-accent font-medium">← Things to Avoid</a>
+                            <a href="#section-9" class="text-accent font-medium">Daily Protocols →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-9" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Practical Daily Protocols</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Longevity is not a single intervention; it is the integration of multiple small, consistent behaviors. Start with the highest-impact changes (sleep, exercise, diet, stress), then layer in optimization (fasting, supplements, hormetic stressors).
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Morning: early light exposure (>10 min, ideally sunlight), hydration, movement (walk/exercise)</li>
+                            <li>• Eating window: 12 PM - 8 PM (time-restricted eating) for AMPK activation without caloric restriction burden</li>
+                            <li>• Lunch: Mediterranean-style (vegetables, fish, whole grains, olive oil)</li>
+                            <li>• Afternoon: Zone 2 exercise (walking, cycling) 30-45 min most days</li>
+                            <li>• Evening: dim lights after sunset, no screens after 8 PM, cool bedroom (16-19°C)</li>
+                            <li>• Weekly: 1-2 HIIT sessions, 2-3 resistance sessions, 1 sauna/cold exposure session</li>
+                            <li>• Monthly: 24-48 hour fast (minimal eating) for robust autophagy and IGF-1 reduction</li>
+                        </ul>
+                    </div>
+                    <h3>Morning Routine</h3>
+                    <p><strong>Light exposure (>10 min sunlight, ideally within 1 hour of waking):</strong> Sunlight >10,000 lux resets circadian phase and sets melatonin release timing for that night. Early light exposure (6-8 AM) optimizes circadian alignment. On overcast days or in winter, consider light therapy (10,000 lux for 30 min). This single intervention improves sleep quality, mood, and metabolic function.</p>
+                    <p><strong>Hydration:</strong> Drink 500 mL water upon waking (electrolytes optional if fasting). This restores plasma osmolarity after overnight 12-16 hour fluid loss and activates the parasympathetic system.</p>
+                    <p><strong>Movement:</strong> 20-30 min walk (conversational pace, Zone 1-2 heart rate) early in the day. This initiates circadian alignment, activates AMPK gently (primes for later exercise), and improves mood. This is ideal time for social connection (walking with partner/friend) - social engagement is a major longevity factor often overlooked.</p>
+                    <h3>Eating Window & Meal Structure</h3>
+                    <p><strong>Time-restricted eating (12 PM - 8 PM or 10 AM - 6 PM):</strong> Define an 8-10 hour eating window and maintain it consistently. This achieves AMPK activation from 12-16 hour overnight fast without requiring daily caloric restriction or meal counting. The window should align with natural feeding patterns (most people naturally eat at these times).</p>
+                    <p><strong>Lunch (main meal):</strong> Mediterranean-style composition: vegetables (minimum half plate), fish or legumes (palm-sized), whole grains (quarter plate), olive oil, and fermented foods (sauerkraut, kimchi, olive oil). This provides fiber (30+ g daily across meals), plant diversity, micronutrients, and anti-inflammatory foods.</p>
+                    <p><strong>Snack (optional, within window):</strong> Nuts/seeds, berries, or hard cheese. Avoid processed snacks and refined carbohydrates.</p>
+                    <p><strong>Dinner (within eating window, preferably before 7 PM):</strong> Similar composition to lunch, potentially lighter (more vegetables, smaller protein). Eating earlier allows >4-5 hour fast before sleep, improving sleep architecture.</p>
+                    <h3>Afternoon Exercise</h3>
+                    <p><strong>Zone 2 training (30-45 min, 4-5 days/week):</strong> Walking, easy cycling, or swimming at conversational pace (130-150 bpm depending on fitness). This is the foundation of the exercise program. Time: post-lunch (1-3 PM) or late afternoon (4-6 PM), allowing 2-3 hours post-meal digestion and avoiding evening sympathetic activation that could impair sleep.</p>
+                    <p><strong>Resistance training (2-3 days/week, 30-45 min):</strong> Compound movements (squats, deadlifts, rows, presses) with progressive overload. Can be combined with one Zone 2 session (e.g., 20 min zone 2 warm-up, 30 min resistance, 10 min zone 2 cool-down).</p>
+                    <p><strong>HIIT (1-2 days/week, 15-30 min):</strong> Can be integrated into cardio days or resistance days. Examples: 4x4 min at 90-95% max HR, or 10x30 sec all-out with 90 sec recovery. Separate from resistance training by ≥6 hours to allow different energy systems.</p>
+                    <h3>Evening Routine (Sleep Preparation)</h3>
+                    <p><strong>Dim lights after sunset (or 7 PM in winter):</strong> Gradually reduce light intensity in home (use warm bulbs <3000K, dim to 20-30% brightness). This triggers endogenous melatonin production.</p>
+                    <p><strong>No screens after 8 PM (or blue-light filter if unavoidable):</strong> Screen light (460-480 nm blue wavelengths) suppresses melatonin. If screens unavoidable, apply blue-light filter (software or glasses) >1 hour before bed.</p>
+                    <p><strong>Cool bedroom (16-19°C, ~61-66°F):</strong> Set thermostat or use evaporative cooling device. Cool environment facilitates sleep onset by lowering core body temperature.</p>
+                    <p><strong>Consistent bedtime (within 1 hour, target 10:30 PM - 7:00 AM):</strong> Consistency is more protective than flexibility. The body adapts to circadian schedule; shifting bedtime by >1 hour nightly disrupts this adaptation.</p>
+                    <h3>Weekly Protocols</h3>
+                    <p><strong>Sauna (1-2 sessions, 4x/week for maximum benefit, 15-20 min at 80-100°C):</strong> Post-exercise is optimal (no additional systemic stress). Or separate session, not within 2 hours of sleep.</p>
+                    <p><strong>Cold exposure (1-2 sessions/week, 1-3 min in 10-15°C water or cold shower):</strong> Separate from sauna by ≥6 hours (not on same day for most). Improves parasympathetic tone and metabolic health.</p>
+                    <h3>Monthly Protocols</h3>
+                    <p><strong>24-48 hour minimal-eating fast (once monthly):</strong> Complete day with water-only (0 calories) or 500 calories. Day after cycle fasting works well (fasting day = weekend). This triggers robust autophagy and IGF-1 reduction.</p>
+                    <p><strong>Biomarker testing (quarterly to annually):</strong> Track lipids, glucose, inflammatory markers, and epigenetic age. See Section 10.</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-8" class="text-accent font-medium">← Sleep & Recovery</a>
+                            <a href="#section-10" class="text-accent font-medium">Biomarkers →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-10" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Biomarkers, Lipid Metabolism & Monitoring</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> Key biomarkers track the biological processes underlying aging: metabolic health (glucose, insulin), cardiovascular risk (lipids, inflammation), cellular damage (homocysteine), and epigenetic age. Regular monitoring (annually to every 2 years) provides feedback and motivation.
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Core panel: fasting glucose, insulin, HbA1c (metabolism), ApoB, LDL-C, HDL-C, triglycerides, Lp(a) (cardiovascular)</li>
+                            <li>• ApoB is emerging as the superior atherogenic marker over LDL-C — discordance is common in metabolic syndrome and insulin resistance</li>
+                            <li>• ~75-80% of circulating cholesterol comes from hepatic synthesis, not diet; endogenous production is the primary driver for most people</li>
+                            <li>• Lp(a) is 70-90% genetically determined, does not respond to statins/diet — measure once in every adult's lifetime</li>
+                            <li>• HDL function (cholesterol efflux capacity) matters more than HDL-C level; pharmacological HDL raising has failed in trials</li>
+                            <li>• TG/HDL ratio &lt; 2.0 is an underappreciated insulin resistance surrogate; free to calculate from any lipid panel</li>
+                            <li>• Inflammatory markers: hs-CRP, IL-6, oxLDL, homocysteine — residual inflammatory risk rivals residual LDL risk (CANTOS trial)</li>
+                            <li>• ApoE genotype (E2/E3/E4) modifies both cardiovascular and Alzheimer's risk — E4 carriers warrant more aggressive targets</li>
+                            <li>• Body composition: DEXA (visceral vs subcutaneous fat breakdown superior to BMI)</li>
+                            <li>• Epigenetic age (DNAm age): captures biological aging independent of chronological age</li>
+                            <li>• VO2max (CPET or field estimate): strongest modifiable mortality predictor</li>
+                        </ul>
+                    </div>
+                    <h3>Metabolic Panel</h3>
+                    <p><strong>Fasting glucose:</strong> Target < 100 mg/dL (< 5.6 mmol/L). Higher values indicate insulin resistance risk. Fasting glucose > 125 mg/dL = diabetes diagnosis threshold.</p>
+                    <p><strong>Fasting insulin:</strong> Target < 10 mIU/L (< 72 pmol/L). Insulin >10 indicates insulin resistance - early marker of metabolic dysfunction. HOMA-IR (Homeostasis Model Assessment of Insulin Resistance) = (glucose × insulin) / 405; target < 1.5.</p>
+                    <p><strong>HbA1c:</strong> Average blood glucose over 3 months. Target < 5.7% (< 39 mmol/mol). 5.7-6.4% = prediabetes range. This is more stable than fasting glucose and less sensitive to single-day variation.</p>
+                    <h3>Lipid Metabolism & Cardiovascular Risk</h3>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Endogenous Synthesis vs. Dietary Cholesterol</h4>
+                    <p>Hepatic cholesterol biosynthesis accounts for approximately <strong>75-80% of circulating cholesterol</strong>; dietary sources contribute only 20-25%. Moreover, only 30-40% of dietary cholesterol is absorbed, and the majority of intestinal cholesterol (~75%) comes from biliary recycling rather than food. When dietary cholesterol intake rises, hepatic HMG-CoA reductase activity is suppressed via the INSIG-SCAP-SREBP2 negative feedback loop — meaning the liver compensates by reducing its own production. This is why dietary cholesterol restriction has relatively minor impact on serum levels for most individuals. The practical implication: <strong>what drives most people's cholesterol numbers is their endogenous synthesis rate</strong>, which is influenced by genetics (SREBP pathway variants), insulin resistance, visceral adiposity, and inflammatory state — not eggs or dietary fat per se.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">LDL-C vs. ApoB vs. LDL Particle Number</h4>
+                    <p>Standard LDL-C measures the cholesterol content carried by LDL particles. ApoB counts the actual number of atherogenic particles (each LDL, VLDL, IDL, and Lp(a) particle carries exactly one ApoB molecule). This distinction matters because <strong>LDL-C and ApoB can be markedly discordant</strong> — particularly in patients with elevated triglycerides, small dense LDL, metabolic syndrome, or insulin resistance. In these common phenotypes, LDL-C may read "normal" (e.g., 90 mg/dL) while ApoB is elevated (e.g., 120 mg/dL), indicating many more particles carrying less cholesterol each.</p>
+                    <p>Sniderman's 2024 systematic review of 15 studies (593,354 participants) found <strong>ApoB outperformed LDL-C in 9 of 9 head-to-head comparisons</strong> for predicting atherosclerotic cardiovascular events. A 2024 UK Biobank analysis confirmed that in discordant populations, elevated ApoB carried significantly increased hazard ratios for MACE and CAD regardless of LDL-C level. Current expert consensus (Sniderman, Mora, Contois): ApoB should be the primary metric for estimating atherogenic burden and assessing adequacy of lipid-lowering therapy. Target: <strong>&lt; 90 mg/dL (general population), &lt; 70 mg/dL (high-risk), &lt; 55 mg/dL (very high-risk/established ASCVD)</strong>.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">HDL: Function Over Quantity</h4>
+                    <p>HDL-C (target &gt; 40 mg/dL men, &gt; 50 mg/dL women) remains a useful marker, but <strong>raising HDL-C pharmacologically has consistently failed to reduce cardiovascular events</strong>. The niacin trials (AIM-HIGH, HPS2-THRIVE) raised HDL-C by ~30% with no CV benefit. Three Phase III CETP inhibitor programs failed: anacetrapib raised HDL-C ~100% but any benefit in the REVEAL trial was attributable to non-HDL lowering, not HDL elevation. What matters is <strong>cholesterol efflux capacity</strong> — HDL's ability to accept cholesterol from macrophage foam cells via ABCA1-mediated reverse cholesterol transport. Population studies show impaired efflux capacity has striking inverse associations with incident ASCVD, independent of HDL-C level. Currently, efflux capacity is a research assay, not a routine clinical test — but it explains why some patients with "high HDL" still develop atherosclerosis.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Lipoprotein(a) — The Inherited Risk Factor</h4>
+                    <p>Lp(a) is 70-90% genetically determined (LPA gene, variable kringle IV-2 repeats) and is an independent, causal risk factor for ASCVD and calcific aortic valve disease. Elevated in ~1.5 billion people worldwide. Lp(a) carries oxidised phospholipids with pro-inflammatory and pro-thrombotic properties. <strong>Critically, Lp(a) does not respond to statins, diet, or exercise</strong> — it is essentially fixed by genotype. Current status: no approved Lp(a)-lowering therapies. The most advanced agent is <strong>pelacarsen</strong> (antisense oligonucleotide targeting apo(a) mRNA), which achieved &gt;80% Lp(a) reduction in Phase 2b. The Phase 3 Lp(a)HORIZON trial (n=8,323) has completed enrolment with topline results expected mid-2025. Every adult should have Lp(a) measured <strong>once in their lifetime</strong> — if elevated (&gt;50 mg/dL or &gt;125 nmol/L), it argues for more aggressive management of all other modifiable risk factors.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">ApoE Genotype</h4>
+                    <p>The ApoE gene has three common alleles (E2, E3, E4) with distinct implications:</p>
+                    <table>
+                        <thead>
+                            <tr><th>Genotype</th><th>Lipid Effect</th><th>Alzheimer's Risk</th><th>Clinical Implication</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>E2 carriers</strong></td><td>Lower LDL-C; higher triglycerides</td><td>Protective</td><td>May develop type III hyperlipoproteinaemia if homozygous</td></tr>
+                            <tr><td><strong>E3/E3</strong></td><td>Reference</td><td>Reference</td><td>Most common genotype (~60% of population)</td></tr>
+                            <tr><td><strong>E3/E4</strong></td><td>Higher LDL-C</td><td>2-3× increased</td><td>More aggressive lipid targets warranted</td></tr>
+                            <tr><td><strong>E4/E4</strong></td><td>Significantly higher LDL-C</td><td>10-15× increased</td><td>2024 consensus: consider deterministic genetic form of AD; aggressive CV and cognitive risk management</td></tr>
+                        </tbody>
+                    </table>
+                    <p>ApoE4 carriers should know their status — it modifies both cardiovascular treatment thresholds and motivates earlier, more aggressive lifestyle interventions. ApoE4 homozygotes may benefit from the lowest achievable ApoB levels.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Triglycerides & the TG/HDL Ratio</h4>
+                    <p><strong>Triglycerides:</strong> Target &lt; 100 mg/dL fasting (optimal), &lt; 150 mg/dL (acceptable). Triglycerides &gt; 150 indicate metabolic dysfunction and increase cardiac risk independent of LDL. Triglyceride-rich lipoprotein remnants have greater atherogenic potential per particle than LDL — they preferentially infiltrate arterial walls and activate NF-κB inflammatory signalling. High carbohydrate intake, alcohol, and insulin resistance raise triglycerides; time-restricted eating, exercise, and omega-3s reduce them.</p>
+                    <p><strong>TG/HDL ratio:</strong> This is an underappreciated <strong>surrogate marker for insulin resistance</strong>. Target &lt; 2.0 (ideal &lt; 1.5). A ratio &gt; 3.0 strongly correlates with small dense LDL predominance, hyperinsulinaemia, and metabolic syndrome — even when LDL-C appears normal. It is free to calculate from any standard lipid panel.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">What Actually Moves the Numbers</h4>
+                    <p><strong>Lifestyle interventions (2024 meta-analysis of exercise training):</strong> Aerobic exercise reduces LDL-C by ~7 mg/dL, triglycerides by ~8 mg/dL, and raises HDL-C by ~2 mg/dL. Each additional weekly session reduces total cholesterol by ~7.7 mg/dL. Aerobic training is superior for lipid improvements; resistance training is superior for glucose metabolism and body composition. Combined training is optimal for comprehensive dyslipidaemia management.</p>
+                    <p><strong>Mediterranean diet:</strong> A 24-RCT systematic review shows LDL-C reduction of ~10 mg/dL vs other diets. The PREDIMED trial demonstrated 30% lower major CV events. Soluble/viscous fibre (oats, psyllium, legumes) binds bile acids, forcing the liver to use cholesterol for new bile synthesis — effectively lowering LDL. Plant sterols/stanols (1.5-3 g/day) reduce total cholesterol 8-17% by blocking intestinal cholesterol absorption.</p>
+                    <p><strong>Pharmacological agents:</strong></p>
+                    <table>
+                        <thead>
+                            <tr><th>Agent</th><th>LDL-C Reduction</th><th>Mechanism</th><th>CV Event Reduction</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Statin (high-intensity)</strong></td><td>45-55%</td><td>HMG-CoA reductase inhibition → upregulates LDL receptors</td><td>35-40% (secondary prevention)</td></tr>
+                            <tr><td><strong>Ezetimibe (add-on)</strong></td><td>+15-20%</td><td>NPC1L1 cholesterol transporter inhibition</td><td>Incremental on statin</td></tr>
+                            <tr><td><strong>PCSK9 inhibitor</strong></td><td>~60% (added to statin)</td><td>Prevents LDL receptor degradation</td><td>Significant MI, stroke, revascularisation reduction (FOURIER)</td></tr>
+                            <tr><td><strong>Bempedoic acid</strong></td><td>15-25%</td><td>ACL inhibition (upstream of HMG-CoA); statin-intolerant option</td><td>CLEAR trial: 13% MACE reduction</td></tr>
+                            <tr><td><strong>Icosapent ethyl (pure EPA)</strong></td><td>Minimal LDL effect</td><td>Anti-inflammatory + TG metabolism</td><td>25% relative risk reduction (REDUCE-IT)</td></tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key insight — dose-response over time:</strong> Each 1 mmol/L LDL-C reduction yields 12% risk reduction at 1 year, 20% at 3 years, and 29% at 7 years. Earlier and sustained lowering produces compounding benefit — the "LDL exposure" or "cumulative ApoB burden" concept argues for intervention earlier in life rather than waiting for events.</p>
+
+                    <h4 class="text-lg font-semibold mt-4 mb-2">Residual Risk: Why LDL Lowering Alone Isn't Enough</h4>
+                    <p>Even with aggressive LDL reduction, substantial cardiovascular risk remains. The <strong>CANTOS trial</strong> (canakinumab, an IL-1β monoclonal antibody; n=8,623 stable CAD patients with hs-CRP ≥2 mg/L on statins) proved that targeting inflammation independently reduces CV events — <strong>with zero change in LDL-C</strong>. This was the first Phase 3 trial demonstrating inflammation as a viable, independent treatment target. Residual risk drivers include: (1) systemic inflammation (hs-CRP, IL-6), (2) triglyceride-rich remnant particles, (3) Lp(a), (4) endothelial dysfunction, and (5) small dense LDL not captured by standard LDL-C. A comprehensive approach must address all of these, not LDL alone.</p>
+
+                    <h3>Inflammatory & Advanced Markers</h3>
+                    <p><strong>High-sensitivity CRP (hs-CRP):</strong> Target &lt; 1 mg/L. CRP &gt; 3 mg/L indicates systemic inflammation and increased cardiovascular and cancer risk. The hs-CRP/HDL-C ratio is emerging as a superior composite predictor of CVD and all-cause mortality compared to either marker alone. Elevated hs-CRP responds to exercise, weight loss, Mediterranean diet, and reduced processed food intake. In statin-treated patients, residual hs-CRP ≥2 mg/L identifies those with ongoing inflammatory risk comparable to or exceeding residual LDL-C risk.</p>
+                    <p><strong>IL-6 (interleukin-6):</strong> Target &lt; 2 pg/mL. IL-6 is a central inflammaging marker; a 2024 meta-analysis found 29% increased heart failure risk per unit elevation. Elevated levels associate with disability, hospitalisation risk, and mortality in older adults. Genetic variants conferring lower IL-6 activity predict lower cardiovascular risk, confirming causality.</p>
+                    <p><strong>Oxidised LDL (oxLDL):</strong> LDL particles that have undergone oxidative modification are far more atherogenic than native LDL — they are taken up by macrophage scavenger receptors without feedback regulation, forming foam cells. OxLDL is both a marker and a driver of plaque formation. Antioxidant-rich diets (polyphenols, vitamin E from food sources) and exercise reduce oxLDL.</p>
+                    <p><strong>Homocysteine:</strong> Target &lt; 10 µmol/L. Elevated homocysteine damages arterial endothelium, increases thrombosis risk, and accelerates atherosclerosis. B-vitamin supplementation (folate, B6, B12) effectively lowers homocysteine, though whether this translates to CV event reduction remains debated. Check in patients with family history of early CVD or B12 deficiency risk.</p>
+                    <h3>Body Composition</h3>
+                    <p><strong>DEXA scan (Dual-Energy X-ray Absorptiometry):</strong> Provides breakdown into visceral fat, subcutaneous fat, muscle mass, and bone density. Far superior to BMI for risk stratification. Visceral fat area target: < 100 cm² for most adults (lower is better). Frequency: every 1-2 years during intervention, baseline + 2-year assessment to establish trajectory.</p>
+                    <p><strong>Bioelectrical impedance analysis (BIA) or similar:</strong> Portable approximation of body composition; less accurate than DEXA but acceptable for home monitoring trends.</p>
+                    <h3>Epigenetic Age</h3>
+                    <p><strong>DNA methylation (DNAm) age:</strong> Most advanced biological age measure; compares methylation pattern to population age-norms. Captures biological aging independent of chronological age. Commercial tests (TruDiagnostic, Elysium) available. Aging slower than chronological age indicates successful intervention. Cost: $200-500 per test. Frequency: every 2 years. Trends are more meaningful than single measurements.</p>
+                    <h3>Cardiovascular Fitness</h3>
+                    <p><strong>VO2max:</strong> Strongest modifiable predictor of mortality. Measured via cardiopulmonary exercise test (CPET, gold standard) or estimated via field tests (1.5-mile run, 6-minute walk). Cost: CPET $200-400 at sports medicine clinic. Target for 40-year-old: > 40 mL/kg/min (men), > 30 mL/kg/min (women). Frequency: annually or every 2 years during training.</p>
+                    <h3>Sample Monitoring Schedule</h3>
+                    <p><strong>Annual (every 12 months):</strong> Fasting metabolic panel (glucose, insulin, HbA1c), advanced lipid panel (LDL-C, ApoB, HDL-C, triglycerides, non-HDL-C), hs-CRP, homocysteine, liver/kidney function, CBC</p>
+                    <p><strong>Once (lifetime):</strong> Lp(a) (genetically fixed — one measurement is sufficient unless borderline), ApoE genotype</p>
+                    <p><strong>Every 2 years:</strong> DEXA scan, epigenetic age (DNAm), VO2max testing</p>
+                    <p><strong>Every 5 years:</strong> Comprehensive imaging (carotid ultrasound, coronary calcium scoring if &gt;40 years with risk factors or &gt;50 years routinely)</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-9" class="text-accent font-medium">← Daily Protocols</a>
+                            <a href="#section-11" class="text-accent font-medium">Women's Health →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-11" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Women's Health & the Menopause Transition</h2>
+                    <div class="key-finding">
+                        <strong>KEY FINDING:</strong> The menopausal transition triggers visceral fat redistribution, accelerated bone loss (~2%/year for 5-7 years), anabolic resistance, and cardiovascular risk acceleration. HRT initiated within 10 years of menopause reduces all-cause mortality by ~30% (FDA boxed warning removed November 2025; BMJ 2026 Danish cohort n=876,805 confirmed no increased mortality). Resistance training is the essential stimulus for overcoming postmenopausal anabolic resistance — leucine alone is insufficient (GeroScience 2025 RCT).
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>Estrogen decline drives visceral fat accumulation (5-8% to 15-20% of body fat), accelerated bone loss, anabolic resistance, and 2-3x cardiovascular risk increase</li>
+                            <li>HiRIT (high-intensity resistance and impact training) is the most effective non-pharmacological intervention for postmenopausal BMD</li>
+                            <li>Protein needs increase to 1.2-1.6 g/kg/day; resistance training — not leucine alone — reverses frailty</li>
+                            <li>HRT timing hypothesis confirmed by FDA action and large cohort data; benefits outweigh risks when started within the window</li>
+                            <li>Intermittent fasting is generally safe for women; TRF shows particular benefit in PCOS</li>
+                            <li>Younger women should focus on peak bone mass, iron/thyroid monitoring, and establishing resistance training habits</li>
+                        </ul>
+                    </div>
+
+                    <h3>The Menopausal Metabolic Shift</h3>
+                    <p>During reproductive years, estrogen levels range 100-250 pg/mL; after menopause they fall to ~10 pg/mL. This decline triggers concurrent processes with profound longevity implications:</p>
+                    <p><strong>Visceral fat redistribution:</strong> Premenopausal estrogen promotes subcutaneous fat storage. Estrogen decline shifts deposition to the visceral compartment — from 5-8% to 15-20% of total body fat. This metabolically active visceral fat produces IL-6 and TNF-alpha, driving the inflammaging cascade described in Section 1.</p>
+                    <p><strong>Accelerated bone loss:</strong> Estrogen regulates osteoclast apoptosis. Its loss produces ~2% BMD loss per year for 5-7 years postmenopause (vs ~0.5%/year in age-matched men). Without intervention, up to 50% of postmenopausal women sustain an osteoporotic fracture.</p>
+                    <p><strong>Cardiovascular risk acceleration:</strong> The premenopausal cardiovascular advantage erodes rapidly as estrogen's protective effects on endothelial function, HDL maintenance, LDL clearance, and vascular compliance diminish. By age 65, women's CVD risk equals men's.</p>
+                    <p><strong>Anabolic resistance:</strong> Postmenopausal women develop blunted muscle protein synthesis responses. The RDA of 0.8 g/kg/day is insufficient. A 2025 GeroScience RCT found resistance training — but not leucine supplementation alone — reversed frailty and increased basal myofibrillar synthesis in older women consuming optimised protein.</p>
+
+                    <h3>Exercise Modifications for Women</h3>
+                    <p><strong>High-intensity resistance and impact training (HiRIT):</strong> A 2025 systematic review confirmed RT significantly improves BMD at the lumbar spine, femoral neck, and total hip. Optimal protocol: moderate-to-high intensity RT 2-3 days/week + impact activity 3+ days/week. A 13-month RCT showed significant lumbar spine improvement with supervised progressive HiRIT — safe even in women with osteoporosis/osteopenia.</p>
+                    <p><strong>Combined approach:</strong> Heavy compound RT 2-3x/week; impact loading 3-5x/week (jumping, stairs, weighted vest walking); Zone 2 aerobic 3-4x/week for cardiovascular and visceral fat reduction; balance/proprioception work 2-3x/week for fall prevention. A 2025 Frontiers scoping review found HRT + exercise produced greater BMD improvements than either alone.</p>
+                    <p><strong>Timing matters:</strong> A 2026 Medscape analysis noted exercise's ability to improve bone density may depend on age and BMI, with earlier intervention yielding better outcomes. Start in perimenopause, not after bone loss becomes clinically evident.</p>
+
+                    <h3>Nutrition Shifts at Menopause</h3>
+                    <p><strong>Protein:</strong> At least 1.2 g/kg/day (up to 1.6 g/kg/day for active women), distributed 25-30g per meal. Adequate protein is necessary but not sufficient — resistance training is the essential stimulus.</p>
+                    <p><strong>Calcium & vitamin D:</strong> Calcium >=1,200 mg/day (food-first: dairy, sardines, fortified foods, leafy greens) + 800-2,000 IU/day vitamin D. A 2025 Frontiers in Nutrition review confirmed Ca/D co-supplementation robustly preserves BMD. Higher dietary vitamin D was associated with 17% lower risk of early menopause (Nurses' Health Study II).</p>
+                    <p><strong>Mediterranean pattern:</strong> Anti-inflammatory polyphenols, omega-3s for cardiovascular protection, phytoestrogens from legumes and flaxseed. 2025 evidence confirms clinically meaningful BP and triglyceride reductions in menopausal populations.</p>
+                    <p><strong>Iron:</strong> Premenopausal women need monitoring for deficiency; postmenopausal women may need to reduce supplementation (excess iron is pro-oxidant). Magnesium (320 mg/day), omega-3s, and B-vitamins also warrant attention.</p>
+
+                    <h3>Fasting Considerations for Women</h3>
+                    <p><strong>Safety evidence:</strong> A 2025 systematic review (2015-2025) found IF presents both potential benefits and risks for female reproductive health, with individualised approaches recommended. However, a 72-hour fast during the follicular phase did not affect gonadotrophin secretion or menstrual cycles in normal women. The feared hormonal disruption from moderate TRF (e.g. 16:8) appears largely overstated — much concern was extrapolated from rodent models.</p>
+                    <p><strong>PCOS benefits:</strong> TRF shows particular promise in PCOS: 33-40% of participants reported normalised cycles, with reductions in testosterone, free androgen index, anti-Mullerian hormone, and LH, plus increased SHBG.</p>
+                    <p><strong>Practical guidance:</strong> Start with 12-14 hour eating window and progress gradually. Ensure adequate calories and protein during feeding. Monitor menstrual regularity. Consider more liberal fasting during the luteal phase. Avoid extended fasts during pregnancy, breastfeeding, or active eating disorder recovery.</p>
+
+                    <h3>HRT & the Timing Hypothesis</h3>
+                    <p><strong>The timing hypothesis:</strong> HRT effects on atherosclerosis and clinical outcomes depend critically on when therapy is initiated. Started before age 60 or within 10 years of menopause, HRT reduces all-cause mortality by ~30% and cardiovascular disease. The "healthy endothelium hypothesis" explains the duality: estrogen benefits healthy vasculature but harms established plaques.</p>
+                    <p><strong>2025-2026 developments:</strong> On 10 November 2025, the FDA removed the long-standing boxed warning from menopause HRT products. In February 2026, a BMJ study of 876,805 Danish women confirmed HRT was not associated with increased mortality. These are landmark regulatory and epidemiological shifts.</p>
+                    <p><strong>Multi-system benefits:</strong> Beyond cardiovascular protection, timely HRT preserves BMD (HRT + exercise superior to either alone), reduces visceral adiposity (OsteoLaus cohort), improves sleep, and may attenuate inflammaging acceleration.</p>
+                    <p><strong>Shared decision-making:</strong> Contraindications include ER+ breast cancer, VTE, active liver disease, undiagnosed vaginal bleeding. Women with intact uterus require progestogen. Body-identical formulations (micronised progesterone, transdermal estradiol) carry the most favourable risk profiles. Discuss in perimenopause with PCP or gynaecologist.</p>
+
+                    <h3>Sleep, Stress & Cardiovascular Risk</h3>
+                    <p>40-60% of perimenopausal women report sleep difficulties, driven by vasomotor symptoms, declining progesterone (GABAergic sleep properties), and increased cortisol. A 2025 JCEM experimental model showed estradiol suppression decreased leptin and altered lipids, while sleep fragmentation increased heart rate and trended toward elevated fasting glucose — the combination accelerates cardiovascular risk beyond what either factor alone would predict.</p>
+                    <p><strong>Interventions:</strong> CBT-I as first-line; cool sleeping environment; HRT if vasomotor symptoms drive disruption; limit alcohol (disproportionately disrupts women's sleep architecture); follow all Chapter 8 principles with added emphasis on consistent wake times and temperature regulation.</p>
+
+                    <h3>Younger Women: Cycle, Pregnancy & Foundational Health</h3>
+                    <p><strong>Menstrual cycle & training:</strong> A 2025 Frontiers review found objective performance differences across cycle phases are inconsistent. Periodising training by cycle phase does not confer additional benefits (S&C Journal 2025). Train consistently; adjust by symptoms, not rigid phase protocols.</p>
+                    <p><strong>Peak bone mass:</strong> Achieved by late 20s. Resistance training + adequate Ca/D before this window creates a larger "bone bank" buffering postmenopausal decline. This may be among the highest-yield longevity investments for young women.</p>
+                    <p><strong>Iron & thyroid:</strong> Premenopausal women at significant risk for iron deficiency (menstrual losses). Autoimmune thyroid disease ~2x more prevalent in women; postpartum thyroiditis affects 4-10%. Up to 50% of women are iron-deficient at 6 weeks postpartum. Screen ferritin, TSH, free T4 regularly, especially postpartum.</p>
+                    <p><strong>Pregnancy & postpartum:</strong> Not the time for caloric restriction or aggressive fasting. Increase protein, iron, iodine, folate, omega-3s. Postpartum: screen iron and thyroid at 6 weeks, gradual return to RT (pelvic floor first), monitor for PPD.</p>
+                    <p><strong>Autoimmune considerations:</strong> ~80% of autoimmune patients are female. Hashimoto's, lupus, and RA can affect exercise capacity, nutrient absorption, and supplement risk-benefit profiles. Adapt strategies with physician guidance.</p>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-10" class="text-accent font-medium">&larr; Biomarkers & Lipids</a>
+                            <a href="#section-12" class="text-accent font-medium">Research Gaps &rarr;</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-12" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Research Gaps & Future Directions</h2>
+                    <div class="key-finding">
+                        <strong>KEY CONCEPT:</strong> While significant progress has been made understanding aging, major gaps remain in translating animal data to humans, optimizing intervention combinations, and identifying individual responder profiles. The next decade will likely produce senolytics, gene therapies, and age-reversal interventions.
+                    </div>
+                    <div class="chapter-summary">
+                        <strong>CHAPTER SUMMARY</strong>
+                        <ul class="mt-3 space-y-2 ml-4">
+                            <li>• Most longevity evidence in humans is observational; large RCTs of integrated protocols are needed</li>
+                            <li>• Sex/gender differences in intervention response are understudied; most data from men</li>
+                            <li>• Individual optimization requires genomic, epigenetic, and metabolic profiling to tailor interventions</li>
+                            <li>• Senolytics and age-reversal therapies (OSK gene therapy) are on the horizon; human trials expected 2026-2028</li>
+                            <li>• Combining multiple interventions may have synergistic or antagonistic effects; little optimization data exists</li>
+                            <li>• Long-term adherence to multimodal protocols is poor; behavioral science and digital health tools are needed</li>
+                        </ul>
+                    </div>
+                    <h3>Translation Gaps: From Mice to Humans</h3>
+                    <p>Most of our mechanistic understanding comes from mice and cell models. While mice have proven predictive for many interventions (e.g., rapamycin, senolytics, exercise), translating to humans is fraught with complexity. Humans live 100x longer, have vastly more complex genetics and microbiomes, and cannot be randomized to 20-year interventions. This creates a fundamental evidence gap: what we think should extend human lifespan based on mouse data may not translate.</p>
+                    <p>Solution approaches: (1) Large RCTs of intermediate endpoints (biomarkers, functional measures) in aging humans (TAME trial is a start); (2) Consortium approach (multiple sites, harmonized protocols) to increase statistical power; (3) Integration of "omics" (genomics, proteomics, metabolomics) to understand responder phenotypes.</p>
+                    <h3>Sex and Gender Differences</h3>
+                    <p>Most longevity research has been conducted in males (mice and humans). Women respond differently to fasting (likely estrogen-AMPK interactions), have different cardiovascular risk patterns (pre- vs post-menopause), and show different microbiome compositions. Hormone replacement therapy (HRT) is controversial for longevity but may have roles post-menopause. More research needed on: fasting protocols for women, exercise dosing across menstrual cycle, HRT and longevity, and sex-specific biomarker targets.</p>
+                    <h3>Individual Responder Profiling</h3>
+                    <p>There is substantial inter-individual variation in response to interventions. Genetics (e.g., APOE genotype for cardiovascular risk, clock genes for circadian sensitivity), epigenetics (baseline age vs chronological age), metabolic capacity (mitochondrial function, insulin sensitivity), and microbiome composition all influence outcomes. Future: precision medicine approach using genomic, metabolic, and epigenetic profiling to tailor interventions to individual biology rather than one-size-fits-all recommendations.</p>
+                    <h3>Senolytic Drugs and Age-Reversal Therapy</h3>
+                    <p>Senolytic drugs (D+Q, fisetin) are in Phase 2 clinical trials; results expected 2026-2027. If successful, these would be the first disease-modifying therapy specifically targeting the aging process itself (not a disease). Longer-term frontier: gene therapy for OSK factors (shown to reverse epigenetic age ~75% in mice). First human trials for blindness reversal using OSK gene therapy are planned for 2026-2027.</p>
+                    <h3>Intervention Synergy and Antagonism</h3>
+                    <p>Most research examines single interventions. In reality, humans combine multiple interventions. Some combinations are likely synergistic (e.g., exercise + time-restricted eating both activate AMPK; additive effect likely). Others may be antagonistic: rapamycin + metformin both suppress mTOR, but rapamycin's immunosuppression might impair metformin's benefits. Little data exists on optimal combination therapy. Future research should systematically evaluate multi-modal protocols.</p>
+                    <h3>Adherence and Behavioral Science</h3>
+                    <p>Long-term adherence to multimodal longevity protocols is poor. Most people cannot sustain Zone 2 exercise, dietary changes, sleep optimization, and monthly fasting simultaneously. Behavioral science approaches (habit stacking, digital tracking, social support, financial incentives) could improve adherence. Technology (wearables, AI coaching) may help tailor real-time feedback.</p>
+                    <h3>Future Interventions</h3>
+                    <p>Expected within 10-20 years: senolytics available by prescription (if trials succeed); gene therapies for age-reversal in specific tissues; NAD+ restoration therapies with better bioavailability; microbiome editing (targeting specific species for longevity); and perhaps the first integrative "aging pill" combining multiple mechanisms. The field of geroscience is accelerating; predictions made 5 years ago are now outdated.</p>
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Section Navigation</h4>
+                        <div class="flex justify-between">
+                            <a href="#section-11" class="text-accent font-medium">&larr; Women's Health</a>
+                            <a href="#find-testing" class="text-accent font-medium">Find Testing &rarr;</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Find Testing Section -->
+                <section id="find-testing" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h2>Find Testing Providers</h2>
+                    <p class="text-gray-600 mb-6">Find longevity testing providers in your area or nationwide options.</p>
+
+                    <div id="geolocation-loader" class="text-center mb-6">
+                        <div class="inline-block">
+                            <div class="inline-block h-8 w-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                        <p class="mt-2 text-gray-600">Detecting your location...</p>
+                    </div>
+
+                    <div id="location-input" class="hidden mb-6">
+                        <label class="block text-sm font-medium mb-2">Or enter your city:</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="city-input" placeholder="Enter city name" class="flex-1 border border-gray-300 rounded px-3 py-2">
+                            <button onclick="searchCity()" class="bg-accent text-white px-4 py-2 rounded font-medium">Search</button>
+                        </div>
+                    </div>
+
+                    <div id="providers-container"></div>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Back</h4>
+                        <a href="#home" class="text-accent font-medium">← Back to Home</a>
+                    </div>
+                </section>
+
+                <!-- Sources & Credits -->
+                <section id="sources" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h1 class="text-3xl font-bold mb-2">Sources & Credits</h1>
+                    <p class="text-gray-600 mb-8">This review synthesises evidence from peer-reviewed literature, expert interviews, and podcast briefings. Key sources are listed below.</p>
+
+                    <h2 class="text-2xl font-bold mt-8 mb-4 accent">Expert Sources & Interviews</h2>
+                    <p class="text-gray-700 mb-4">The following expert interviews and podcast episodes were reviewed and integrated into this document:</p>
+
+                    <div class="space-y-3 mb-10">
+                        <div class="p-3 bg-gray-50 rounded border-l-3 border-accent" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">David Sinclair, PhD</p>
+                            <p class="text-sm text-gray-600">Harvard Medical School — Information theory of aging, epigenetic reprogramming, NAD+ biology, age-reversal research. <em>Diary of a CEO</em> (two episodes).</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Peter Attia, MD</p>
+                            <p class="text-sm text-gray-600">Author of <em>Outlive</em> — Resistance training roundtable, cold plunge vs sauna ROI analysis, strength/stability programming, visceral adiposity. <em>The Drive Podcast</em> (multiple episodes).</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Matthew Walker, PhD</p>
+                            <p class="text-sm text-gray-600">UC Berkeley — Sleep architecture, mortality, immune function, glymphatic clearance, chronotypes, societal cost of sleep deprivation. TED Talk & <em>Diary of a CEO</em>.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Benjamin Bikman, PhD</p>
+                            <p class="text-sm text-gray-600">BYU — Insulin as master aging signal, ketone biology, mTOR/rapamycin sceptical appraisal. <em>Diary of a CEO</em> & <em>The Metabolic Classroom</em>.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Rhonda Patrick, PhD</p>
+                            <p class="text-sm text-gray-600">FoundMyFitness — Sauna dose-response data, heat shock proteins, detoxification, depression RCT evidence. <em>MedCram</em> briefing.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Tim Spector, PhD &amp; Federica Amati, PhD</p>
+                            <p class="text-sm text-gray-600">King's College London / ZOE — Chronic inflammation, gut-immune axis, anti-inflammatory foods, PREDICT trial, microbiome diversity. <em>Zoe Science &amp; Nutrition</em> podcast (multiple episodes).</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Iñigo San Millán, PhD</p>
+                            <p class="text-sm text-gray-600">University of Colorado — Zone 2 training physiology, lactate shuttle, mitochondrial dysfunction, VO2max &amp; mortality. <em>The Drive Podcast</em> with Peter Attia.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">James Kirkland, MD, PhD</p>
+                            <p class="text-sm text-gray-600">Mayo Clinic — Cellular senescence, SASP biology, senolytics (dasatinib + quercetin, fisetin), Translational Geroscience Network clinical trials. NUS Webinar.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Nicola Segata, PhD</p>
+                            <p class="text-sm text-gray-600">University of Trento — Shotgun metagenomics, strain-level microbiome analysis, lost microbes hypothesis, drug-microbiome interactions. <em>Zoe</em> podcast.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Kevin O'Mara, MD</p>
+                            <p class="text-sm text-gray-600">Visceral adiposity, 4-compartment fat model, TOFI/FOTI phenotypes, sex-specific fat distribution, MRI body composition. <em>Fit2Fat2Fit</em>.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Gabrielle Lyon, DO &amp; Jeff Cavaliere, DPT</p>
+                            <p class="text-sm text-gray-600">Muscle as organ of longevity, resistance training programming, unilateral vs bilateral, anabolic resistance. <em>The Drive</em> roundtable with Attia &amp; Boyle.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded" style="border-left: 3px solid #0d9488;">
+                            <p class="font-semibold">Alan Goldhamer, DC</p>
+                            <p class="text-sm text-gray-600">True North Health Center — 40 years of medically supervised water-only fasting data. Hypertension case series (n=174), DEXA body composition, microbiome reboot, SOS/pleasure trap framework, women's health, extended fasting protocols. <em>Diary of a CEO</em>.</p>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 accent">Key Journal References</h2>
+                    <p class="text-gray-700 mb-4">Selected peer-reviewed references cited throughout the review:</p>
+
+                    <div class="space-y-2 text-sm text-gray-700 mb-10">
+                        <p>1. Wang Z, et al. <em>Ageing Res Rev</em> 2024; 101: 102528 — Epigenetic clocks as aging biomarkers.</p>
+                        <p>2. Vasim I, et al. <em>Nutrients</em> 2022; 14(6): 1220 — Intermittent fasting: evidence, mechanisms, and safety.</p>
+                        <p>3. MIT News. <em>MIT Technology Review</em> 2023 — Yamanaka factors and cellular reprogramming.</p>
+                        <p>4. Taher MS, et al. <em>Antioxidants</em> 2023; 12(4): 1–18 — Senolytics targeting SCAP networks.</p>
+                        <p>5. GBD 2018 Alcohol Collaborators. <em>Lancet</em> 2018; 392: 1015–1035 — Zero safe threshold for alcohol.</p>
+                        <p>6. Topiwala A, et al. <em>Nature Communications</em> 2022; 13: 1175 — Alcohol and brain structure (n = 25,378).</p>
+                        <p>7. Doll R, et al. <em>BMJ</em> 2004; 328: 1519 — 50-year British doctors study, smoking &amp; mortality.</p>
+                        <p>8. Hackshaw A, et al. <em>BMJ</em> 2018; 360: j5855 — Low-intensity smoking and CVD risk.</p>
+                        <p>9. Epel ES, et al. <em>PNAS</em> 2004; 101(49): 17312–17315 — Chronic stress and telomere shortening.</p>
+                        <p>10. Hall KD, et al. <em>Cell Metabolism</em> 2019; 30(1): 67–77 — Ultra-processed foods NIH RCT.</p>
+                        <p>11. Holt-Lunstad J, et al. <em>PLoS Medicine</em> 2010; 7(7): e1000316 — Social isolation mortality meta-analysis (308,849 subjects).</p>
+                        <p>12. Burnett R, et al. <em>PNAS</em> 2018; 115(38): 9592–9597 — PM2.5 and global mortality.</p>
+                        <p>13. Marfella R, et al. <em>NEJM</em> 2024; 390: 900–910 — Microplastics in carotid plaque (HR 4.53).</p>
+                        <p>14. Laukkanen T, et al. <em>JAMA Internal Medicine</em> 2015; 175(4): 542–548 — Sauna bathing and cardiovascular mortality.</p>
+                        <p>15. Cappuccio FP, et al. <em>Sleep</em> 2010; 33(5): 585–592 — Sleep duration meta-analysis (1.3M subjects).</p>
+                        <p>16. Windred DP, et al. <em>Sleep</em> 2024 — Sleep regularity &gt; duration for mortality (UK Biobank, n = 60,977).</p>
+                        <p>17. Lim ASP, et al. <em>JAMA Neurology</em> 2023 — Slow-wave sleep decline and dementia risk (27% per 1% annual loss).</p>
+                        <p>18. Mannick JB, et al. <em>Science Translational Medicine</em> 2014 &amp; 2018 — Low-dose everolimus and immune function in elderly.</p>
+                        <p>19. Fitzgerald KN, et al. <em>Aging</em> 2021; 13(7): 9419–9432 — Diet/lifestyle epigenetic age reversal RCT (n = 43).</p>
+                        <p>20. Dancer et al. <em>Cell Metabolism</em> 2021 — Isocaloric HFD and senolytic lifespan extension.</p>
+                        <p>21. Obesity Reviews 2024 — 84-RCT network meta-analysis: exercise modalities for visceral fat reduction.</p>
+                        <p>22. Alimujiang A, et al. <em>JAMA Network Open</em> 2019; 2(6): e196694 — Life purpose and all-cause mortality (HR 2.43).</p>
+                        <p>23. Chang A-M, et al. <em>PNAS</em> 2014 — Blue light and circadian disruption.</p>
+                        <p>24. Drake CL, et al. <em>JCSM</em> 2013 — Caffeine timing and sleep quality.</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 accent">Additional Research Sources</h2>
+                    <div class="space-y-2 text-sm text-gray-700 mb-10">
+                        <p>R.J. Aldwinckle. <em>Evidence-Based Fasting Review</em>. March 2025. 24 references — metabolic physiology, autophagy, inflammation, circadian biology, gut-brain axis.</p>
+                        <p>Infrared Sauna Evidence Review (April 2026) — Waon therapy RCTs, Janssen JAMA sham-controlled depression trial, IR-specific evidence audit.</p>
+                        <p>Red Light Photobiomodulation Mini-Review (April 2026) — 9 references, Lee 2007 split-face RCT, Mota 2023 wrinkle volume RCT, JAAD 2025 consensus.</p>
+                        <p>Visceral Adiposity &amp; Inflammaging Evidence Synthesis (April 2026) — VAT mortality systematic review, DEXA vs CT comparison, Nature Medicine 2025 TRE data.</p>
+                        <p>Longevity Biomarkers Evidence Synthesis (April 2026) — GrimAge v2, DunedinPACE, telomere meta-analysis, recommended testing panel.</p>
+                        <p>Sleep Architecture &amp; Longevity Evidence Synthesis (April 2026) — Glymphatic clearance, triple coupling, adenosine/caffeine mechanisms, OSA prevalence.</p>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-gray-50 rounded border-l-4 border-accent">
+                        <p class="text-sm text-gray-600"><strong>Note:</strong> This is a living document. Full numbered references with DOIs are available in the downloadable PDF/DOCX version. All claims have been graded using a modified Oxford CEBM evidence framework where possible.</p>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-gray-50 border-t-2 border-gray-300">
+                        <h4 class="font-bold mb-3">Back</h4>
+                        <a href="#home" class="text-accent font-medium">← Back to Home</a>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top" onclick="scrollToTop()"></div>
+
+    <script>
+        // Provider database
+        const providerDatabase = {
+            'Sacramento': {
+                lat: 38.5816,
+                lng: -121.4944,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'UC Davis Health Imaging', address: 'UC Davis Medical Center', price: '$150-250' },
+                        { name: 'Capitol Radiology', address: 'Midtown Sacramento', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Sacramento', address: 'Downtown & Midtown', price: '$150-300' },
+                        { name: 'Quest Diagnostics', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner Clinic)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'UC Davis Health MRI', address: 'UC Davis Medical Center', price: '$2000-3500' },
+                        { name: 'Preventive Medicine Imaging', address: 'Midtown', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'San Francisco': {
+                lat: 37.7749,
+                lng: -122.4194,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'UCSF Radiology', address: 'UCSF Medical Center', price: '$150-250' },
+                        { name: 'Preventive Health Imaging', address: 'Financial District', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'InsideTracker (Partner)', address: 'Remote', price: '$300-600' },
+                        { name: 'LabCorp San Francisco', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'TruDiagnostic (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'UCSF Preventive Imaging', address: 'Parnassus Heights', price: '$2500-4000' }
+                    ]
+                }
+            },
+            'Los Angeles': {
+                lat: 34.0522,
+                lng: -118.2437,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Cedars-Sinai Radiology', address: 'Los Angeles', price: '$150-250' },
+                        { name: 'LA Preventive Medicine', address: 'Santa Monica', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Los Angeles', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest LA', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Cedars-Sinai Advanced Imaging', address: 'Los Angeles', price: '$3000-4500' }
+                    ]
+                }
+            },
+            'New York': {
+                lat: 40.7128,
+                lng: -74.0060,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Mount Sinai Radiology', address: 'Manhattan', price: '$150-250' },
+                        { name: 'NY Preventive Medicine', address: 'Midtown', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp New York', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest Diagnostics NY', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Elysium Health (Partner)', address: 'Remote', price: '$400-600' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Cornell Radiology', address: 'Manhattan', price: '$3000-4500' }
+                    ]
+                }
+            },
+            'Chicago': {
+                lat: 41.8781,
+                lng: -87.6298,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Northwestern Radiology', address: 'Chicago', price: '$150-250' },
+                        { name: 'Chicago Preventive Health', address: 'Downtown', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Chicago', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest Chicago', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Northwestern Advanced Imaging', address: 'Chicago', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Houston': {
+                lat: 29.7604,
+                lng: -95.3698,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'MD Anderson Radiology', address: 'Houston', price: '$150-250' },
+                        { name: 'Houston Preventive Medicine', address: 'Medical Center', price: '$200-300' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Houston', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest Houston', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'TruDiagnostic (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Houston Methodist Imaging', address: 'Medical Center', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Phoenix': {
+                lat: 33.4484,
+                lng: -112.0742,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Mayo Clinic Radiology', address: 'Phoenix', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Phoenix', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest Phoenix', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Mayo Clinic Advanced Imaging', address: 'Phoenix', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Philadelphia': {
+                lat: 39.9526,
+                lng: -75.1652,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Penn Medicine Radiology', address: 'Philadelphia', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Philadelphia', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'InsideTracker (Partner)', address: 'Remote', price: '$300-600' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Penn Advanced Imaging', address: 'Philadelphia', price: '$3000-4500' }
+                    ]
+                }
+            },
+            'Dallas': {
+                lat: 32.7767,
+                lng: -96.7970,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'UT Southwestern Radiology', address: 'Dallas', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Dallas', address: 'Multiple locations', price: '$150-300' },
+                        { name: 'Quest Dallas', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'TruDiagnostic (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'UT Southwestern Imaging', address: 'Dallas', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Seattle': {
+                lat: 47.6062,
+                lng: -122.3321,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'UW Medicine Radiology', address: 'Seattle', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Seattle', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'UW Medicine Advanced Imaging', address: 'Seattle', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Denver': {
+                lat: 39.7392,
+                lng: -104.9903,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'CU Anschutz Radiology', address: 'Denver', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Denver', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'InsideTracker (Partner)', address: 'Remote', price: '$300-600' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'CU Anschutz Imaging', address: 'Denver', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Boston': {
+                lat: 42.3601,
+                lng: -71.0589,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Mass General Radiology', address: 'Boston', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Boston', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Elysium Health (Partner)', address: 'Remote', price: '$400-600' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Mass General Advanced Imaging', address: 'Boston', price: '$3000-4500' }
+                    ]
+                }
+            },
+            'Atlanta': {
+                lat: 33.7490,
+                lng: -84.3880,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'Emory Radiology', address: 'Atlanta', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Atlanta', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'Function Health (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'Emory Advanced Imaging', address: 'Atlanta', price: '$3000-4000' }
+                    ]
+                }
+            },
+            'Miami': {
+                lat: 25.7617,
+                lng: -80.1918,
+                providers: {
+                    'DEXA Scanning': [
+                        { name: 'UM Miller Radiology', address: 'Miami', price: '$150-250' }
+                    ],
+                    'Blood Panels': [
+                        { name: 'LabCorp Miami', address: 'Multiple locations', price: '$150-300' }
+                    ],
+                    'Epigenetic Testing': [
+                        { name: 'TruDiagnostic (Partner)', address: 'Remote', price: '$500-800' }
+                    ],
+                    'Full-Body MRI': [
+                        { name: 'UM Miller Advanced Imaging', address: 'Miami', price: '$3000-4000' }
+                    ]
+                }
+            }
+        };
+
+        // National providers
+        const nationalProviders = [
+            { name: 'TruDiagnostic', services: 'Epigenetic Testing (DNAm age)', price: '$500-800', website: 'https://www.trudiagnostic.com' },
+            { name: 'Function Health', services: 'Comprehensive Blood Panels & Epigenetics', price: '$400-900', website: 'https://www.functionhealth.com' },
+            { name: 'InsideTracker', services: 'Blood Panels & Biomarker Analysis', price: '$300-800', website: 'https://www.insidetracker.com' },
+            { name: 'LabCorp OnDemand', services: 'Blood Panels & Biomarker Testing', price: '$150-500', website: 'https://www.labcorp.com' }
+        ];
+
+        // Haversine formula for distance calculation
+        function getDistance(lat1, lng1, lat2, lng2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Find nearest city
+        function findNearestCity(lat, lng) {
+            let nearest = null;
+            let minDistance = Infinity;
+            for (const city in providerDatabase) {
+                const data = providerDatabase[city];
+                const distance = getDistance(lat, lng, data.lat, data.lng);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearest = city;
+                }
+            }
+            return nearest;
+        }
+
+        // Display providers
+        function displayProviders(city) {
+            const container = document.getElementById('providers-container');
+            if (!providerDatabase[city]) {
+                container.innerHTML = '<p class="text-red-500">City not found in database. Please try another city.</p>';
+                return;
+            }
+
+            const cityData = providerDatabase[city];
+            let html = `<h3 class="text-2xl font-bold mb-6">Testing Providers in ${city}</h3>`;
+
+            for (const category in cityData.providers) {
+                html += `<div class="mb-8"><h4 class="text-xl font-semibold mb-4 text-accent">${category}</h4>`;
+                const providers = cityData.providers[category];
+                for (const provider of providers) {
+                    html += `<div class="provider-card">
+                        <h5 class="font-bold">${provider.name}</h5>
+                        <p class="text-sm text-gray-600">${provider.address}</p>
+                        <p class="text-sm">Price: ${provider.price}</p>
+                    </div>`;
+                }
+                html += '</div>';
+            }
+
+            html += '<h3 class="text-2xl font-bold my-6">National Providers (Available Anywhere)</h3>';
+            for (const provider of nationalProviders) {
+                html += `<div class="provider-card">
+                    <h5 class="font-bold">${provider.name}</h5>
+                    <p class="text-sm text-gray-600">${provider.services}</p>
+                    <p class="text-sm">Price: ${provider.price}</p>
+                    <a href="${provider.website}" target="_blank" class="text-accent text-sm">Visit Website →</a>
+                </div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Search city
+        function searchCity() {
+            const city = document.getElementById('city-input').value.trim();
+            if (!city) return;
+            const found = Object.keys(providerDatabase).find(c => c.toLowerCase() === city.toLowerCase());
+            if (found) {
+                displayProviders(found);
+            } else {
+                document.getElementById('providers-container').innerHTML = `<p class="text-red-500">City "${city}" not in database. Available cities: ${Object.keys(providerDatabase).join(', ')}</p>`;
+            }
+        }
+
+        // Geolocation
+        function detectLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const city = findNearestCity(lat, lng);
+                        document.getElementById('geolocation-loader').classList.add('hidden');
+                        document.getElementById('location-input').classList.remove('hidden');
+                        displayProviders(city);
+                    },
+                    function() {
+                        document.getElementById('geolocation-loader').innerHTML = '<p class="text-gray-600">Location access denied. Please enter your city manually.</p>';
+                        document.getElementById('location-input').classList.remove('hidden');
+                    }
+                );
+            } else {
+                document.getElementById('geolocation-loader').innerHTML = '<p class="text-gray-600">Geolocation not supported. Please enter your city.</p>';
+                document.getElementById('location-input').classList.remove('hidden');
+            }
+        }
+
+        // Navigation & scroll
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            const hamburger = document.getElementById('hamburger');
+            const overlay = document.getElementById('mobile-overlay');
+            sidebar.classList.remove('mobile-open');
+            hamburger.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Mobile hamburger
+        document.getElementById('hamburger')?.addEventListener('click', function() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            const isOpen = sidebar.classList.contains('mobile-open');
+            if (isOpen) {
+                closeMobileSidebar();
+            } else {
+                sidebar.classList.add('mobile-open');
+                this.classList.add('active');
+                overlay.classList.add('active');
+            }
+        });
+
+        // Hash routing
+        function handleRoute() {
+            const hash = window.location.hash || '#home';
+            const sectionId = hash.slice(1);
+            const section = document.getElementById(sectionId);
+            if (section) {
+                showSection(sectionId);
+                updateActiveSidebar(sectionId);
+            }
+        }
+
+        function updateActiveSidebar(sectionId) {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Back to top button visibility
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Initialize
+        window.addEventListener('hashchange', handleRoute);
+        handleRoute();
+
+        // Load testing page geolocation when it's active
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#find-testing') {
+                setTimeout(detectLocation, 100);
+            }
+        });
+    </script>
+</body>
+</html>
