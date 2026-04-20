@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifespan Podcast Briefing — Supplements & Longevity Drugs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .sidebar { background-color: #1a2332; color: white; }
+        .sidebar-link {
+            color: #d1d5db;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+        .sidebar-link:hover { color: #0d9488; }
+        .sidebar-link.active {
+            color: #0d9488;
+            border-left-color: #0d9488;
+            background-color: rgba(13, 148, 136, 0.1);
+        }
+        .accent { color: #0d9488; }
+        .key-finding {
+            border-left: 4px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .key-finding strong { color: #1e40af; }
+        .chapter-summary {
+            border-left: 4px solid #10b981;
+            background-color: rgba(16, 185, 129, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .chapter-summary strong { color: #065f46; }
+        .bottom-line-box {
+            border-left: 4px solid #1a2332;
+            background-color: #f0f4f8;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th { background-color: #1a2332; color: white; padding: 0.75rem; text-align: left; }
+        td { padding: 0.75rem; border: 1px solid #e5e7eb; }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+        h1 { font-size: 2.25rem; font-weight: 700; margin: 2rem 0 1rem; }
+        h2 {
+            font-size: 2rem; font-weight: 800; margin: 2.5rem 0 1.25rem; color: #1a2332;
+            padding-bottom: 0.5rem; border-bottom: 3px solid #0d9488; letter-spacing: -0.02em;
+        }
+        h3 {
+            font-size: 1.35rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0f766e;
+            padding-left: 0.75rem; border-left: 3px solid #0d9488;
+        }
+        a { color: #0d9488; text-decoration: underline; }
+        a:hover { color: #0f766e; }
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; background-color: #0d9488; color: white;
+            width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 40;
+        }
+        .back-to-top.show { opacity: 1; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 0.4rem; }
+        .hamburger span { width: 1.5rem; height: 0.2rem; background-color: white; transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(0.5rem, 0.5rem); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(0.5rem, -0.5rem); }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .mobile-sidebar {
+                position: fixed; left: 0; top: 0; width: 75%; max-width: 280px; height: 100vh;
+                transition: transform 0.3s ease; transform: translateX(-100%); z-index: 50;
+                overflow-y: auto; padding-top: 4rem;
+            }
+            .mobile-sidebar.mobile-open { transform: translateX(0); }
+            .mobile-overlay {
+                display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); z-index: 45;
+            }
+            .mobile-overlay.active { display: block; }
+            .main-content { width: 100% !important; }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar hidden md:flex flex-col w-64 fixed h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-700">
+                <h2 class="text-xl font-bold text-white">Podcast Briefing</h2>
+                <p class="text-xs text-gray-400 mt-1">Lifespan &mdash; Sinclair</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium">Overview</a>
+                <a href="#takeaways" class="sidebar-link block py-2 text-sm font-medium">Key Takeaways</a>
+                <a href="#s1" class="sidebar-link block py-2 text-sm font-medium">NAD &amp; Aging</a>
+                <a href="#s2" class="sidebar-link block py-2 text-sm font-medium">NR</a>
+                <a href="#s3" class="sidebar-link block py-2 text-sm font-medium">NMN</a>
+                <a href="#s4" class="sidebar-link block py-2 text-sm font-medium">NAD IV Therapy</a>
+                <a href="#s5" class="sidebar-link block py-2 text-sm font-medium">Resveratrol</a>
+                <a href="#s6" class="sidebar-link block py-2 text-sm font-medium">Fisetin &amp; Quercetin</a>
+                <a href="#s7" class="sidebar-link block py-2 text-sm font-medium">Rapamycin</a>
+                <a href="#s8" class="sidebar-link block py-2 text-sm font-medium">Spermidine</a>
+                <a href="#s9" class="sidebar-link block py-2 text-sm font-medium">Metformin</a>
+                <a href="#s10" class="sidebar-link block py-2 text-sm font-medium">Berberine</a>
+                <a href="#protocol" class="sidebar-link block py-2 text-sm font-medium">Sinclair Protocol</a>
+                <a href="#pathways" class="sidebar-link block py-2 text-sm font-medium">Longevity Pathways</a>
+                <a href="#bottom-line" class="sidebar-link block py-2 text-sm font-medium">Bottom Line</a>
+            </nav>
+            <div class="p-4 border-t border-gray-700">
+                <a href="index.html" class="block w-full bg-teal-600 text-white text-center py-2 rounded text-sm font-medium no-underline hover:bg-teal-700">&larr; Back to Main Site</a>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="md:hidden fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 flex justify-between items-center">
+            <h2 class="text-lg font-bold">Podcast Briefing</h2>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileSidebar()"></div>
+        <div class="mobile-sidebar md:hidden bg-gray-900" id="mobile-sidebar">
+            <nav class="p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Overview</a>
+                <a href="#takeaways" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Key Takeaways</a>
+                <a href="#s1" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">NAD &amp; Aging</a>
+                <a href="#s2" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">NR</a>
+                <a href="#s3" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">NMN</a>
+                <a href="#s4" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">NAD IV Therapy</a>
+                <a href="#s5" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Resveratrol</a>
+                <a href="#s6" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Fisetin &amp; Quercetin</a>
+                <a href="#s7" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Rapamycin</a>
+                <a href="#s8" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Spermidine</a>
+                <a href="#s9" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Metformin</a>
+                <a href="#s10" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Berberine</a>
+                <a href="#protocol" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Sinclair Protocol</a>
+                <a href="#pathways" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Longevity Pathways</a>
+                <a href="#bottom-line" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Bottom Line</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content md:ml-64 w-full md:w-[calc(100%-256px)]">
+            <div class="md:pt-0 pt-20">
+
+                <!-- HEADER / HOME -->
+                <section id="home" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <p class="text-sm text-gray-500 mb-2"><a href="index.html">&larr; Back to Longevity Research</a></p>
+                    <h1 class="text-4xl font-bold mb-2">Lifespan Podcast</h1>
+                    <p class="text-xl text-gray-600 mb-4">Supplements, NAD Boosters &amp; Longevity Drugs: What the Science Actually Says</p>
+                    <div class="mb-4 text-gray-700">
+                        <p><strong>Host:</strong> David Sinclair, PhD &mdash; Professor, Harvard Medical School; Co-director, Paul F. Glenn Center for Aging Research</p>
+                        <p><strong>Co-host:</strong> Matthew LaPlante</p>
+                        <p class="text-sm text-gray-500 mt-1">Prepared from podcast transcript &mdash; April 2026</p>
+                    </div>
+                    <div class="mb-8 p-4 bg-gray-50 border-l-4 border-teal-600 rounded">
+                        <p class="text-gray-700">This briefing distils a deep-dive podcast episode on longevity supplements and drugs into an evidence-graded executive summary. Sinclair and LaPlante cover NAD boosters (NR, NMN), sirtuin activators (resveratrol), senolytics (fisetin, quercetin), mTOR inhibitors (rapamycin, spermidine), AMPK activators (metformin, berberine), and Sinclair&rsquo;s personal protocol. Each section distinguishes animal evidence from human data and flags where the science is still incomplete.</p>
+                    </div>
+                </section>
+
+                <!-- KEY TAKEAWAYS -->
+                <section id="takeaways" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>Key Takeaways</h2>
+                    <div class="key-finding">
+                        <ul class="space-y-3 list-disc pl-5">
+                            <li><strong>NAD declines with age and supplementation can restore youthful levels.</strong> Both NR and NMN raise NAD in humans; NMN appears more effective at equivalent doses based on animal data, though human evidence is still emerging.</li>
+                            <li><strong>Resveratrol activates Sirt-1 and must be taken with fat for absorption.</strong> At 250&ndash;1,000 mg/day it has shown improved insulin sensitivity, lower cholesterol, and anti-cancer activity in both animal and early human studies.</li>
+                            <li><strong>Metformin is the most evidence-backed longevity drug available today.</strong> Retrospective studies of diabetics on Metformin show lower all-cause mortality than non-diabetics. The TAME trial will test it prospectively as an anti-aging intervention.</li>
+                            <li><strong>Fisetin and quercetin are emerging senolytics that kill zombie cells.</strong> Mouse lifespan extension up to 30% has been observed with fisetin; human trials at the Mayo Clinic are underway.</li>
+                            <li><strong>Sinclair&rsquo;s personal protocol centres on morning NMN + resveratrol and evening Metformin,</strong> with periodic fisetin/quercetin and recently added spermidine&mdash;all guided by regular blood monitoring.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- SECTION 1: NAD -->
+                <section id="s1" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>1. NAD and the Biology of Aging</h2>
+                    <p><strong>What NAD does.</strong> Nicotinamide adenine dinucleotide (NAD) is essential for energy production (ATP synthesis) and for activating sirtuins, the defensive enzymes Sinclair&rsquo;s lab has studied for two decades. NAD is the second most abundant molecule in the body after ATP, and without it, death occurs within 30 seconds.</p>
+                    <p class="mt-4"><strong>The age-related decline.</strong> NAD levels fall significantly with age due to both decreased synthesis and increased degradation. Even with optimal diet and exercise, individuals in the latter half of life have substantially lower NAD. This decline impairs sirtuin activation and the body&rsquo;s ability to fight aging-related diseases.</p>
+                    <p class="mt-4"><strong>Why supplements, not just lifestyle.</strong> While exercise and fasting both raise NAD, they cannot fully compensate for age-related decline. NAD boosters aim to restore youthful levels, effectively &ldquo;prank-calling the Pentagon,&rdquo; as Sinclair puts it, to mobilise the body&rsquo;s defence systems against a threat that isn&rsquo;t immediately present.</p>
+                </section>
+
+                <!-- SECTION 2: NR -->
+                <section id="s2" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>2. NR (Nicotinamide Riboside)</h2>
+                    <p><strong>Mechanism.</strong> NR is vitamin B3 plus a sugar (ribose). After oral ingestion it enters the bloodstream, is transported into cells via ENT transporters, and is converted to NMN by NRK enzymes, then to NAD. It requires a phosphate group (which may be rate-limiting) to complete the conversion.</p>
+
+                    <h3>Animal Evidence</h3>
+                    <p>NR extended yeast lifespan by ~30% via sirtuin pathway activation. In mice, NR given late in life (equivalent to age 70 in humans) extended lifespan by ~9%, with increased mitochondria, improved athleticism, and reduced inflammation.</p>
+
+                    <h3>Human Evidence</h3>
+                    <p>Doses of 250 mg&ndash;1 g/day raise blood NAD levels over 9&ndash;10 days with no significant adverse effects. Reduced inflammation has been demonstrated. However, the insulin sensitivity improvements and mitochondrial benefits seen in mice have not yet been confirmed in short-term human trials. One study combining NR with pterostilbene showed functional improvement in ALS patients.</p>
+
+                    <div class="chapter-summary">
+                        <strong>Assessment:</strong> Safe and well-tolerated. Raises NAD levels. But human evidence for downstream health benefits remains thin. NMN appears to outperform NR at equivalent doses in head-to-head animal comparisons.
+                    </div>
+                </section>
+
+                <!-- SECTION 3: NMN -->
+                <section id="s3" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>3. NMN (Nicotinamide Mononucleotide)</h2>
+                    <p><strong>Mechanism.</strong> NMN is one step closer to NAD than NR (it already has the phosphate group). A specific transporter protein, SLC12A8, discovered by Shin Imai at Washington University, takes NMN directly into cells. This may explain its greater potency.</p>
+
+                    <h3>Animal Evidence</h3>
+                    <p>Shin Imai&rsquo;s half-lifespan study showed NMN slowed aging effects in mice but was halted due to limited NMN supply. Sinclair&rsquo;s lab completed a full lifespan study at 400 mg/kg showing 10&ndash;15% lifespan extension, with more pronounced effects in females. Treated mice showed less frailty, better mitochondrial function, and greater running endurance.</p>
+
+                    <h3>Human Evidence</h3>
+                    <div class="key-finding">
+                        <strong>Yoshino et al. (2021)</strong> &mdash; 10-week RCT, 250 mg/day: improved insulin-stimulated glucose disposal (a hallmark of longevity). Harvard Medical School clinical trials at 1&ndash;2 g/day show no adverse effects; efficacy data expected by 2022.
+                    </div>
+                    <p>Other labs have demonstrated NMN protects kidneys and heart from damage and enhances wound healing in animals.</p>
+                    <p class="mt-4"><strong>Bioavailability.</strong> Oral ingestion (capsule, powder, or sublingual) raises NAD 2&ndash;3 fold. No evidence of significant advantage for sublingual over swallowed forms. Standard studied dose: 1 g/day.</p>
+
+                    <h3>Cancer Concern with NAD Boosters</h3>
+                    <p>Two mouse studies warrant mention. One (Wash U) showed that reducing NAD in brain tumours slowed growth&mdash;but this was misreported as &ldquo;NAD causes cancer.&rdquo; A second (2019) found that NMN accelerated precancerous growths in mice genetically predisposed to pancreatic cancer, possibly via P53 suppression. Importantly, normal mice given NMN showed no increased cancer risk and lived longer. Sinclair advises consulting a physician, especially for those with cancer history.</p>
+                </section>
+
+                <!-- SECTION 4: NAD IV -->
+                <section id="s4" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>4. NAD Intravenous Therapy</h2>
+                    <p><strong>Current status.</strong> NAD IV drips (typically &gt;1 hour, administered under medical supervision) are increasingly popular for addiction recovery, depression, energy, and hangovers. NAD is too large to enter most cells directly (except neurons), so the body must break it down and re-assemble it.</p>
+                    <p class="mt-4"><strong>Evidence level.</strong> Sinclair notes extensive anecdotal data (improved mood, energy) but no published placebo-controlled trial. He considers the anecdotal volume compelling but cannot draw conclusions without controlled data. The hangover application has plausible biochemistry: alcohol dehydrogenase requires NAD, and a hangover likely involves hepatic NAD depletion.</p>
+                </section>
+
+                <!-- SECTION 5: RESVERATROL -->
+                <section id="s5" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>5. Resveratrol</h2>
+                    <p><strong>Discovery.</strong> Sinclair and Conrad Howitz screened thousands of molecules for Sirt-1 activation in the early 2000s. Resveratrol, a polyphenol found in red wine grapes and polygonum cuspidatum (Japanese knotweed), activated Sirt-1 13-fold and was published in <em>Nature</em> (2003). Red wine sales rose 30% following publication.</p>
+
+                    <div class="key-finding">
+                        <strong>Critical bioavailability note:</strong> Resveratrol is highly hydrophobic (&ldquo;brick dust&rdquo;). It must be dissolved in fat&mdash;yogurt, olive oil, or similar&mdash;to be absorbed. Studies that dissolved it in water alone showed poor results. This may explain conflicting study outcomes in the literature.
+                    </div>
+
+                    <h3>Animal Evidence</h3>
+                    <p>Obese mice on a Western diet given resveratrol lived as long as lean controls&mdash;the first demonstration that caloric restriction could be mimicked pharmacologically. Anti-cancer activity was shown in a 1999 <em>Science</em> paper (topical application reduced carcinogen-induced skin tumours). Over 1,000 papers document benefits including metabolic rate, mitochondrial boosting, and glucose control.</p>
+
+                    <h3>Human Evidence</h3>
+                    <p>A 2019 study showed reduced fasting glucose and increased insulin sensitivity. Battista and George et al. (2020) RCT in 25 individuals (age 30&ndash;60, BMI ~30) demonstrated lower cholesterol, lower urea (kidney marker), and raised HDL. Minimum effective dose in literature: 250 mg/day; some take up to 2,000 mg/day.</p>
+                </section>
+
+                <!-- SECTION 6: FISETIN & QUERCETIN -->
+                <section id="s6" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>6. Fisetin and Quercetin (Senolytics)</h2>
+                    <p><strong>Dual function.</strong> Originally identified alongside resveratrol as sirtuin activators, both fisetin and quercetin have emerged as potent senolytics&mdash;compounds that selectively kill senescent (&ldquo;zombie&rdquo;) cells that accumulate with age, secrete inflammatory factors (SASP), and promote cancer.</p>
+
+                    <h3>Quercetin</h3>
+                    <p>Better studied as a senolytic. Jim Kirkland (Mayo Clinic) combined quercetin with dasatinib (a leukaemia drug) to create a potent senolytic cocktail. Human studies show reduced liver steatosis (fatty liver), lower inflammation, and measurable clearance of senescent cells. Dasatinib is prescription-only and available only through clinical trials for this purpose.</p>
+
+                    <h3>Fisetin</h3>
+                    <p>Found in strawberries, grapes, and apples. University of Minnesota studies showed fisetin extended mouse lifespan up to 30% when given young or even late in life (equivalent to age 75 in humans). Kirkland&rsquo;s AFFIRM-LITE trial is testing 20 mg/kg in humans; results expected within a year. Human data is currently limited to reduced inflammation. Available over the counter, but Sinclair advises caution pending more safety data.</p>
+                </section>
+
+                <!-- SECTION 7: RAPAMYCIN -->
+                <section id="s7" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>7. Rapamycin and Rapalogs</h2>
+                    <p><strong>Mechanism.</strong> Rapamycin inhibits mTOR (Target Of Rapamycin), mimicking the effects of protein restriction and activating autophagy&mdash;the body&rsquo;s cellular recycling program. Discovered on Easter Island (Rapanui) from a fungus scraped off a statue. It has extended lifespan in every organism tested: yeast, worms, flies, and mice, including when given late in life.</p>
+                    <p class="mt-4"><strong>Limitations.</strong> Rapamycin is an immune suppressant at higher doses (used clinically for organ transplant rejection and cancer). The longevity dose (~10 mg/week in humans) is thought to be below the immunosuppressive threshold, but toxicity risk remains. It is not currently available for anti-aging use outside clinical trials.</p>
+                </section>
+
+                <!-- SECTION 8: SPERMIDINE -->
+                <section id="s8" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>8. Spermidine</h2>
+                    <p><strong>Mechanism.</strong> Spermidine stimulates autophagy (like rapamycin via the mTOR pathway) and stabilises epigenomic changes&mdash;one of the proposed fundamental causes of aging. Sourced from wheat germ and soy products (originally crystallised from human sperm by Antony van Leeuwenhoek, hence the name).</p>
+
+                    <h3>Animal Evidence</h3>
+                    <p>Extended lifespan in yeast, flies, worms, and mice. In mice, both early-life and late-life administration improved heart function and extended lifespan.</p>
+
+                    <h3>Human Evidence</h3>
+                    <div class="key-finding">
+                        <strong>Schwartz et al. (2018)</strong> &mdash; 1.2 g/day over three months: significant enhancement of memory in older adults. Cognitive benefits are the best-documented human outcome so far; longevity effects in humans remain unknown.
+                    </div>
+                </section>
+
+                <!-- SECTION 9: METFORMIN -->
+                <section id="s9" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>9. Metformin</h2>
+                    <p><strong>Mechanism.</strong> Metformin activates AMPK by binding mitochondrial complex I, reducing ATP production and triggering mitohormesis (&ldquo;what doesn&rsquo;t kill the cell makes it stronger&rdquo;). This leads to increased mitochondria, improved insulin signalling, and mTOR inhibition. It also raises NAD levels, activating sirtuins. Derived from the French lilac plant (guanidines), it has been used for type 2 diabetes since the 1950s.</p>
+
+                    <h3>Animal Evidence</h3>
+                    <p>Extended worm lifespan by 30&ndash;40 days. Sinclair&rsquo;s collaboration with Rafael de Cabo at NIH showed healthier, longer-lived mice on Metformin, with improved muscle-fibre type switching (more athletic phenotype), more mitochondria, and less inflammation.</p>
+
+                    <h3>Human Evidence (Strongest of Any Molecule Discussed)</h3>
+                    <div class="key-finding">
+                        <strong>Retrospective data:</strong> Tens of thousands of elderly Metformin users show lower incidence not just of diabetes but also cancer, heart disease, Alzheimer&rsquo;s, and frailty. <em>Most remarkably, type 2 diabetics on Metformin outlive age-matched non-diabetics.</em>
+                    </div>
+                    <p>The <strong>TAME trial</strong> (Targeting Aging by Metformin), led by Nir Barzilai at Albert Einstein College of Medicine, is a multi-institutional study aiming to prove to the FDA that aging itself is a treatable condition. Funding has been challenging because Metformin is off-patent (pennies per dose).</p>
+
+                    <h3>Side Effects &amp; Practical Considerations</h3>
+                    <p>GI upset (most common), rare lactic acidosis (potentially fatal). About 20% of people cannot tolerate it. A modest (~5%) reduction in muscle hypertrophy has been observed, but muscle strength and inflammation profiles are improved. Sinclair skips Metformin on days before heavy exercise. Available by prescription in the US, UK, Europe, and Australia; over-the-counter in many other countries. Increasingly prescribed off-label by physicians for pre-diabetic and longevity applications.</p>
+                </section>
+
+                <!-- SECTION 10: BERBERINE -->
+                <section id="s10" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>10. Berberine</h2>
+                    <p><strong>The OTC Metformin alternative.</strong> Berberine is a plant alkaloid from bark and roots that binds mitochondrial complex I identically to Metformin, reducing ATP and triggering the same mitohormesis cascade: AMPK activation, increased mitochondria, improved insulin sensitivity, and lower blood glucose.</p>
+                    <p class="mt-4"><strong>Evidence.</strong> Extended lifespan in mice (including those treated with chemotherapy) and fruit flies. Human clinical studies at 1&ndash;2 g/day confirm improved insulin sensitivity and lower blood glucose, comparable to Metformin. Poorly soluble&mdash;should be taken with food. Side effects mirror Metformin (GI disturbance) but no major safety concerns have been identified.</p>
+                </section>
+
+                <!-- SINCLAIR PROTOCOL -->
+                <section id="protocol" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>11. David Sinclair&rsquo;s Personal Protocol</h2>
+                    <p>Sinclair has been taking longevity supplements since his early thirties and monitors bloodwork regularly via Inside Tracker. He emphasises this is his personal regimen&mdash;not medical advice&mdash;and that regular monitoring (especially liver function: AST/ALT) is essential.</p>
+
+                    <table class="mt-6">
+                        <thead>
+                            <tr>
+                                <th>Molecule</th>
+                                <th>Dose</th>
+                                <th>Timing</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>NMN</td>
+                                <td>1 g/day</td>
+                                <td>Morning</td>
+                                <td>Dissolved in water or swallowed; doubles NAD levels</td>
+                            </tr>
+                            <tr>
+                                <td>Resveratrol</td>
+                                <td>1 g/day</td>
+                                <td>Morning with yogurt or olive oil</td>
+                                <td>Fat required for absorption; taken since 2004</td>
+                            </tr>
+                            <tr>
+                                <td>Fisetin</td>
+                                <td>500 mg/day</td>
+                                <td>Morning with yogurt</td>
+                                <td>Maintenance dose; clinical trials use 2 g 1x/week</td>
+                            </tr>
+                            <tr>
+                                <td>Quercetin</td>
+                                <td>500 mg/day</td>
+                                <td>Morning with yogurt</td>
+                                <td>Maintenance dose; often paired with dasatinib in trials</td>
+                            </tr>
+                            <tr>
+                                <td>Spermidine</td>
+                                <td>1 g/day</td>
+                                <td>Morning</td>
+                                <td>Recently added; monitoring bloodwork for response</td>
+                            </tr>
+                            <tr>
+                                <td>Metformin</td>
+                                <td>800 mg/night</td>
+                                <td>Evening with dinner</td>
+                                <td>Skipped night before planned exercise; Rx required in US</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- PATHWAYS TABLE -->
+                <section id="pathways" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>12. The Three Longevity Pathways</h2>
+                    <p>Sinclair frames all longevity interventions through three interconnected survival pathways. Each molecule discussed targets one or more of these, and the pathways communicate with each other in a coordinated defence network.</p>
+
+                    <table class="mt-6">
+                        <thead>
+                            <tr>
+                                <th>Pathway</th>
+                                <th>Activated By</th>
+                                <th>Molecules Discussed</th>
+                                <th>Primary Effect</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sirtuins</strong></td>
+                                <td>NAD, caloric restriction, exercise</td>
+                                <td>NR, NMN, resveratrol, fisetin, quercetin</td>
+                                <td>Epigenomic stability, DNA repair, defence mobilisation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AMPK</strong></td>
+                                <td>Low energy, fasting, exercise</td>
+                                <td>Metformin, berberine</td>
+                                <td>Mitochondrial biogenesis, insulin sensitivity, fat oxidation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>mTOR (inhibition)</strong></td>
+                                <td>Low protein/amino acids, fasting</td>
+                                <td>Rapamycin, spermidine</td>
+                                <td>Autophagy, cellular recycling, epigenome stabilisation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- BOTTOM LINE -->
+                <section id="bottom-line" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>Bottom Line</h2>
+                    <div class="bottom-line-box">
+                        <p>Sinclair presents a compelling case that the age-related decline in NAD, combined with accumulated senescent cells and dysregulated metabolic signalling, can be pharmacologically countered. <strong>Metformin carries the strongest human evidence base</strong>&mdash;diabetics taking it outlive non-diabetics&mdash;while <strong>NMN is the most promising NAD booster</strong> based on emerging clinical data. Resveratrol remains a cornerstone of sirtuin activation but requires fat-based delivery. The senolytic agents (fisetin, quercetin) and autophagy inducers (spermidine, rapamycin) offer mechanistically distinct but synergistic approaches. The overarching message is one of cautious optimism: the science is advancing rapidly, several molecules are freely available and appear safe in the short-to-medium term, but rigorous long-term human data is still largely absent. Regular blood monitoring and physician consultation are non-negotiable safeguards for anyone considering these interventions.</p>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-8 text-center">Lifespan Podcast &mdash; David Sinclair, PhD &amp; Matthew LaPlante<br>Prepared from podcast transcript &mdash; April 2026</p>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</div>
+
+    <script>
+        // Sidebar active link tracking
+        const sections = document.querySelectorAll('section[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                const top = s.offsetTop - 120;
+                if (window.scrollY >= top) current = s.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+            const btn = document.getElementById('backToTop');
+            btn.classList.toggle('show', window.scrollY > 300);
+        });
+
+        // Mobile sidebar
+        const hamburger = document.getElementById('hamburger');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const overlay = document.getElementById('mobile-overlay');
+        hamburger && hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileSidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        });
+        function closeMobileSidebar() {
+            hamburger && hamburger.classList.remove('active');
+            mobileSidebar && mobileSidebar.classList.remove('mobile-open');
+            overlay && overlay.classList.remove('active');
+        }
+    </script>
+</body>
+</html>

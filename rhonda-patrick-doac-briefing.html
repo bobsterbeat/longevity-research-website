@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOAC Podcast Briefing — Dr. Rhonda Patrick</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .sidebar { background-color: #1a2332; color: white; }
+        .sidebar-link {
+            color: #d1d5db;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+        .sidebar-link:hover { color: #0d9488; }
+        .sidebar-link.active {
+            color: #0d9488;
+            border-left-color: #0d9488;
+            background-color: rgba(13, 148, 136, 0.1);
+        }
+        .accent { color: #0d9488; }
+        .key-finding {
+            border-left: 4px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .key-finding strong { color: #1e40af; }
+        .chapter-summary {
+            border-left: 4px solid #10b981;
+            background-color: rgba(16, 185, 129, 0.05);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .chapter-summary strong { color: #065f46; }
+        .bottom-line-box {
+            border-left: 4px solid #1a2332;
+            background-color: #f0f4f8;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0.25rem;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th { background-color: #1a2332; color: white; padding: 0.75rem; text-align: left; }
+        td { padding: 0.75rem; border: 1px solid #e5e7eb; }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; }
+        h1 { font-size: 2.25rem; font-weight: 700; margin: 2rem 0 1rem; }
+        h2 {
+            font-size: 2rem; font-weight: 800; margin: 2.5rem 0 1.25rem; color: #1a2332;
+            padding-bottom: 0.5rem; border-bottom: 3px solid #0d9488; letter-spacing: -0.02em;
+        }
+        h3 {
+            font-size: 1.35rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0f766e;
+            padding-left: 0.75rem; border-left: 3px solid #0d9488;
+        }
+        a { color: #0d9488; text-decoration: underline; }
+        a:hover { color: #0f766e; }
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; background-color: #0d9488; color: white;
+            width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 40;
+        }
+        .back-to-top.show { opacity: 1; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 0.4rem; }
+        .hamburger span { width: 1.5rem; height: 0.2rem; background-color: white; transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(0.5rem, 0.5rem); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(0.5rem, -0.5rem); }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .mobile-sidebar {
+                position: fixed; left: 0; top: 0; width: 75%; max-width: 280px; height: 100vh;
+                transition: transform 0.3s ease; transform: translateX(-100%); z-index: 50;
+                overflow-y: auto; padding-top: 4rem;
+            }
+            .mobile-sidebar.mobile-open { transform: translateX(0); }
+            .mobile-overlay {
+                display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); z-index: 45;
+            }
+            .mobile-overlay.active { display: block; }
+            .main-content { width: 100% !important; }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar hidden md:flex flex-col w-64 fixed h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-700">
+                <h2 class="text-xl font-bold text-white">Podcast Briefing</h2>
+                <p class="text-xs text-gray-400 mt-1">DOAC &mdash; Rhonda Patrick</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium">Overview</a>
+                <a href="#takeaways" class="sidebar-link block py-2 text-sm font-medium">Key Takeaways</a>
+                <a href="#s1" class="sidebar-link block py-2 text-sm font-medium">Visceral Fat</a>
+                <a href="#s2" class="sidebar-link block py-2 text-sm font-medium">Sleep &amp; Diet Shifts</a>
+                <a href="#s3" class="sidebar-link block py-2 text-sm font-medium">Losing Visceral Fat</a>
+                <a href="#s4" class="sidebar-link block py-2 text-sm font-medium">Hormones &amp; Menopause</a>
+                <a href="#s5" class="sidebar-link block py-2 text-sm font-medium">Endocrine Disruptors</a>
+                <a href="#s6" class="sidebar-link block py-2 text-sm font-medium">Supplement Stack</a>
+                <a href="#s7" class="sidebar-link block py-2 text-sm font-medium">Peak Span</a>
+                <a href="#s8" class="sidebar-link block py-2 text-sm font-medium">Vigorous &gt; Moderate</a>
+                <a href="#s9" class="sidebar-link block py-2 text-sm font-medium">Sedentary Risk</a>
+                <a href="#s10" class="sidebar-link block py-2 text-sm font-medium">GLP-1 Agonists</a>
+                <a href="#s11" class="sidebar-link block py-2 text-sm font-medium">AI &amp; Cognitive Reserve</a>
+                <a href="#bottom-line" class="sidebar-link block py-2 text-sm font-medium">Bottom Line</a>
+            </nav>
+            <div class="p-4 border-t border-gray-700">
+                <a href="index.html" class="block w-full bg-teal-600 text-white text-center py-2 rounded text-sm font-medium no-underline hover:bg-teal-700">&larr; Back to Main Site</a>
+            </div>
+        </div>
+
+        <!-- Mobile Header -->
+        <div class="md:hidden fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 flex justify-between items-center">
+            <h2 class="text-lg font-bold">Podcast Briefing</h2>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileSidebar()"></div>
+        <div class="mobile-sidebar md:hidden bg-gray-900" id="mobile-sidebar">
+            <nav class="p-4 space-y-2">
+                <a href="#home" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Overview</a>
+                <a href="#takeaways" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Key Takeaways</a>
+                <a href="#s1" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Visceral Fat</a>
+                <a href="#s2" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Sleep &amp; Diet Shifts</a>
+                <a href="#s3" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Losing Visceral Fat</a>
+                <a href="#s4" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Hormones &amp; Menopause</a>
+                <a href="#s5" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Endocrine Disruptors</a>
+                <a href="#s6" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Supplement Stack</a>
+                <a href="#s7" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Peak Span</a>
+                <a href="#s8" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Vigorous &gt; Moderate</a>
+                <a href="#s9" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Sedentary Risk</a>
+                <a href="#s10" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">GLP-1 Agonists</a>
+                <a href="#s11" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">AI &amp; Cognitive Reserve</a>
+                <a href="#bottom-line" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Bottom Line</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content md:ml-64 w-full md:w-[calc(100%-256px)]">
+            <div class="md:pt-0 pt-20">
+
+                <!-- HEADER / HOME -->
+                <section id="home" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <p class="text-sm text-gray-500 mb-2"><a href="index.html">&larr; Back to Longevity Research</a></p>
+                    <h1 class="text-4xl font-bold mb-2">The Diary of a CEO</h1>
+                    <p class="text-xl text-gray-600 mb-4">Visceral Fat, Endocrine Disruptors, Supplements, Peak Span &amp; the New Exercise Science</p>
+                    <div class="mb-4 text-gray-700">
+                        <p><strong>Host:</strong> Steven Bartlett</p>
+                        <p><strong>Guest:</strong> Dr. Rhonda Patrick, PhD &mdash; Biomedical Scientist &amp; Host of FoundMyFitness</p>
+                        <p class="text-sm text-gray-500 mt-1">Prepared from podcast transcript &mdash; April 2026</p>
+                    </div>
+                    <div class="mb-8 p-4 bg-gray-50 border-l-4 border-teal-600 rounded">
+                        <p class="text-gray-700">This briefing distils a long-form interview between Steven Bartlett and Dr. Rhonda Patrick into an evidence-graded executive summary. It covers the hidden drivers of metabolic disease (visceral fat), the endocrine-disrupting chemicals in modern life, Patrick's personal supplement stack, the new concept of "peak span", and a landmark accelerometer study that upends the standard moderate-vs-vigorous exercise ratio.</p>
+                    </div>
+                </section>
+
+                <!-- KEY TAKEAWAYS -->
+                <section id="takeaways" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>Key Takeaways</h2>
+                    <div class="key-finding">
+                        <ul class="space-y-3 list-disc pl-5">
+                            <li><strong>Visceral fat doubles all-cause mortality risk</strong> and raises metastatic cancer likelihood by 44%. Most adults carry too much, and even lean individuals can be metabolically unhealthy.</li>
+                            <li><strong>Two weeks of 4-hour sleep nights caused healthy young men to gain 11% visceral fat</strong> with no change on the scale. Five days of 1,200-calorie excess from ultra-processed foods triggered fatty liver and brain insulin resistance.</li>
+                            <li><strong>Endocrine-disrupting chemicals (BPA, phthalates, PFAS)</strong> in plastics, receipts, non-stick cookware, and food packaging are linked to 20&ndash;50% testosterone reductions and accelerated ovarian aging. Reverse-osmosis filtration and glass containers are the primary defences.</li>
+                            <li><strong>Patrick's top-6 supplement stack:</strong> fish oil (&ge;1.6 g/day), vitamin D3, a multivitamin, magnesium, creatine (10 g/day for brain benefits), and urolithin A (1,000 mg/day for mitophagy and immune rejuvenation).</li>
+                            <li><strong>A landmark accelerometer study shows vigorous exercise is 4&ndash;10&times; more valuable minute-for-minute than moderate activity.</strong> Patrick argues for replacing the "10,000 steps" target with 10 minutes/day of vigorous movement.</li>
+                            <li><strong>Peak span</strong> &mdash; maintaining &ge;90% of peak physiological function &mdash; is the new frontier beyond health span, achievable through compounding exercise, sleep, nutrition, cognitive novelty, and targeted supplementation.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- SECTION 1: VISCERAL FAT -->
+                <section id="s1" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>1. Visceral Fat: The Hidden Driver of Metabolic Disease</h2>
+                    <p><strong>What it is.</strong> Visceral fat is deep intra-abdominal fat surrounding the liver, kidneys, and intestines. Unlike subcutaneous (pinchable) fat, it is invisible from the outside and does not reliably track on a bathroom scale. Patrick calls it "insidious" &mdash; 70% of women and 50% of men over 50 carry a high burden of it.</p>
+                    <p class="mt-4"><strong>Why it matters.</strong> Visceral fat is metabolically active: it secretes inflammatory cytokines, constantly breaks down triglycerides into free fatty acids, and drives insulin resistance by blocking insulin signalling to the liver and muscle. The downstream cascade includes type-2 diabetes, brain insulin resistance, fatty liver disease, brain fog, chronic fatigue, and a 44% higher risk of metastatic cancer.</p>
+                    <p class="mt-4"><strong>Measurement.</strong> Waist circumference is a practical proxy (&ge;40&Prime; in men, &ge;35&Prime; in women flags concern). A DEXA scan gives a direct measurement; the target is below 300 g of visceral fat, ideally as close to zero as possible.</p>
+
+                    <h3>Visceral Fat by Age and Sex</h3>
+                    <table>
+                        <thead><tr><th>Age</th><th>Men (lb)</th><th>Women (lb)</th></tr></thead>
+                        <tbody>
+                            <tr><td>30</td><td>1.2</td><td>0.5</td></tr>
+                            <tr><td>40</td><td>1.7</td><td>0.7</td></tr>
+                            <tr><td>50</td><td>2.2</td><td>1.0</td></tr>
+                            <tr><td>60</td><td>2.7</td><td>1.5</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- SECTION 2: SLEEP & DIET -->
+                <section id="s2" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>2. How Sleep and Diet Rapidly Shift Visceral Fat</h2>
+                    <p><strong>Sleep deprivation.</strong> A study in healthy college-age men restricted to 4 hours of sleep per night for 2 weeks showed an 11% increase in visceral fat with no change in total body weight. The mechanism is bidirectional: sleep loss drives insulin resistance, which promotes visceral fat storage, which worsens insulin resistance further.</p>
+                    <p class="mt-4"><strong>Caloric excess from ultra-processed food.</strong> Healthy young men given 1,200&ndash;1,500 extra calories/day from ultra-processed sources developed signs of fatty liver and brain insulin resistance after just 5 days. When the brain becomes insulin resistant, it loses the ability to direct the body to store energy in adipose tissue, and fat defaults to visceral deposition.</p>
+                    <p class="mt-4"><strong>Eating close to bedtime.</strong> Eating a large meal fewer than 3 hours before sleep activates the sympathetic nervous system, fragmenting sleep quality even if total sleep time appears normal. Patrick recommends a 3-hour pre-bed food cut-off. If a pre-bed snack is unavoidable, resistant starch (cooled-then-reheated potato or rice, green bananas) or a light protein shake is preferable.</p>
+                    <p class="mt-4"><strong>Other amplifiers.</strong> Chronic stress (via cortisol) and excess alcohol consumption both accelerate visceral fat deposition. The "beer belly" is literally visceral fat, not beer.</p>
+                </section>
+
+                <!-- SECTION 3: LOSING VISCERAL FAT -->
+                <section id="s3" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>3. Losing Visceral Fat: The Good News</h2>
+                    <p><strong>Aerobic exercise first.</strong> Visceral fat is the first fat compartment to respond to weight loss. Resistance training improves glucose sensitivity and metabolism but does not specifically target visceral fat; aerobic exercise (running, cycling, swimming) is the primary lever.</p>
+                    <p class="mt-4"><strong>Intermittent fasting.</strong> Patrick practises a 16:8 protocol, skipping breakfast. She values it as a calorie-reduction tool that requires no counting, as a stimulus for autophagy and mitophagy (cellular repair pathways heightened in the fasted state), and as a route to ketosis for cognitive benefits. At the lowest clinical dose, the weight loss achievable with intermittent fasting is comparable to that with semaglutide.</p>
+                    <p class="mt-4"><strong>The metabolic switch.</strong> After approximately 10&ndash;12 hours without food, hepatic glycogen is depleted and the body transitions to fatty-acid oxidation, producing ketones (beta-hydroxybutyrate). Patrick extends her fast into the morning to maximise time in this state, reporting reduced anxiety (via GABA upregulation) and sharper cognition (via BDNF signalling).</p>
+                    <p class="mt-4"><strong>Fasted training.</strong> Multiple studies show superior mitochondrial adaptations when aerobic endurance exercise is performed in a fasted vs. fed state: greater fat oxidation, increased mitochondrial biogenesis, and improved metabolic flexibility. Patrick trains fasted for runs up to ~3 miles; longer efforts require fuelling. She emphasises listening to your body &mdash; if fasted exercise feels terrible, eat first.</p>
+                </section>
+
+                <!-- SECTION 4: HORMONES -->
+                <section id="s4" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>4. Hormonal Shifts: Menopause, Testosterone &amp; Visceral Fat</h2>
+                    <p><strong>Women and menopause.</strong> Estrogen directs the body to store energy in subcutaneous adipose tissue rather than viscerally. During perimenopause (typically mid-40s), estrogen plummets, triggering an 8&ndash;10% annual increase in visceral fat (SWAN study data). Patrick, 47, describes the onset as "almost overnight." Hormone replacement therapy and aggressive exercise/fasting protocols are her countermeasures.</p>
+                    <p class="mt-4"><strong>Testosterone decline in men.</strong> Testosterone peaks in the late 20s and drops ~1%/year from age 30, contributing to a ~200% rise in visceral fat between 25 and 65 even with stable total weight. Testosterone helps burn visceral fat; as levels fall, the body's ability to offset accumulation declines. Environmental endocrine disruptors compound the problem: male testosterone levels have dropped ~20% over the past two decades.</p>
+                </section>
+
+                <!-- SECTION 5: EDCs -->
+                <section id="s5" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>5. Endocrine-Disrupting Chemicals: BPA, Phthalates &amp; PFAS</h2>
+                    <p><strong>The three main players.</strong> BPA (bisphenol A) mimics estrogen, blocks androgen receptors, and inhibits aromatase. Phthalates disrupt testosterone synthesis directly in the testes and leach from flexible plastics into fatty foods. PFAS ("forever chemicals") target the thyroid and accelerate ovarian aging by 1&ndash;2 years.</p>
+
+                    <h3>Key Evidence Cited</h3>
+                    <p><strong>BPA and testosterone.</strong> Adolescent boys with the highest BPA levels had 50% lower testosterone than those with the lowest levels. Men with high BPA also show lower testosterone and impaired sperm quality (count, morphology, motility).</p>
+                    <p class="mt-4"><strong>Phthalates.</strong> Men with the highest phthalate levels had 20% lower testosterone. Prenatal phthalate exposure in male foetuses is associated with hypospadias, undescended testicles (~20% of boys now affected), and later infertility/testicular cancer risk.</p>
+                    <p class="mt-4"><strong>BPA and autism.</strong> Pregnant women with high BPA levels were 6&times; more likely to have a child with autism spectrum disorder. Children with ASD are ~30&times; less able to excrete BPA.</p>
+
+                    <h3>Practical Mitigation</h3>
+                    <p><strong>Avoid.</strong> Plastic water bottles, to-go coffee cups (plastic-lined), canned soups (BPA-lined, shown to increase BPA by 1,000%), non-stick/Teflon cookware, black plastic takeaway containers (contain recycled-electronics flame retardants), thermal receipts (covered in BPA &mdash; hand sanitiser increases dermal absorption ~100&times;), plastic blender cups (friction releases orders-of-magnitude more microplastics).</p>
+                    <p class="mt-4"><strong>Prefer.</strong> Glass containers (especially for acidic/fatty foods), stainless-steel or cast-iron cookware, wooden or verified-pure-silicone utensils, reverse-osmosis water filtration (filters nano/microplastics, BPA, phthalates, PFAS). Supplement with trace minerals removed by RO filtration.</p>
+                    <p class="mt-4"><strong>Detoxify.</strong> Sulforaphane (from broccoli sprouts or Avmacol supplement by Nutramax) activates phase-2 detoxification enzymes, increasing urinary BPA excretion. Patrick supplements daily for a concentrated dose.</p>
+                </section>
+
+                <!-- SECTION 6: SUPPLEMENTS -->
+                <section id="s6" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>6. The Supplement Stack: Patrick's Top Picks</h2>
+                    <h3>Top-6 Ranked by Priority</h3>
+                    <table>
+                        <thead><tr><th>#</th><th>Supplement</th><th>Dose / Form</th><th>Key Evidence &amp; Notes</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Omega-3 Fish Oil</td><td>&ge;1.6&ndash;2 g/day EPA+DHA</td><td>High omega-3 index (&ge;8%) = 5-year life-expectancy gain, 66% lower Alzheimer's risk, slows epigenetic aging even in active/D-sufficient populations (Swiss RCT). Store frozen or refrigerated; total oxidation &lt;10. Third-party tested.</td></tr>
+                            <tr><td>2</td><td>Vitamin D3</td><td>Variable; avoid D2</td><td>Deficient individuals who supplemented D3 slowed biological aging by ~2 years (large study). Vegans should use lichen-derived D3, not D2. People with darker skin or limited sun exposure are at higher deficiency risk.</td></tr>
+                            <tr><td>3</td><td>Multivitamin</td><td>Daily (e.g. Centrum Silver)</td><td>COSMOS study: reversed global brain aging by 2.1 years and episodic memory aging by ~5 years after 3 years. Also slowed epigenetic aging by months after 2 years. Look for no-iron formulas for men and post-menopausal women. NSF certified preferred.</td></tr>
+                            <tr><td>4</td><td>Magnesium</td><td>350&ndash;400 mg/day</td><td>Cofactor for 300+ enzymes; essential for DNA repair, cancer prevention, and sleep. 50% of the population is deficient. Lost through sweat during exercise.</td></tr>
+                            <tr><td>5</td><td>Creatine Monohydrate</td><td>5 g/day (muscle); 10 g/day (brain)</td><td>German studies show 10 g/day increases brain creatine in regions not saturated at 5 g. Patrick reports elimination of afternoon cognitive slump. 20&ndash;25 g under sleep deprivation for supranormal cognitive function. 4-week saturation period at 5 g/day. NSF certified, microionised. Gummies often contain zero creatine.</td></tr>
+                            <tr><td>6</td><td>Urolithin A</td><td>1,000 mg/day</td><td>Induces mitophagy (clearance of damaged mitochondria). 20% lifespan extension in mice. Human RCTs: activates mitophagy in muscle biopsies, increases CD8+ T cells and NK cells, reduces senescence markers, improves VO2 max 10% (untrained) / 5% (trained) beyond exercise alone, and increases hamstring strength 10&ndash;12%. 50% of people lack gut bacteria to produce it from pomegranate. Not widely available in retail.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Additional Supplements Discussed</h3>
+                    <p><strong>Phytosomal curcumin.</strong> Lowers TNF-alpha (a cytokine strongly linked to accelerated epigenetic aging and Alzheimer's risk) without blunting exercise adaptations the way NSAIDs do. Phytosomal delivery overcomes rapid hepatic metabolism of native curcumin.</p>
+                    <p class="mt-4"><strong>Glutamine.</strong> Fuel source for immune cells and gut enterocytes. Endurance athletes supplementing glutamine had fewer respiratory infections. Patrick uses it alongside creatine and urolithin A for immune resilience.</p>
+                    <p class="mt-4"><strong>Exogenous ketones (Ketone IQ / Oxford ketone esters).</strong> Elevate beta-hydroxybutyrate, increasing GABA (reduced anxiety), BDNF (neuroplasticity), and acute cognitive performance. Caveat: exogenous ketones transiently suppress lipolysis, so they should not be used during fasting periods intended for fat loss.</p>
+                    <p class="mt-4"><strong>Liposomal glutathione.</strong> Standard oral glutathione is poorly absorbed because cells lack an external transporter. Only the liposomal form has demonstrated intracellular delivery. Non-liposomal glutathione supplements are largely ineffective.</p>
+                    <p class="mt-4"><strong>Supplement quality.</strong> Supplements are unregulated. Some melatonin and vitamin D products have been found to contain 1,000&ndash;10,000&times; the labelled dose. Patrick recommends NSF certification and third-party testing (e.g. ConsumerLab) as minimum safeguards. Men should avoid supplemental iron unless clinically indicated.</p>
+                </section>
+
+                <!-- SECTION 7: PEAK SPAN -->
+                <section id="s7" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>7. Peak Span: The New Frontier Beyond Health Span</h2>
+                    <p><strong>Definition.</strong> Peak span is the period during which an individual maintains &ge;90% of their peak physiological function across a given domain. The concept was introduced in a recent preprint from Duke University and collaborators. Where health span aims for disease-free years and lifespan aims for total years lived, peak span targets sustained high performance.</p>
+                    <p class="mt-4"><strong>Peak windows.</strong> Most physiological capacities &mdash; immune function, musculoskeletal strength, bone density, fluid cognitive processing speed, cardiorespiratory fitness &mdash; peak around age 25 and then decline. The exception is crystallised intelligence (accumulated knowledge and pattern recognition), which peaks around 45.</p>
+                    <p class="mt-4"><strong>Maintaining peak span.</strong> Patrick argues the decline is modifiable. Compounding interventions include: aerobic and resistance exercise (5+ hours/week with HIIT can reverse cardiac aging by 20 years), sleep optimisation, omega-3 supplementation, novel cognitive engagement (learning, new languages, intellectually demanding work), and protein-sufficient nutrition with resistance training for musculoskeletal preservation.</p>
+                </section>
+
+                <!-- SECTION 8: EXERCISE -->
+                <section id="s8" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>8. Rethinking Exercise Guidelines: Vigorous &gt; Moderate</h2>
+                    <p><strong>Current guidelines are outdated.</strong> The standard recommendation (150&ndash;300 min/week moderate or 75&ndash;150 min/week vigorous) is based on a 2:1 energy-expenditure ratio. A new accelerometer-based study (the basis for Patrick's journal-club episode) measured actual movement intensity rather than relying on questionnaires and revealed that the true value of vigorous exercise is far higher.</p>
+
+                    <h3>Vigorous-to-Moderate Substitution Ratios (New Data)</h3>
+                    <table>
+                        <thead><tr><th>Outcome</th><th>1 min Vigorous =</th><th>Light (min)</th></tr></thead>
+                        <tbody>
+                            <tr><td>All-cause mortality</td><td>4 min moderate</td><td>100&ndash;150</td></tr>
+                            <tr><td>Cardiovascular death</td><td>8 min moderate</td><td>~200</td></tr>
+                            <tr><td>Type-2 diabetes risk</td><td>10 min moderate</td><td>100&ndash;200</td></tr>
+                            <tr><td>Cancer mortality</td><td>4 min moderate</td><td>250&ndash;300</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>Exercise snacks count.</strong> Short bursts of vigorous activity (1&ndash;3 minutes at a time) measured by accelerometer accumulate meaningfully. Women doing just 3.5 minutes/day of vigorous movement lowered cancer risk by 40%. Broader data: 9 minutes/day of accumulated vigorous bursts = 40% lower cancer mortality + 50% lower cardiovascular mortality.</p>
+                    <p class="mt-4"><strong>Replace 10,000 steps with 10 minutes.</strong> Patrick advocates replacing the 10,000-steps target with 10 minutes/day of heart-rate-elevating movement: body-weight squats, high knees, playing tag, sprinting with a dog. Ten minutes daily yields ~50% lower cardiovascular and all-cause mortality, ~40% lower cancer mortality.</p>
+                    <p class="mt-4"><strong>Define vigorous.</strong> &ge;70% of max heart rate (jogging pace or faster). HIIT for VO2 max improvement is &ge;80% max HR. Moderate &asymp; 50% max HR (brisk walking). Light = casual movement around the house.</p>
+                </section>
+
+                <!-- SECTION 9: SEDENTARY -->
+                <section id="s9" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>9. Sedentary Behaviour: An Independent Risk Factor</h2>
+                    <p><strong>Not just "not exercising."</strong> Sedentary time is time spent sitting, regardless of whether you also exercise. It is an independent risk factor for disease &mdash; particularly cancer. Even regular exercisers face increased risk if they also sit for prolonged periods.</p>
+                    <p class="mt-4"><strong>Mitigation.</strong> Standing desks, hourly exercise snacks (1 minute of body-weight squats or high knees), and breaking up sitting bouts all reduce risk. Patrick notes the immediate cognitive benefit: a 1-minute burst of movement increases cerebral blood flow and delivers a noticeable "pump" of mental clarity.</p>
+                </section>
+
+                <!-- SECTION 10: GLP-1 -->
+                <section id="s10" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>10. GLP-1 Receptor Agonists: Benefits, Risks &amp; Caveats</h2>
+                    <p><strong>Mechanism.</strong> GLP-1 drugs (semaglutide/Ozempic = 1st gen; tirzepatide/Mounjaro = 2nd gen, dual-agonist) reduce appetite via satiety-hormone modulation and slowed gastric emptying. They effectively mimic caloric restriction without requiring willpower.</p>
+                    <p class="mt-4"><strong>Benefits.</strong> Obesity is a leading accelerant of all age-related disease. Weight loss via GLP-1s reduces cardiovascular, cancer, and Alzheimer's disease risk. The drugs are life-changing for individuals carrying 30&ndash;50+ excess pounds who have been unable to lose weight through diet and lifestyle alone.</p>
+                    <p class="mt-4"><strong>Risks and caveats.</strong> Most individuals regain weight after discontinuation &mdash; appetite returns "with a vengeance." Up to 40% of weight lost can be lean mass (including muscle) if protein intake and resistance training are not maintained. Additional concerns include bone loss, gallstones, nausea/GI upset, a black-box thyroid cancer warning (animal data), and an unexplained kidney cancer signal. Tapering the dose rather than stopping abruptly may slow weight regain.</p>
+                    <p class="mt-4"><strong>Patrick's concern.</strong> Widespread use by people needing to lose only 10&ndash;15 lb, particularly in Hollywood and among otherwise healthy individuals, may expose them to side effects without proportionate benefit. Long-term safety data in this population is lacking.</p>
+                </section>
+
+                <!-- SECTION 11: AI -->
+                <section id="s11" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>11. AI, Critical Thinking &amp; Cognitive Reserve</h2>
+                    <p><strong>Cognitive debt.</strong> A study found 83% of AI users were unable to remember details of text they wrote with AI assistance, and EEG scans showed brain connectivity nearly halved when thinking was outsourced to generative AI. Patrick and Bartlett both express concern about a generation that may lose the ability to think critically.</p>
+                    <p class="mt-4"><strong>The London taxi-driver analogy.</strong> London black-cab drivers who memorise 25,000 streets have measurably larger hippocampi and appear protected against Alzheimer's. This is the extreme version of what novel cognitive engagement does: it builds cognitive reserve and stimulates BDNF, glutamate signalling, and neuroplasticity.</p>
+                    <p class="mt-4"><strong>Handwriting and memory.</strong> Writing by hand &mdash; or even typing &mdash; information significantly improves retention compared to passively consuming AI-generated output. Patrick's personal protocol: research &rarr; type in a Google Doc &rarr; handwrite key facts. Bartlett's: read on one side of an iPad, write lessons on the other.</p>
+                    <p class="mt-4"><strong>Retirement warning.</strong> Retirement followed by passive television consumption is one of the worst things for brain health. Continued intellectual engagement, learning new skills, and novel experience are essential for maintaining both fluid and crystallised intelligence.</p>
+                </section>
+
+                <!-- BOTTOM LINE -->
+                <section id="bottom-line" class="p-8 md:p-12 max-w-4xl mx-auto">
+                    <h2>Bottom Line</h2>
+                    <div class="bottom-line-box">
+                        <p>Rhonda Patrick's central thesis is that the invisible threats &mdash; visceral fat you can't see, endocrine disruptors you don't notice, and cognitive atrophy you won't feel until it's advanced &mdash; are the ones most worth addressing. The practical programme is surprisingly tractable: 10 minutes/day of vigorous movement, a 16:8 fasting window, a core supplement stack (fish oil, D3, multivitamin, magnesium, creatine), ruthless plastic elimination from the kitchen, and deliberate cognitive challenge. The new concept of peak span reframes the goal from merely avoiding disease to sustaining near-peak physiological and cognitive function across the lifespan. For a mid-career clinician already investing in longevity science, the highest-leverage additions from this episode are likely the urolithin A data, the updated vigorous-exercise ratios, and the practical EDC-mitigation audit.</p>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-6">Show: The Diary of a CEO with Steven Bartlett &middot; Guest: Dr. Rhonda Patrick, PhD &mdash; FoundMyFitness &middot; Prepared from podcast transcript, April 2026.</p>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileSidebar.classList.toggle('mobile-open');
+            mobileOverlay.classList.toggle('active');
+        });
+        function closeMobileSidebar() {
+            hamburger.classList.remove('active');
+            mobileSidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+        }
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 400);
+        });
+    </script>
+</body>
+</html>

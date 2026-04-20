@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence Review: Physical Activity Intensity Equivalence | Longevity Evidence Series</title>
+  <meta name="description" content="Device-measured data from 73,485 adults reveals that 1 minute of vigorous activity equals 4–9 minutes of moderate activity — not the 2 minutes current guidelines assume.">
+  <meta property="og:title" content="The True Value of Vigorous Exercise: An Evidence Review">
+  <meta property="og:description" content="Wearable data overturns the longstanding 1:2 ratio between vigorous and moderate physical activity.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --paper: #faf8f5;
+      --paper-warm: #f3efe9;
+      --accent: #0a6e5c;
+      --accent-light: #e6f4f0;
+      --accent-dark: #064d40;
+      --red-muted: #a63d2f;
+      --blue-muted: #2a5a8c;
+      --gold: #b8860b;
+      --grey-600: #555;
+      --grey-400: #999;
+      --grey-300: #bbb;
+      --grey-200: #ddd;
+      --grey-100: #eee;
+      --serif: 'Newsreader', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --max-w: 720px;
+      --wide-w: 900px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { font-size: 18px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--serif);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(165deg, #0b2e26 0%, #0a3d33 35%, #0d4a3e 65%, #104f42 100%);
+      color: #fff;
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(255,255,255,0.04) 0%, transparent 70%),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: var(--wide-w); margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.35em 1em;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 650px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-subtitle {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-meta {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4em; }
+
+    /* ── ARTICLE ── */
+    article { max-width: var(--max-w); margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+    /* ── TYPOGRAPHY ── */
+    h2 {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 3.5rem 0 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0;
+    }
+    /* Make h2 full width while keeping underline inline */
+    .section-label {
+      display: block;
+      margin: 3.5rem 0 1.2rem;
+    }
+    .section-label h2 { margin: 0 0 0.2rem; }
+
+    h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin: 2rem 0 0.8rem;
+      line-height: 1.35;
+    }
+
+    p { margin-bottom: 1.2rem; }
+    p + p { text-indent: 0; }
+
+    strong { font-weight: 600; }
+
+    /* ── BOTTOM LINE BOX ── */
+    .callout {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0 2.5rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .callout-title {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.8rem;
+    }
+    .callout p { margin-bottom: 0.8rem; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .label {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--accent-dark);
+    }
+
+    /* ── DATA TABLE ── */
+    .table-wrap {
+      margin: 2rem -1.5rem 2.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (min-width: 780px) {
+      .table-wrap { margin-left: -3rem; margin-right: -3rem; }
+    }
+    table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+    }
+    thead th {
+      background: #0b2e26;
+      color: #fff;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.9rem 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+    }
+    thead th:first-child { border-radius: 6px 0 0 0; }
+    thead th:last-child { border-radius: 0 6px 0 0; }
+    tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--grey-200);
+      vertical-align: middle;
+    }
+    tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+    tbody tr:hover { background: var(--accent-light); transition: background 0.15s; }
+    td:first-child { font-weight: 600; color: var(--ink); }
+    .ratio-new { color: var(--accent-dark); font-weight: 700; font-family: var(--mono); font-size: 0.85rem; }
+    .ratio-old { color: var(--red-muted); font-family: var(--mono); font-size: 0.8rem; text-decoration: line-through; opacity: 0.7; }
+    .ratio-lpa { color: var(--grey-600); font-family: var(--mono); font-size: 0.8rem; }
+    .table-note {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      color: var(--grey-400);
+      margin-top: 0.6rem;
+      line-height: 1.5;
+      padding: 0 1rem;
+    }
+
+    /* ── STRENGTH / LIMITATION CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--grey-200);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 12px rgba(10,110,92,0.08);
+    }
+    .card-label {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .card.caution { border-left: 3px solid var(--gold); }
+    .card.caution .card-label { color: var(--gold); }
+
+    /* ── CONTEXT TIMELINE ── */
+    .timeline {
+      list-style: none;
+      border-left: 2px solid var(--grey-200);
+      margin: 1.5rem 0 2.5rem 0.5rem;
+      padding-left: 1.8rem;
+    }
+    .timeline li {
+      position: relative;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: -2.15rem;
+      top: 0.45rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline .year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .timeline .pub-title { font-weight: 600; }
+
+    /* ── TAKEAWAY BOX ── */
+    .takeaway {
+      background: linear-gradient(135deg, #0b2e26 0%, #0d4a3e 100%);
+      color: #fff;
+      border-radius: 8px;
+      padding: 2.2rem 2.2rem;
+      margin: 2.5rem 0;
+    }
+    .takeaway-title {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.2rem;
+    }
+    .takeaway ol {
+      list-style: none;
+      counter-reset: tk;
+      padding: 0;
+    }
+    .takeaway li {
+      counter-increment: tk;
+      margin-bottom: 1rem;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .takeaway li::before {
+      content: counter(tk);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      width: 1.4rem;
+      text-align: center;
+    }
+    .takeaway li strong { color: #7ee6c7; font-weight: 600; }
+    .takeaway li:last-child { margin-bottom: 0; }
+
+    /* ── REFERENCES ── */
+    .references {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--grey-200);
+    }
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+      padding: 0;
+    }
+    .references li {
+      counter-increment: ref;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: var(--grey-600);
+      margin-bottom: 0.6rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .references li::before {
+      content: counter(ref) ".";
+      position: absolute;
+      left: 0;
+      font-weight: 600;
+      color: var(--accent);
+      width: 1.5rem;
+      text-align: right;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--grey-200);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      color: var(--grey-400);
+      line-height: 1.6;
+    }
+
+    /* ── UTILITY ── */
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      .hero { padding: 4rem 1.2rem 3.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      article { padding: 2.5rem 1.2rem 4rem; }
+      .callout { padding: 1.4rem 1.2rem; }
+      .takeaway { padding: 1.6rem 1.4rem; }
+      .table-wrap { margin-left: -1.2rem; margin-right: -1.2rem; }
+    }
+
+    /* ── FADE-IN ── */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════ HERO ════════════ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">Longevity Evidence Series</span>
+      <h1>The True Value of Vigorous Exercise</h1>
+      <p class="hero-subtitle">Wearable device data from 73,485 adults overturns the longstanding 1:2 ratio between vigorous and moderate physical activity &mdash; and the implications for longevity are substantial.</p>
+      <div class="hero-meta">
+        <span>Rob Aldwinckle, BMBS FRCA</span>
+        <span>&middot;</span>
+        <span>April 2026</span>
+        <span>&middot;</span>
+        <span>Evidence Review</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════ ARTICLE ════════════ -->
+  <article>
+
+    <!-- ── BOTTOM LINE ── -->
+    <div class="fade-section">
+      <div class="callout">
+        <div class="callout-title">Bottom Line</div>
+        <p>The WHO-endorsed convention that 1 minute of vigorous physical activity (VPA) equals 2 minutes of moderate physical activity (MPA) is almost certainly wrong. Accelerometer data from 73,485 UK adults suggests the true ratio is closer to <strong>1:4 for all-cause mortality</strong> and as high as <strong>1:9 for type 2 diabetes risk reduction</strong>. Vigorous activity is 2&ndash;4 times more time-efficient than previously assumed.</p>
+        <p><span class="label">Evidence Grade:</span> Oxford CEBM Level 2b (prospective cohort, device-measured exposure). Moderate-High credibility. Awaits replication in independent cohorts.</p>
+        <p><span class="label">Source:</span> Biswas RK, Ahmadi MN, Bauman A, Milton K, Koemel NA, Stamatakis E. <em>Nature Communications</em> 2025; 16: 8315.</p>
+      </div>
+    </div>
+
+    <!-- ── KEY FINDINGS ── -->
+    <div class="fade-section">
+      <div class="section-label"><h2>Key Findings</h2></div>
+
+      <h3>The Conventional 1:2 Ratio Is Substantially Wrong</h3>
+      <p>Current WHO guidelines recommend 150&ndash;300 minutes per week of moderate-intensity or 75&ndash;150 minutes of vigorous-intensity physical activity, reflecting a 1:2 equivalence ratio derived from MET-based energy expenditure calculations and self-reported data. This study used wrist-worn accelerometer data with a validated machine-learning intensity classifier to objectively quantify the actual health equivalence between intensity levels for the first time.</p>
+      <p>The results are striking. Across all cardiometabolic outcomes, vigorous activity was far more time-efficient than the conventional ratio implies. The equivalence varied by outcome, with the strongest differential seen for type 2 diabetes (1:9.4) and CVD mortality (1:7.8), and a more modest &mdash; but still doubled &mdash; ratio for all-cause mortality (1:4.1).</p>
+    </div>
+
+    <!-- ── TABLE ── -->
+    <div class="fade-section">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Health Outcome</th>
+              <th>VPA : MPA (New)</th>
+              <th>VPA : LPA</th>
+              <th>Old Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>All-Cause Mortality</td>
+              <td><span class="ratio-new">1 : 4.1</span></td>
+              <td><span class="ratio-lpa">1 : 53</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+            <tr>
+              <td>CVD Mortality</td>
+              <td><span class="ratio-new">1 : 7.8</span></td>
+              <td><span class="ratio-lpa">1 : 73</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+            <tr>
+              <td>MACE</td>
+              <td><span class="ratio-new">1 : 5.4</span></td>
+              <td><span class="ratio-lpa">1 : 86</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+            <tr>
+              <td>Type 2 Diabetes</td>
+              <td><span class="ratio-new">1 : 9.4</span></td>
+              <td><span class="ratio-lpa">1 : 94</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+            <tr>
+              <td>Cancer Mortality</td>
+              <td><span class="ratio-new">1 : 3.5</span></td>
+              <td><span class="ratio-lpa">1 : 156</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+            <tr>
+              <td>Cancer Incidence</td>
+              <td><span class="ratio-new">1 : 1.6</span></td>
+              <td><span class="ratio-lpa">1 : 5</span></td>
+              <td><span class="ratio-old">1 : 2</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">VPA = Vigorous Physical Activity; MPA = Moderate Physical Activity; LPA = Light Physical Activity; MACE = Major Adverse Cardiovascular Events. Old ratio reflects the WHO/guideline convention based on self-reported data. New ratios represent median equivalence across 5&ndash;35% risk reduction (Biswas et al. 2025).</p>
+    </div>
+
+    <!-- ── DOSE-RESPONSE ── -->
+    <div class="fade-section">
+      <h3>Vigorous Activity Shows the Steepest Dose-Response</h3>
+      <p>VPA demonstrated pronounced, nearly linear dose-response gradients for all non-cancer outcomes. MPA showed a steep inverse relationship up to approximately 30 minutes per day, after which benefits plateaued. LPA exhibited only subtle risk reductions for all-cause mortality and type 2 diabetes, with no statistically significant associations for MACE, CVD mortality, or cancer outcomes.</p>
+      <p>Critically, even the largest daily volumes of LPA could not replicate the risk reductions achievable through moderate or vigorous intensity activity. The LPA equivalence ratios (53&ndash;156 minutes per VPA minute) are derived from very weak dose-response curves and should be interpreted as mathematical constructs, not clinically actionable substitution ratios.</p>
+
+      <h3>Cancer Outcomes Are Notably Different</h3>
+      <p>The equivalence ratios for cancer outcomes were substantially lower than for cardiometabolic endpoints. Cancer mortality showed a 1:3.5 VPA:MPA ratio, while cancer incidence showed only 1:1.6 &mdash; much closer to the old 1:2 convention. This likely reflects weaker VPA dose-response curves for cancer, suggesting that the mechanisms driving cardiometabolic benefits may differ from those mediating cancer risk reduction.</p>
+    </div>
+
+    <!-- ── STUDY DESIGN ── -->
+    <div class="fade-section">
+      <div class="section-label"><h2>Study Design</h2></div>
+      <p><strong>Cohort:</strong> 73,485 adults from the UK Biobank (mean age 61.6 years, 56.4% female) who wore a wrist-mounted Axivity AX3 accelerometer continuously for 7 days between 2013 and 2015.</p>
+      <p><strong>Follow-up:</strong> Mean 8.0 years, yielding 585,313 person-years for all-cause mortality. Events included 2,675 all-cause deaths, 545 CVD deaths, 2,359 MACE events, 1,836 type 2 diabetes diagnoses, and 538 PA-related cancer deaths.</p>
+      <p><strong>Intensity classification:</strong> A validated two-stage Random Forest machine-learning classifier processed raw acceleration signals in 10-second windows &mdash; substantially more granular than questionnaire methods, which typically require activity bouts of 10&ndash;15 minutes or longer.</p>
+      <p><strong>Statistics:</strong> Cox proportional hazards for all-cause mortality; Fine-Gray subdistribution hazard models for disease-specific outcomes (competing risks). Restricted cubic splines with knots at 10th, 50th, and 90th percentiles. Equivalence derived by comparing intensity values needed for the same 5&ndash;35% risk reduction, standardised to 1 minute of VPA.</p>
+    </div>
+
+    <!-- ── CRITICAL APPRAISAL ── -->
+    <div class="fade-section">
+      <div class="section-label"><h2>Critical Appraisal</h2></div>
+
+      <h3>Strengths</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">Novel Question</div>
+          First study to systematically quantify per-minute intensity equivalence using device data against hard clinical endpoints, rather than surrogate markers like VO₂max or lipid profiles.
+        </div>
+        <div class="card">
+          <div class="card-label">Validated ML Classifier</div>
+          The Random Forest activity classifier operates at 10-second resolution and has been validated across multiple publications (Ahmadi et al., <em>Eur Heart J</em> 2022; Stamatakis et al., <em>Nat Med</em> 2022).
+        </div>
+        <div class="card">
+          <div class="card-label">Competing-Risk Models</div>
+          Fine-Gray subdistribution hazards for disease-specific outcomes correctly account for competing mortality &mdash; an important methodological choice often neglected.
+        </div>
+        <div class="card">
+          <div class="card-label">Triangulation with RCTs</div>
+          The population-level VPA:MPA ratios (1:4 to 1:9) bracket the 1:7 to 1:13 ratios observed in supervised HIIT vs MICT trials for surrogate cardiometabolic outcomes.
+        </div>
+      </div>
+
+      <h3>Limitations</h3>
+      <div class="card-grid">
+        <div class="card caution">
+          <div class="card-label">Single Cohort, Single Week</div>
+          All data derive from one 7-day accelerometry period in one cohort (UK Biobank). Reproducibility ICCs range from 0.58&ndash;0.75 &mdash; moderate-to-good, but a single week is an imperfect proxy for long-term behaviour.
+        </div>
+        <div class="card caution">
+          <div class="card-label">Healthy Volunteer Bias</div>
+          The UK Biobank had a 5.5% response rate. Accelerometry participants were healthier, better educated, and less likely to smoke. While post-stratification suggests relative associations hold, specific ratios may not generalise.
+        </div>
+        <div class="card caution">
+          <div class="card-label">5.5-Year Covariate Gap</div>
+          Baseline covariates (BMI, medications, smoking, diet) were measured a median of 5.5 years before accelerometry. Time-varying confounders cannot be excluded.
+        </div>
+        <div class="card caution">
+          <div class="card-label">Observational Design</div>
+          Causal inference is not possible. The equivalence ratios reflect associations, not proven substitution effects. Unmeasured confounding cannot be ruled out.
+        </div>
+        <div class="card caution">
+          <div class="card-label">LPA Ratios Are Fragile</div>
+          LPA dose-response was weak and non-significant beyond 10&ndash;15% risk reduction. The large equivalence numbers (53&ndash;156 min) are mathematical artefacts from near-null effects, not actionable substitution ratios.
+        </div>
+        <div class="card caution">
+          <div class="card-label">Conflict of Interest</div>
+          Senior author holds equity in Complement 1, a company whose products relate to physical activity. The paper&rsquo;s recommendation that wearable algorithms be recalibrated is directly relevant to this interest.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EVIDENCE CONTEXT ── -->
+    <div class="fade-section">
+      <div class="section-label"><h2>Evidence Context</h2></div>
+      <p>This study sits within a productive programme from the Sydney Mackenzie Wearables Research Hub, all drawing on the same UK Biobank accelerometry sub-cohort and Random Forest classifier:</p>
+
+      <ul class="timeline">
+        <li>
+          <span class="year">2022</span>
+          <span class="pub-title">Stamatakis et al., <em>Nature Medicine</em></span><br>
+          3&ndash;4 min/day of vigorous intermittent lifestyle physical activity (VILPA) associated with 38&ndash;40% lower all-cause mortality in non-exercisers.
+        </li>
+        <li>
+          <span class="year">2022</span>
+          <span class="pub-title">Ahmadi et al., <em>European Heart Journal</em></span><br>
+          Quantified minimum effective dose of vigorous activity for incident heart disease and cancer.
+        </li>
+        <li>
+          <span class="year">2023</span>
+          <span class="pub-title">Ahmadi et al., <em>Lancet Public Health</em></span><br>
+          Brief bouts of lifestyle-embedded vigorous activity associated with lower MACE risk.
+        </li>
+        <li>
+          <span class="year">2023</span>
+          <span class="pub-title">Stamatakis et al., <em>JAMA Oncology</em></span><br>
+          VILPA associated with lower cancer incidence among non-exercisers.
+        </li>
+        <li>
+          <span class="year">2025</span>
+          <span class="pub-title">Biswas et al., <em>Nature Communications</em> &mdash; this review</span><br>
+          First device-based intensity equivalence quantification across all major clinical endpoints.
+        </li>
+        <li>
+          <span class="year">2026</span>
+          <span class="pub-title">Koemel et al., <em>Int J Behav Nutr Phys Act</em></span><br>
+          NHANES replication showed attenuated but directionally consistent VILPA-mortality associations, highlighting cohort-specific factors.
+        </li>
+      </ul>
+      <p>The consistency across studies is reassuring for internal validity. However, the same cohort-specific biases (5.5% response rate, healthy-volunteer effect, single 7-day wear window, 5.5-year covariate lag) propagate through the entire evidence base.</p>
+    </div>
+
+    <!-- ── PRACTICAL TAKEAWAYS ── -->
+    <div class="fade-section">
+      <div class="takeaway">
+        <div class="takeaway-title">Practical Implications for Longevity</div>
+        <ol>
+          <li><strong>Vigorous activity is the highest-yield time investment.</strong> For cardiometabolic outcomes, each minute of vigorous effort delivers 4&ndash;9 times the risk-reduction of moderate effort. If you are time-constrained, prioritise intensity.</li>
+          <li><strong>The old 1:2 guideline ratio undervalues vigorous activity.</strong> Current wearable algorithms (Google Fit Heart Points, Apple Activity Rings) likely underweight vigorous minutes. Treat your vigorous minutes as worth considerably more than the app suggests.</li>
+          <li><strong>Brief vigorous bursts count.</strong> You do not need sustained 30-minute sessions. Short bursts embedded in daily life &mdash; stair climbing, brisk inclines, cycling sprints &mdash; accumulate meaningful health benefits. This aligns with the entire VILPA evidence base.</li>
+          <li><strong>Light activity is not a substitute, but it is not useless.</strong> LPA showed modest associations with all-cause mortality and T2DM, but the dose-response was weak. Use light activity as a sedentary-time replacement, not an exercise substitute.</li>
+          <li><strong>These are best-available estimates, not settled constants.</strong> The specific ratios will shift as replication data accumulate from diverse populations. The directional finding &mdash; vigorous is substantially more efficient than moderate &mdash; is robust.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── REFERENCES ── -->
+    <div class="fade-section">
+      <div class="references">
+        <div class="section-label"><h2>References</h2></div>
+        <ol>
+          <li>Biswas RK, Ahmadi MN, Bauman A, Milton K, Koemel NA, Stamatakis E. Wearable device-based health equivalence of different physical activity intensities against mortality, cardiometabolic disease, and cancer. <em>Nat Commun</em>. 2025;16:8315.</li>
+          <li>Bull FC, Al-Ansari SS, Biddle S, et al. World Health Organization 2020 guidelines on physical activity and sedentary behaviour. <em>Br J Sports Med</em>. 2020;54(24):1451&ndash;1462.</li>
+          <li>Stamatakis E, Ahmadi MN, Gill JMR, et al. Association of wearable device-measured vigorous intermittent lifestyle physical activity with mortality. <em>Nat Med</em>. 2022;28(12):2521&ndash;2529.</li>
+          <li>Ahmadi MN, Clare PJ, Katzmarzyk PT, del Pozo Cruz B, Lee IM, Stamatakis E. Vigorous physical activity, incident heart disease, and cancer: how little is enough? <em>Eur Heart J</em>. 2022;43(46):4801&ndash;4814.</li>
+          <li>Ahmadi MN, Hamer M, Gill JM, et al. Brief bouts of device-measured intermittent lifestyle physical activity and its association with major adverse cardiovascular events and mortality. <em>Lancet Public Health</em>. 2023;8(10):e800&ndash;e810.</li>
+          <li>Stamatakis E, Ahmadi MN, Biswas RK, et al. Vigorous intermittent lifestyle physical activity and cancer incidence among nonexercising adults. <em>JAMA Oncol</em>. 2023;9(9):1255&ndash;1259.</li>
+          <li>Koemel NA, Ahmadi MN, Biswas RK, et al. Vigorous intermittent lifestyle physical activity (VILPA) and mortality risk among US adults: a wearables-based national cohort study. <em>Int J Behav Nutr Phys Act</em>. 2026.</li>
+          <li>Mattioni Maturana F, Martus P, Zipfel S, Nieß AM. Effectiveness of HIIE versus MICT in improving cardiometabolic risk factors. <em>Med Sci Sports Exerc</em>. 2021;53(3):559&ndash;573.</li>
+          <li>Wewege M, van den Berg R, Ward RE, Keech A. The effects of HIIT vs. MICT on body composition in overweight and obese adults. <em>Obes Rev</em>. 2017;18(6):635&ndash;646.</li>
+          <li>Ekelund U, Tarp J, Steene-Johannessen J, et al. Dose-response associations between accelerometry measured physical activity and sedentary time and all cause mortality. <em>BMJ</em>. 2019;366:l4570.</li>
+          <li>Wang Y, Nie J, Ferrari G, Rey-Lopez JP, Rezende LFM. Association of physical activity intensity with mortality. <em>JAMA Intern Med</em>. 2021;181(2):203.</li>
+          <li>Stamatakis E, Ahmadi MN, Friedenreich CM, et al. Is cohort representativeness passé? Post-stratified associations of lifestyle risk factors with mortality in the UK Biobank. <em>Epidemiology</em>. 2021;32(2):179&ndash;188.</li>
+        </ol>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer class="page-footer">
+    <p><strong>Disclaimer:</strong> This evidence review is for educational purposes and does not constitute medical advice. Individual exercise prescriptions should be guided by clinical context and professional guidance. The equivalence ratios presented are derived from observational data and represent associations, not proven causal substitution effects.</p>
+    <p style="margin-top: 0.8rem;">&copy; 2026 Rob Aldwinckle &middot; Longevity Evidence Series</p>
+  </footer>
+
+  <!-- ════════════ SCROLL ANIMATION ════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.fade-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      sections.forEach(s => observer.observe(s));
+    });
+  </script>
+
+</body>
+</html>
