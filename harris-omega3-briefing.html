@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harris on Omega-3s — Zoe Podcast Briefing</title>
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-elev: #131a2e;
+    --bg-card: #1a2340;
+    --border: #243056;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #2dd4bf;
+    --accent-dim: #14b8a6;
+    --heading: #5eead4;
+    --warn: #fbbf24;
+    --link: #7dd3fc;
+    --table-head: #1e293b;
+    --table-row-alt: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; color: var(--accent); }
+
+  /* ===== Layout ===== */
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-elev);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .sidebar h2 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .sidebar .show-tag {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+  .sidebar nav { display: flex; flex-direction: column; gap: 4px; }
+  .sidebar nav a {
+    display: block;
+    padding: 7px 12px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    font-size: 13.5px;
+  }
+  .sidebar nav a:hover {
+    background: var(--bg-card);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    text-decoration: none;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .back-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  main {
+    flex: 1;
+    max-width: 920px;
+    padding: 48px 56px 80px;
+  }
+
+  /* ===== Title block ===== */
+  .eyebrow {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h1.title {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 19px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  .meta {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 24px;
+    font-size: 14.5px;
+  }
+  .meta dt {
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    align-self: center;
+  }
+  .meta dd { margin: 0; color: var(--text); }
+  .prep-line {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+
+  /* ===== Sections ===== */
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 56px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 28px 0 10px;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: #f1f5f9; font-weight: 600; }
+  em { color: var(--text); }
+
+  /* ===== Key Takeaways box ===== */
+  .takeaways-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0 16px;
+  }
+  .takeaways-box ul { margin: 0; padding-left: 22px; }
+  .takeaways-box li { margin-bottom: 12px; }
+  .takeaways-box li:last-child { margin-bottom: 0; }
+
+  ul, ol { padding-left: 22px; margin: 8px 0 18px; }
+  li { margin-bottom: 8px; }
+
+  /* ===== Tables ===== */
+  .table-wrap { overflow-x: auto; margin: 18px 0 22px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--bg-card);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  thead th {
+    background: var(--table-head);
+    color: var(--accent);
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--table-row-alt); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ===== Bottom Line ===== */
+  .bottom-line-box {
+    background: linear-gradient(135deg, rgba(45,212,191,0.06), rgba(20,184,166,0.04));
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--heading);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 16px 0 32px;
+  }
+  .bottom-line-box p:last-child { margin-bottom: 0; }
+
+  /* ===== References ===== */
+  .refs h3 {
+    color: var(--accent);
+    margin-top: 24px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .refs p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    text-indent: -16px;
+    line-height: 1.5;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    main { padding: 32px 24px 60px; max-width: 100%; }
+    h1.title { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ============================================================ -->
+<!-- SIDEBAR -->
+<!-- ============================================================ -->
+<aside class="sidebar">
+  <h2>Podcast Briefing</h2>
+  <div class="show-tag">Zoe — Bill Harris on Omega-3s</div>
+
+  <nav>
+    <a href="#home">Overview</a>
+    <a href="#takeaways">Key Takeaways</a>
+    <a href="#s1">1. Omega-3 Family</a>
+    <a href="#s2">2. The Conversion Problem</a>
+    <a href="#s3">3. The Omega-3 Index</a>
+    <a href="#s4">4. Membrane Mechanism</a>
+    <a href="#s5">5. Cardiovascular Health</a>
+    <a href="#s6">6. AFib Controversy</a>
+    <a href="#s7">7. Brain & Dementia</a>
+    <a href="#s8">8. Depression & Anxiety</a>
+    <a href="#s9">9. SMASH Fish & Algal Oil</a>
+    <a href="#s10">10. Omega-6 Ratio Myth</a>
+    <a href="#s11">11. Practical Protocol</a>
+    <a href="#bottom-line">Bottom Line</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <a class="back-link" href="https://longevity-bobsterbeats-projects.vercel.app/index.html">← Back to Longevity Research</a>
+</aside>
+
+<!-- ============================================================ -->
+<!-- MAIN -->
+<!-- ============================================================ -->
+<main id="home">
+
+  <div class="eyebrow">Podcast Briefing · Supplements & Cardiometabolic Health</div>
+  <h1 class="title">Zoe Science &amp; Nutrition</h1>
+  <p class="subtitle">Omega-3 Fatty Acids — Cardiovascular Health, Brain Health, Depression &amp; the Omega-3 Index</p>
+
+  <dl class="meta">
+    <dt>Host</dt><dd>Jonathan Wolf · Co-host: Prof. Sarah Berry, PhD (King's College London; Chief Scientist, Zoe)</dd>
+    <dt>Guest</dt><dd>Dr. William (Bill) S. Harris, PhD — Professor, Sanford School of Medicine, University of South Dakota; co-inventor of the Omega-3 Index; founder of OmegaQuant Analytics &amp; the Fatty Acid Research Institute</dd>
+  </dl>
+
+  <p class="prep-line">Prepared from podcast transcript — April 2026</p>
+
+  <p>This briefing distils a long-form interview between Jonathan Wolf, Prof. Sarah Berry, and Dr. Bill Harris into an evidence-graded executive summary. It covers the biochemistry of marine vs plant omega-3s, the Omega-3 Index biomarker and its risk thresholds, the cardiovascular evidence base from the Inuit paradox to modern mortality data, the recently-publicised atrial fibrillation signal in proper context, the brain-health and depression evidence, and a practical dosing and sourcing protocol for clinicians and informed lay readers.</p>
+
+  <!-- =================== KEY TAKEAWAYS =================== -->
+  <h2 id="takeaways">Key Takeaways</h2>
+  <div class="takeaways-box">
+    <ul>
+      <li><strong>The Omega-3 Index</strong> — the EPA + DHA content of red blood cell membranes — is a validated biomarker of long-term omega-3 status. <strong>Optimal: ≥ 8%. Western average: ~5%. Vegans and US military personnel: 3–4%. Approximately 90–95% of Americans fall below the optimal threshold.</strong></li>
+      <li><strong>Plant-derived ALA is not a substitute</strong> for marine EPA/DHA. Only ~5% of dietary ALA is converted to EPA, and far less to DHA. Pre-formed EPA + DHA is the only reliable route to a healthy Omega-3 Index.</li>
+      <li>Higher Omega-3 Index is consistently linked to lower all-cause mortality, lower cardiovascular death, lower stroke risk, and lower risk of dementia and cognitive decline. Japan — Omega-3 Index ~8–9% — outlives the US by ~4 years despite higher rates of smoking and hypertension.</li>
+      <li><strong>EPA-dominant supplementation (≥60% EPA) at 1–2 g/day</strong> appears more effective than DHA for reducing depressive symptoms — counterintuitive given DHA's structural role in the brain, and presumed to operate through EPA's stronger anti-inflammatory signalling.</li>
+      <li><strong>Practical target: ~1,000 mg combined EPA + DHA per day</strong> (the historical Japanese intake). Achievable with two oily-fish servings per week plus supplementation, or with supplementation alone. Choose triglyceride-form products and verify EPA + DHA content on the back of the label.</li>
+      <li>Mercury risk is overstated for the fish that actually matter (the SMASH fish: salmon, mackerel, anchovies, sardines, herring). Modern farmed salmon is safe. The omega-6:omega-3 ratio is an outdated metric — increase the omega-3 numerator rather than restricting linoleic acid.</li>
+    </ul>
+  </div>
+
+  <!-- =================== SECTION 1 =================== -->
+  <h2 id="s1">1. The Omega-3 Family — Why the EPA / DHA / ALA Distinction Matters</h2>
+
+  <p><strong>The architecture.</strong> Omega-3 is a chemical family of polyunsaturated fatty acids defined by a shared structural feature (the position of the first double bond from the methyl end). Three members dominate human nutrition:</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Fatty acid</th><th>Length / bonds</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>ALA (α-linolenic acid)</td><td>18 C, 3 double bonds</td><td>Flax, chia, walnuts, canola, hemp</td><td>Precursor only; mostly burned for energy</td></tr>
+      <tr><td>EPA (eicosapentaenoic acid)</td><td>20 C, 5 double bonds</td><td>Oily fish, fish oil, krill, algal oil</td><td>Anti-inflammatory; cardiovascular &amp; mood signalling</td></tr>
+      <tr><td>DHA (docosahexaenoic acid)</td><td>22 C, 6 double bonds</td><td>Oily fish, fish oil, algal oil</td><td>Structural — neuronal &amp; retinal membranes</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>Strict essentiality vs bioactivity.</strong> Harris is careful with terminology: EPA and DHA are not technically essential nutrients — vegans survive without preformed intake. He frames them instead as <em>highly bioactive and important for health, but not essential for life</em>. ALA itself is essential, but its primary value in modern Western diets appears to be as a precursor that the body inefficiently elongates.</p>
+
+  <p><strong>The marketing myth.</strong> Harris's top-cited myth in this episode: "plant-based omega-3s are the same as fish-based omega-3s." They are not. Sharing a chemical family name does not mean sharing a biological role.</p>
+
+  <!-- =================== SECTION 2 =================== -->
+  <h2 id="s2">2. The Conversion Problem — Why Plant Omega-3s Are Not a Substitute</h2>
+
+  <p><strong>The biochemistry.</strong> To convert ALA into EPA the body must add two carbons and two double bonds; converting onward to DHA requires further elongation and desaturation. These are enzymatically expensive steps performed mostly in the liver and competing with the omega-6 pathway for the same Δ6-desaturase enzyme.</p>
+
+  <p><strong>Conversion efficiency.</strong> Harris cites an upper estimate of ~5% of dietary ALA reaching EPA, and substantially less reaching DHA. Berry adds the practical interpretation: <em>the body is "pretty rubbish" at this conversion</em>. Much of the ingested ALA is simply β-oxidised for energy before any conversion can occur.</p>
+
+  <p><strong>Implication for plant-based eaters.</strong> Flaxseed, chia, walnuts, and hemp are useful foods for many reasons but should not be relied on to maintain a healthy Omega-3 Index. Vegans and vegetarians wanting marine-equivalent EPA/DHA without animal products should turn to algal oil (see Section 9), which is the original biosynthetic source the food chain depends on anyway.</p>
+
+  <!-- =================== SECTION 3 =================== -->
+  <h2 id="s3">3. The Omega-3 Index — A Validated Biomarker of Long-Term Status</h2>
+
+  <p><strong>Definition.</strong> The Omega-3 Index (O3I), proposed by Harris and von Schacky in 2004, is the percentage of total fatty acids in the red blood cell membrane that is EPA + DHA. Because erythrocytes have a ~120-day lifespan, the O3I integrates intake over roughly 4 months — making it far more robust than a single-day dietary recall.</p>
+
+  <h3>Risk zones</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Omega-3 Index</th><th>Category</th><th>Population context</th></tr></thead>
+    <tbody>
+      <tr><td>≥ 8%</td><td>Optimal / cardioprotective</td><td>Historical Japanese cohorts; healthy fish-eaters</td></tr>
+      <tr><td>4 – 8%</td><td>Intermediate</td><td>Most Western adults</td></tr>
+      <tr><td>≤ 4%</td><td>High-risk</td><td>Vegans; many US military personnel; lowest-decile Westerners</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>Population estimates.</strong> Approximately 90–95% of Americans fall below the 8% optimal threshold. The US average sits near 5%; Western Europe is similar. Vegans and US military personnel cluster around 3–4%. Berry notes that Zoe's PREDICT cohort (~300,000 participants, with detailed fatty acid profiling in ~10,000) is now generating large-scale individual-level data on these distributions in the UK and US.</p>
+
+  <p><strong>Causal weight.</strong> Harris and colleagues (Atherosclerosis 2017, pooling 10 cohort studies) estimated that moving from an Omega-3 Index of 4% to 8% would reduce risk of fatal coronary heart disease by approximately 30%. The hazard ratio per 1-SD increase was 0.85 (95% CI 0.80–0.91).</p>
+
+  <p><strong>Practical access.</strong> Most physicians do not order O3I testing — Harris bluntly notes a clinician asked about it would be "a deer in the headlights." Direct-to-consumer dried blood spot tests (finger-prick, mailed in) deliver results within ~1 week. Berry recommends self-testing as the foundation of any personalised supplementation strategy.</p>
+
+  <!-- =================== SECTION 4 =================== -->
+  <h2 id="s4">4. Mechanism — Membrane Flexibility and the Cellular "Door Hinge"</h2>
+
+  <p><strong>Where omega-3s act.</strong> EPA and DHA are esterified into membrane phospholipids throughout the body. Their multiple double bonds create kinks in the acyl chain that increase membrane fluidity. Harris's intuitive analogy: omega-3s act as <em>"grease on a hinge on a door"</em> — the membrane transporters and receptors that move nutrients in and metabolic waste out swing more smoothly when the surrounding lipid bilayer is appropriately flexible.</p>
+
+  <p><strong>Downstream effects.</strong> Beyond physical membrane properties, EPA-derived eicosanoids (prostaglandins, thromboxanes, resolvins, protectins) are markedly less inflammatory than their omega-6 (arachidonic acid) counterparts. EPA is the precursor for E-series resolvins; DHA for D-series resolvins and neuroprotectins. These are the active resolution-of-inflammation signalling molecules now considered central to the cardio- and neuroprotective effects.</p>
+
+  <!-- =================== SECTION 5 =================== -->
+  <h2 id="s5">5. Cardiovascular Health — From the Inuit Paradox to Modern Mortality Data</h2>
+
+  <p><strong>The origin story.</strong> The omega-3 cardiovascular hypothesis traces to Dyerberg and Bang's work in the 1970s, which examined Greenlandic Inuit who, despite a diet extraordinarily high in saturated and animal fat and devoid of fruits and vegetables, had remarkably low rates of myocardial infarction. The key analytical finding: their blood lipids contained EPA and DHA absent in mainland Danes. The mechanism inferred was reduced platelet aggregation — "thinner" blood that clotted less readily.</p>
+
+  <h3>Cardiovascular mechanisms identified to date</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Mechanism</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td>Membrane incorporation</td><td>Improved cellular signalling and transporter function</td></tr>
+      <tr><td>Triglyceride lowering</td><td>Modest reduction in fasting TG (NB: omega-3 does NOT lower LDL cholesterol)</td></tr>
+      <tr><td>Heart rate reduction</td><td>2–4 bpm decrease; associated with longer lifespan</td></tr>
+      <tr><td>Blood pressure</td><td>Modest reduction</td></tr>
+      <tr><td>Antiarrhythmic</td><td>Lower risk of fatal ventricular arrhythmia (the dangerous kind)</td></tr>
+      <tr><td>Endothelial function</td><td>Improved vascular elasticity; better RBC deformability through capillaries</td></tr>
+      <tr><td>Antithrombotic</td><td>Reduced platelet aggregation</td></tr>
+      <tr><td>Anti-inflammatory</td><td>Resolvin/protectin signalling</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>The cholesterol myth.</strong> Harris explicitly debunks the popular belief that fish oil lowers cholesterol. It does not. It lowers <em>triglycerides</em> — a different lipid fraction. This distinction matters when interpreting clinical trials.</p>
+
+  <p><strong>Mortality signal.</strong> Across multiple cohorts the highest Omega-3 Index quintile is associated with lower all-cause mortality, lower cardiovascular death, and lower cancer death. Japan, with a national average O3I of ~8–9%, has a life expectancy roughly 4–4.5 years longer than the US — despite higher smoking prevalence and higher mean blood pressure. Harris is appropriately cautious: omega-3 is <em>"one brick in the wall,"</em> not the entire explanation, but the signal is consistent.</p>
+
+  <!-- =================== SECTION 6 =================== -->
+  <h2 id="s6">6. The Atrial Fibrillation Controversy — Putting the Risk in Context</h2>
+
+  <p><strong>What was found.</strong> Two large pharmaceutical trials (REDUCE-IT with icosapent ethyl; STRENGTH with combined EPA/DHA) reported a small absolute increase in new-onset atrial fibrillation (AF) among high-risk cardiac patients receiving 3–4 g/day of prescription omega-3. In typical numbers: ~3% AF in the omega-3 arm vs ~2% in placebo — a 50% relative increase, but only ~1% in absolute terms.</p>
+
+  <p><strong>What it does and does not mean.</strong> Important framing from Harris:</p>
+  <ul>
+    <li>Atrial fibrillation is <em>not</em> a fatal arrhythmia. It is the upper-chamber rhythm — annoying, embolic-stroke-relevant, but qualitatively different from a ventricular arrhythmia, which kills.</li>
+    <li>The signal appeared only at <strong>high pharmaceutical doses (3–4 g/day) in already high-risk cardiac populations</strong> — not at the supplemental doses (500–1,500 mg/day) most consumers take.</li>
+    <li>In the same trials, those high-dose omega-3 arms also showed <strong>~20% reduction in stroke</strong> — a clinically more important endpoint, since the principal harm of AF is embolic stroke.</li>
+    <li>An unpublished Harris-led meta-analysis (referenced in the episode) finds the AF signal is confined to that high-dose, high-risk setting and is <strong>absent in dietary supplement users and fish eaters</strong>.</li>
+  </ul>
+
+  <p><strong>Bottom line for the typical consumer:</strong> the AF signal does not apply at supplemental dosing. Stroke risk is reduced. Net cardiovascular benefit remains favourable.</p>
+
+  <!-- =================== SECTION 7 =================== -->
+  <h2 id="s7">7. Brain Health — Dementia, Cognition and the B-Vitamin Interaction</h2>
+
+  <p><strong>Structural foundation.</strong> DHA is a major structural constituent of neuronal membranes and is the most abundant fatty acid in the retina. Brain DHA concentration is laid down primarily in utero and during the first ~1,000 days of life, with continued accumulation through ~age 18–20. Maternal DHA status during pregnancy and lactation is therefore the single most consequential exposure window.</p>
+
+  <p><strong>Autopsy and prospective evidence.</strong> Brains from people who died with dementia show lower omega-3 content than age-matched controls. In prospective cohorts a higher Omega-3 Index predicts lower incidence of all-cause dementia and Alzheimer's disease. The Framingham Offspring Study (Schaefer et al., 2006; Sala-Vila et al., 2022) is a key reference: upper-quartile plasma DHA was associated with roughly half the dementia risk of the lower three quartiles.</p>
+
+  <p><strong>The B-vitamin interaction.</strong> Harris highlights an important effect modifier: when blood homocysteine is high (a marker of poor B-vitamin status — particularly B12, folate, B6), the cognitive benefit of omega-3 supplementation appears to vanish. Both nutrient systems must be adequate. This is a recurring finding from the Oxford OPTIMA trials.</p>
+
+  <p><strong>The evidence ceiling.</strong> Most dementia data are observational. Definitive randomised trials would require multi-decade follow-up beginning in midlife or earlier — practically infeasible. Harris is candid: <em>the brain–omega-3 connection rests largely on epidemiology</em>, augmented by mechanistic plausibility and short-term cognitive trials in mild cognitive impairment.</p>
+
+  <p><strong>An important caveat about brain DHA.</strong> The blood–brain barrier limits incorporation of dietary DHA into adult brain tissue. Supplementation reliably raises liver, kidney, heart, and red-cell DHA; brain tissue DHA in adults is far less responsive. The cognitive benefit may therefore operate through cerebral vascular effects, neuroinflammation reduction, and CSF pool turnover rather than brain-tissue substrate replacement.</p>
+
+  <!-- =================== SECTION 8 =================== -->
+  <h2 id="s8">8. Mental Health — EPA-Dominant Supplements for Anxiety and Depression</h2>
+
+  <p><strong>The counterintuitive finding.</strong> Conventional wisdom predicted that DHA — the structural brain omega-3 — would be the antidepressant component. The data say otherwise. Meta-analyses (Martins, J Am Coll Nutr 2009; Liao et al., Translational Psychiatry 2019; Kelaiditi et al., Br J Nutr 2023) consistently find that <strong>EPA-enriched preparations (≥60% EPA of total EPA + DHA), at 1–2 g/day</strong>, produce the largest reductions in depressive symptoms. DHA-dominant supplements show little or no antidepressant effect.</p>
+
+  <p><strong>Mechanism.</strong> The leading hypothesis is anti-inflammatory: EPA does not deposit substantially in brain tissue but circulates in cerebral blood and serves as substrate for E-series resolvins. Neuroinflammation is increasingly implicated in major depression, providing biological rationale for EPA's effect.</p>
+
+  <p><strong>Anxiety.</strong> Evidence is thinner but trending similarly. A new paper accepted at the time of recording (Berry/Harris collaboration via Zoe PREDICT) reports that higher Omega-3 Index is associated with both lower current anxiety and lower incident anxiety over time.</p>
+
+  <p><strong>Clinical positioning.</strong> Omega-3 supplementation is <em>adjunctive</em>, not a replacement for evidence-based depression treatment. For patients already engaged in psychotherapy or pharmacotherapy, an EPA-dominant 1–2 g/day adjunct is well-supported and very low risk.</p>
+
+  <!-- =================== SECTION 9 =================== -->
+  <h2 id="s9">9. Practical Sources — SMASH Fish, Algal Oil and the Mercury Myth</h2>
+
+  <h3>The SMASH framework</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Fish</th><th>Approx. EPA + DHA per serving</th><th>Mercury concern?</th></tr></thead>
+    <tbody>
+      <tr><td>Salmon (wild or farmed)</td><td>~1,200–2,000 mg</td><td>Negligible</td></tr>
+      <tr><td>Mackerel (Atlantic, Pacific — NOT king)</td><td>~1,000–2,500 mg</td><td>Negligible (king mackerel: yes)</td></tr>
+      <tr><td>Anchovies</td><td>~1,200 mg</td><td>Negligible</td></tr>
+      <tr><td>Sardines</td><td>~1,000–1,400 mg</td><td>Negligible</td></tr>
+      <tr><td>Herring</td><td>~1,500–2,000 mg</td><td>Negligible</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>The mercury myth.</strong> Harris is forceful: the early-2000s FDA mercury advisory has been substantially over-applied. Only four fish carry meaningful mercury — <em>swordfish, tilefish, king mackerel, and shark</em> — none of which are commonly eaten. The omega-3-rich fish (salmon, sardines, mackerel, herring, anchovies) are essentially mercury-free. Avoiding fish out of mercury fear, particularly during pregnancy, is a net harm.</p>
+
+  <p><strong>Farmed salmon.</strong> Concerns from ~2010 about PCBs and dioxins in farmed Atlantic salmon were valid at the time but have been largely addressed by industry feed reform. Current farmed salmon is safe. One trade-off worth noting: as feed has shifted toward plant oils (driven by fish-oil cost), the per-serving omega-3 content of farmed salmon has fallen and now approximates wild salmon levels rather than exceeding them.</p>
+
+  <p><strong>Algal oil.</strong> Microalgae are the original biosynthetic source of marine EPA/DHA — fish merely concentrate what they consume up the food chain. Cultivated algal oil delivers preformed EPA and/or DHA without animal sourcing. It is the appropriate option for vegans, vegetarians, and anyone wanting to bypass marine supply chains. Quality and concentration are now commercially comparable to fish oil.</p>
+
+  <!-- =================== SECTION 10 =================== -->
+  <h2 id="s10">10. The Omega-6 to Omega-3 Ratio Myth</h2>
+
+  <p><strong>Why Harris dismisses it.</strong> The omega-6:omega-3 ratio dates to 1980s nutritional thinking and rests on the assumption that omega-6 fatty acids — principally linoleic acid in seed oils — are pro-inflammatory and harmful. The contemporary evidence does not support this:</p>
+
+  <ul>
+    <li>Higher blood linoleic acid is associated with <strong>lower</strong> risk of coronary heart disease, type 2 diabetes, and all-cause mortality (Marklund et al., Circulation 2019; Wu et al., Diabetes Care 2017).</li>
+    <li>Increasing dietary linoleic acid does not raise tissue arachidonic acid in adults consuming Western diets (Rett &amp; Whelan, Nutr Metab 2011).</li>
+    <li>A ratio is mathematically uninformative without absolute amounts: a low-omega-6 / low-omega-3 diet and a high-omega-6 / high-omega-3 diet can have identical ratios but radically different physiological consequences.</li>
+  </ul>
+
+  <p><strong>Practical correction.</strong> If a person's omega-6:omega-3 ratio is unfavourable, the productive intervention is to <em>raise the omega-3 numerator</em>, not to restrict the omega-6 denominator. Seed-oil avoidance is unsupported by current evidence.</p>
+
+  <!-- =================== SECTION 11 =================== -->
+  <h2 id="s11">11. Practical Protocol — Dosing, Forms and Lifelong Supplementation</h2>
+
+  <h3>Recommended daily intake (combined EPA + DHA)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Population</th><th>Daily target</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>General adult</td><td>~1,000 mg/day</td><td>Approximates historical Japanese intake</td></tr>
+      <tr><td>Pregnancy &amp; lactation</td><td>≥ 200–300 mg DHA, plus EPA</td><td>Critical window for fetal/infant brain</td></tr>
+      <tr><td>Children</td><td>Age-appropriate dosing acceptable from infancy</td><td>Safe; long-term cognitive benefits suspected</td></tr>
+      <tr><td>Cardiovascular secondary prevention</td><td>1–2 g/day (clinical decision)</td><td>Higher prescription doses reserved for hypertriglyceridaemia</td></tr>
+      <tr><td>Adjunct to depression treatment</td><td>1–2 g/day, EPA-dominant (≥60% EPA)</td><td>Best evidence at this ratio and dose</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Choosing a supplement</h3>
+  <ul>
+    <li><strong>Read the back of the label.</strong> "1,000 mg fish oil" on the front commonly contains only 250–300 mg combined EPA + DHA. The relevant number is the EPA + DHA total per serving — not total fish oil.</li>
+    <li><strong>Prefer triglyceride form over ethyl ester.</strong> Triglyceride (TG) and re-esterified triglyceride (rTG) forms are better absorbed than the ethyl ester (EE) form used in some prescription products. Look for "natural triglyceride" or "rTG" on the label.</li>
+    <li><strong>Higher concentration generally means cleaner product.</strong> Higher-cost concentrates typically have undergone more purification. "Fishy burp" comes from oxidised non-omega-3 lipids, not from the omega-3s themselves — but it is a reasonable freshness indicator.</li>
+    <li><strong>Algal oil</strong> is a fully appropriate substitute for those avoiding marine sources. It is the original source organism in any case.</li>
+    <li><strong>Dose then re-test.</strong> Berry and Harris both recommend testing the Omega-3 Index, supplementing for ~3–4 months (one full red-cell turnover), then re-testing — "titrate" rather than guess. There is meaningful inter-individual variability in response.</li>
+  </ul>
+
+  <h3>Safety and overdose</h3>
+  <p><strong>No clinically meaningful overdose has been documented at supplemental doses.</strong> Bleeding time increases slightly at high doses (similar in magnitude to low-dose aspirin) but is not associated with clinically significant bleeding even on top of antiplatelet or anticoagulant therapy. Concurrent use with warfarin, DOACs, or aspirin is acceptable in most clinical settings.</p>
+
+  <p><strong>Time course of perceived effect.</strong> Most omega-3 effects (triglycerides, blood pressure, Omega-3 Index) are biochemical and not subjectively felt. The most commonly reported subjective effect — improvement in joint stiffness or arthralgia — typically appears at 3–5 months as tissue levels rise.</p>
+
+  <!-- =================== BOTTOM LINE =================== -->
+  <h2 id="bottom-line">Bottom Line</h2>
+  <div class="bottom-line-box">
+    <p>The contemporary case for marine omega-3s is more cohesive — and more conservative — than either the 1990s heart-disease enthusiasm or the 2018 Cochrane backlash suggested. EPA and DHA are bioactive, modifiable, biomarkable, and cumulatively important across the cardiovascular, neurocognitive, and affective domains. The Omega-3 Index is a defensible biomarker with validated risk thresholds (≥ 8% optimal, ≤ 4% high-risk), and the great majority of Western adults sit below the optimal target.</p>
+    <p>The evidence-grounded action items are straightforward: get the index measured, aim for ~1,000 mg combined EPA + DHA daily through SMASH fish or supplementation (triglyceride form, label verified), choose EPA-dominant preparations if depression is the indication, and disregard the omega-6:omega-3 ratio as a useful metric. The remaining genuine uncertainties — whether brain DHA in adults is meaningfully modifiable, whether long-term randomised dementia prevention is achievable, and the exact mechanism of EPA in mood — do not undermine the practical recommendation, which carries minimal risk and a coherent multi-organ benefit profile.</p>
+  </div>
+
+  <!-- =================== REFERENCES =================== -->
+  <h2 id="refs">Selected References</h2>
+  <div class="refs">
+    <h3>Foundational Omega-3 Index work</h3>
+    <p>Harris WS, von Schacky C. The Omega-3 Index: a new risk factor for death from coronary heart disease? <em>Prev Med.</em> 2004;39(1):212–20.</p>
+    <p>Harris WS, Del Gobbo L, Tintle NL. The Omega-3 Index and relative risk for coronary heart disease mortality: estimation from 10 cohort studies. <em>Atherosclerosis.</em> 2017;262:51–4.</p>
+    <p>Harris WS. Recent studies confirm the utility of the omega-3 index. <em>Curr Opin Clin Nutr Metab Care.</em> 2025;28(2):91–5.</p>
+    <p>Schuchardt JP, Beinhorn P, Hu XF, et al. Omega-3 world map: 2024 update. <em>Prog Lipid Res.</em> 2024;95:101286.</p>
+
+    <h3>Cardiovascular outcomes</h3>
+    <p>Bhatt DL, Steg PG, Miller M, et al. Cardiovascular risk reduction with icosapent ethyl for hypertriglyceridemia (REDUCE-IT). <em>N Engl J Med.</em> 2019;380:11–22.</p>
+    <p>Nicholls SJ, Lincoff AM, Garcia M, et al. Effect of high-dose omega-3 fatty acids vs corn oil on major adverse cardiovascular events (STRENGTH). <em>JAMA.</em> 2020;324(22):2268–80.</p>
+    <p>Manson JE, Cook NR, Lee IM, et al. Marine n-3 fatty acids and prevention of cardiovascular disease and cancer (VITAL). <em>N Engl J Med.</em> 2019;380:23–32.</p>
+    <p>Yokoyama M, Origasa H, Matsuzaki M, et al. Effects of EPA on major coronary events in hypercholesterolaemic patients (JELIS). <em>Lancet.</em> 2007;369(9567):1090–8.</p>
+
+    <h3>Brain health, cognition and dementia</h3>
+    <p>Schaefer EJ, Bongard V, Beiser AS, et al. Plasma phosphatidylcholine docosahexaenoic acid content and risk of dementia and Alzheimer disease: the Framingham Heart Study. <em>Arch Neurol.</em> 2006;63(11):1545–50.</p>
+    <p>Sala-Vila A, Satizabal CL, Tintle N, et al. Red blood cell DHA is inversely associated with risk of incident Alzheimer's disease and all-cause dementia: Framingham Offspring Study. <em>Nutrients.</em> 2022;14(12):2408.</p>
+    <p>Wei BZ, Li L, Dong CW, et al. The relationship of omega-3 fatty acids with dementia and cognitive decline: evidence from prospective cohort studies. <em>Am J Clin Nutr.</em> 2023;117(6):1096–109.</p>
+    <p>Jernerén F, Elshorbagy AK, Oulhaj A, et al. Brain atrophy in cognitively impaired elderly: the importance of long-chain ω-3 fatty acids and B-vitamin status in a randomized trial. <em>Am J Clin Nutr.</em> 2015;102(1):215–21.</p>
+
+    <h3>Depression and mental health</h3>
+    <p>Martins JG. EPA but not DHA appears to be responsible for the efficacy of omega-3 long chain polyunsaturated fatty acid supplementation in depression. <em>J Am Coll Nutr.</em> 2009;28(5):525–42.</p>
+    <p>Liao Y, Xie B, Zhang H, et al. Efficacy of omega-3 PUFAs in depression: a meta-analysis. <em>Transl Psychiatry.</em> 2019;9(1):190.</p>
+    <p>Kelaiditi E, Marlow G, Kushinski J, et al. Effects of long-chain omega-3 PUFAs on reducing anxiety and/or depression in adults: a systematic review and meta-analysis of RCTs. 2023.</p>
+    <p>Mocking RJT, Harmsen I, Assies J, et al. Meta-analysis and meta-regression of omega-3 PUFAs in major depressive disorder. <em>Transl Psychiatry.</em> 2016;6(3):e756.</p>
+
+    <h3>Linoleic acid and the omega-6 question</h3>
+    <p>Marklund M, Wu JHY, Imamura F, et al. Biomarkers of dietary omega-6 fatty acids and incident cardiovascular disease and mortality: an individual-level pooled analysis of 30 cohort studies. <em>Circulation.</em> 2019;139(21):2422–36.</p>
+    <p>Wu JHY, Marklund M, Imamura F, et al. Omega-6 fatty acid biomarkers and incident type 2 diabetes: pooled analysis of individual-level data for 39,740 adults. <em>Lancet Diabetes Endocrinol.</em> 2017;5(12):965–74.</p>
+    <p>Rett BS, Whelan J. Increasing dietary linoleic acid does not increase tissue arachidonic acid content in adults consuming Western-type diets: a systematic review. <em>Nutr Metab.</em> 2011;8:36.</p>
+  </div>
+
+  <footer>
+    Show: Zoe Science &amp; Nutrition with Jonathan Wolf · Co-host: Prof. Sarah Berry · Guest: Dr. Bill Harris, PhD — Sanford School of Medicine, University of South Dakota · Prepared from podcast transcript, April 2026.
+  </footer>
+
+</main>
+
+</div>
+</body>
+</html>
