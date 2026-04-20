@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walker on Sleep — DOAC Podcast Briefing</title>
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-elev: #131a2e;
+    --bg-card: #1a2340;
+    --border: #243056;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #2dd4bf;
+    --accent-dim: #14b8a6;
+    --heading: #5eead4;
+    --warn: #fbbf24;
+    --link: #7dd3fc;
+    --table-head: #1e293b;
+    --table-row-alt: #0f172a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; color: var(--accent); }
+
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-elev);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .sidebar h2 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .sidebar .show-tag {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+  .sidebar nav { display: flex; flex-direction: column; gap: 4px; }
+  .sidebar nav a {
+    display: block;
+    padding: 7px 12px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    font-size: 13.5px;
+  }
+  .sidebar nav a:hover {
+    background: var(--bg-card);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    text-decoration: none;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .back-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  main {
+    flex: 1;
+    max-width: 920px;
+    padding: 48px 56px 80px;
+  }
+
+  .eyebrow {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h1.title {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 19px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  .meta {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 24px;
+    font-size: 14.5px;
+  }
+  .meta dt {
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    align-self: center;
+  }
+  .meta dd { margin: 0; color: var(--text); }
+  .prep-line {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 56px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 28px 0 10px;
+  }
+  p { margin: 0 0 14px; }
+  strong { color: #f1f5f9; font-weight: 600; }
+  em { color: var(--text); }
+
+  .takeaways-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0 16px;
+  }
+  .takeaways-box ul { margin: 0; padding-left: 22px; }
+  .takeaways-box li { margin-bottom: 12px; }
+  .takeaways-box li:last-child { margin-bottom: 0; }
+
+  ul, ol { padding-left: 22px; margin: 8px 0 18px; }
+  li { margin-bottom: 8px; }
+
+  .table-wrap { overflow-x: auto; margin: 18px 0 22px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--bg-card);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  thead th {
+    background: var(--table-head);
+    color: var(--accent);
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--table-row-alt); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .bottom-line-box {
+    background: linear-gradient(135deg, rgba(45,212,191,0.06), rgba(20,184,166,0.04));
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--heading);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 16px 0 32px;
+  }
+  .bottom-line-box p:last-child { margin-bottom: 0; }
+
+  .refs h3 {
+    color: var(--accent);
+    margin-top: 24px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .refs p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    text-indent: -16px;
+    line-height: 1.5;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    main { padding: 32px 24px 60px; max-width: 100%; }
+    h1.title { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <h2>Podcast Briefing</h2>
+  <div class="show-tag">DOAC — Matthew Walker on Sleep</div>
+
+  <nav>
+    <a href="#home">Overview</a>
+    <a href="#takeaways">Key Takeaways</a>
+    <a href="#s1">1. The Four Macros (QQRT)</a>
+    <a href="#s2">2. Quantity — 7 to 9</a>
+    <a href="#s3">3. Quality — SE ≥ 85%</a>
+    <a href="#s4">4. Regularity — The Big Signal</a>
+    <a href="#s5">5. Timing, Light & Temperature</a>
+    <a href="#s6">6. Sleep Banking</a>
+    <a href="#s7">7. Architecture & REM</a>
+    <a href="#s8">8. Insomnia & 20-Min Rule</a>
+    <a href="#s9">9. Supplements</a>
+    <a href="#s10">10. The DORAs</a>
+    <a href="#s11">11. Nightmares & Suicidality</a>
+    <a href="#s12">12. Fasting & Sleep</a>
+    <a href="#bottom-line">Bottom Line</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Back to Longevity Research</a>
+</aside>
+
+<main id="home">
+
+  <div class="eyebrow">Podcast Briefing · Sleep Science & Sleep Medicine</div>
+  <h1 class="title">The Diary of a CEO</h1>
+  <p class="subtitle">Updated Sleep Science — The Four Macros, Sleep Banking, Regularity, Supplements, Nightmares &amp; the New DORAs Class of Sleep Medication</p>
+
+  <dl class="meta">
+    <dt>Host</dt><dd>Steven Bartlett</dd>
+    <dt>Guest</dt><dd>Dr. Matthew Walker, PhD — Professor of Neuroscience and Psychology, UC Berkeley; Director, Center for Human Sleep Science; author of <em>Why We Sleep</em></dd>
+  </dl>
+
+  <p class="prep-line">Prepared from podcast transcript — April 2026</p>
+
+  <p>This briefing distils a long-form interview between Steven Bartlett and Dr. Matthew Walker into an evidence-graded executive summary. It covers Walker's updated framework of the four sleep macros (Quantity, Quality, Regularity, Timing), the new UK Biobank data that elevates regularity over duration as the dominant mortality predictor, the validated phenomenon of prospective sleep banking, an honest appraisal of common supplements (magnesium, ashwagandha, melatonin), the genuinely novel DORAs class of sleep medication and its glymphatic-clearance data, and the clinically important suicidality signal carried by repetitive nightmares.</p>
+
+  <h2 id="takeaways">Key Takeaways</h2>
+  <div class="takeaways-box">
+    <ul>
+      <li><strong>Regularity beats duration.</strong> In a UK Biobank analysis of ~61,000 accelerometer-tracked participants (Windred et al., <em>SLEEP</em> 2024), the most sleep-regular quintile had a 48% lower all-cause mortality risk, 39% lower cancer mortality risk, and 57% lower cardiometabolic mortality risk than the least regular quintile. Head-to-head, regularity was the stronger mortality predictor than duration.</li>
+      <li><strong>Sleep banking is real (unlike debt repayment).</strong> You cannot fully repay a weekday sleep debt on weekends, but you CAN build a prospective sleep credit. Army personnel who extended sleep for a week before a sleep-deprivation bout suffered ~40% less cognitive impairment than those who went in "net neutral." Actionable for clinicians, shift workers, and new parents.</li>
+      <li><strong>The four macros of good sleep: Q-Q-R-T.</strong> Quantity (7–9 hours), Quality (sleep efficiency ≥ 85% plus deep-wave power), Regularity (±15 min bedtime/wake time), and Timing (alignment with circadian phase). Legs of a chair, not a ranked list — any one failing destabilises the whole.</li>
+      <li><strong>Magnesium is mostly expensive urine.</strong> Common forms (oxide, citrate) don't cross the blood–brain barrier. Only magnesium L-threonate has direct CNS evidence, and even that benefit appears only in magnesium-deficient individuals. Ashwagandha and phosphatidylserine have more defensible mechanisms via HPA-axis/cortisol modulation — useful for the "tired but wired" phenotype.</li>
+      <li><strong>Melatonin is not a sleep drug.</strong> It's a darkness signal, not a sleep generator. Meta-analyses show it reduces sleep onset by only ~3.4 minutes and improves sleep efficiency by ~2.2% (barely more than placebo). Legitimate indications are narrow — jet lag and circadian phase disorders — at 0.1–3 mg, not the 10–20 mg supra-physiological doses commonly sold. US pediatric melatonin poisoning admissions rose 530% over a decade.</li>
+      <li><strong>The DORAs — a genuinely new class of sleep medication.</strong> Suvorexant, lemborexant, and daridorexant are dual orexin receptor antagonists that dial down the wakefulness drive rather than sedating the cortex (as benzos and Z-drugs do). RCTs show they not only improve sleep continuity but also enhance glymphatic clearance of beta-amyloid and tau — the Alzheimer's proteins. First sleep medication that appears to produce functional rather than "junk" sleep.</li>
+      <li><strong>Nightmares are a suicidality biomarker.</strong> Short sleep (&lt; 6 h) predicts a 100–150% higher risk of suicidal ideation; nightmares predict an 800% higher risk. Repetitive nightmares should not be dismissed. First-line treatment: Image Rehearsal Therapy (IRT), exploiting memory reconsolidation. Prazosin is a secondary option supported by VA PTSD data.</li>
+    </ul>
+  </div>
+
+  <h2 id="s1">1. The Four Macros of Sleep — QQRT</h2>
+
+  <p><strong>The framing.</strong> Walker offers a clean mnemonic analogous to dietary macronutrients. Sleep has four macros — <strong>Quantity, Quality, Regularity, and Timing</strong>. They function as the four legs of a chair: if any one becomes unstable, the chair topples. This replaces earlier, narrower framings that focused almost exclusively on duration.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Macro</th><th>Target</th><th>Measurement</th></tr></thead>
+    <tbody>
+      <tr><td>Quantity</td><td>7–9 hours per night</td><td>Self-report; sleep tracker total sleep time</td></tr>
+      <tr><td>Quality</td><td>Sleep efficiency ≥ 85%; preserved slow-wave power</td><td>Sleep tracker for continuity; polysomnography for slow-wave amplitude</td></tr>
+      <tr><td>Regularity</td><td>Bedtime and wake time variable by ≤ ±15 min</td><td>Sleep Regularity Index (SRI) from accelerometry; self-tracked times</td></tr>
+      <tr><td>Timing</td><td>Alignment with individual chronotype and circadian phase</td><td>Dim-light melatonin onset (lab); sleep-midpoint proxy from tracker</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>Why all four matter.</strong> Walker has updated his prior emphasis on duration. Quality is at least as predictive of mortality as quantity, and arguably more predictive of mental-health outcomes. Regularity, which he had previously underweighted, turns out to beat duration head-to-head for all-cause mortality prediction. Timing is less studied in mortality terms but essential for circadian alignment.</p>
+
+  <h2 id="s2">2. Quantity — The 7-to-9-Hour Window and the Myth of 8</h2>
+
+  <p><strong>The range, not the number.</strong> The "8 hours" prescription is a heuristic, not a biological constant. The evidence-based range is 7–9 hours. Shorter than 7 begins to predict dose-dependent increases in all-cause mortality; longer than 9 is associated (though reverse-causation is more plausible — illness causes long sleep, not the reverse).</p>
+
+  <p><strong>Survival vs thriving.</strong> Walker makes an important distinction critics often conflate: 7 hours is the approximate threshold for <em>survival</em> (below which mortality rises), but not for <em>thriving</em>. A person sleeping 6 hours may show a modest mortality difference from a 7-hour sleeper but a substantial difference in cognitive performance, mood, glucose handling, and immune function. The "minimum to survive" is not the "optimum to function."</p>
+
+  <p><strong>No magic parental immunity.</strong> The evidence does not support the folk belief that parents develop biological resilience to sleep loss. Walker notes the opposite evolutionary logic: once reproduction has occurred, mother nature's selection pressure on parental sleep is reduced — offspring become the protected variable.</p>
+
+  <p><strong>Genetic short sleepers exist but are rare.</strong> Four identified genes (including DEC2 and ADRB1) produce true short-sleep phenotypes who thrive on 6.25 hours. Prevalence of the ADRB1 variant is ~0.004 — statistically, a person is more likely to be struck by lightning in their lifetime. The overwhelming majority who "feel fine" on 6 hours are not genetic short sleepers; they have adapted to chronic deficit and have lost accurate self-perception of it.</p>
+
+  <h2 id="s3">3. Quality — Continuity and Slow-Wave Power</h2>
+
+  <p><strong>Two operational definitions.</strong> Sleep quality comprises (1) continuity — sleeping in one or two consolidated bouts rather than fragmented awakenings, measurable as the sleep-efficiency metric (time asleep / time in bed), and (2) slow-wave power — the amplitude and abundance of the large, slow oscillations of deep non-REM sleep, measurable only by polysomnography.</p>
+
+  <p><strong>Sleep efficiency target: ≥ 85%.</strong> This is the actionable consumer metric. Most wearables (Oura, Whoop, Apple Watch, Fitbit) report sleep efficiency. A value below 85% indicates either insomnia-type fragmentation or sleep-onset problems and warrants attention. Values consistently in the 92–98% range are common in well-sleeping adults.</p>
+
+  <p><strong>The mental-health signal.</strong> When duration and quality are both tested against mental-health outcomes (depression, anxiety, emotional regulation), quality carries a larger predictive signal than quantity. This aligns with the deep-sleep / REM architecture discussion in Section 7 — what the brain does during sleep matters as much as how long it does it.</p>
+
+  <h2 id="s4">4. Regularity — The Largest New Signal in Sleep Epidemiology</h2>
+
+  <p><strong>The landmark study.</strong> Windred et al. (<em>SLEEP</em> 2024) analysed &gt; 10 million hours of accelerometer data from 60,977 UK Biobank participants, calculating a Sleep Regularity Index (SRI) for each. The top four SRI quintiles, compared to the least regular quintile, showed:</p>
+
+  <ul>
+    <li>20–48% lower all-cause mortality risk</li>
+    <li>16–39% lower cancer mortality risk</li>
+    <li>22–57% lower cardiometabolic mortality risk</li>
+  </ul>
+
+  <p><strong>Regularity beat duration head-to-head.</strong> When both metrics were entered into the same Cox model, SRI was the stronger predictor of all-cause mortality. This was the finding that forced Walker to update his own teaching: regularity is not a minor third cousin to duration — it is, at least for mortality, the dominant sleep variable.</p>
+
+  <p><strong>Definition of "regular."</strong> Most-regular participants in these analyses go to bed and wake up within a ±15-minute window — total wiggle room of 30 minutes across the whole night. Least-regular participants varied by 90–120 minutes. The actionable threshold for the consumer is tight: same bedtime, same wake time, weekdays and weekends.</p>
+
+  <p><strong>Why regularity works — the suprachiasmatic nucleus.</strong> The master circadian clock sits in the suprachiasmatic nucleus of the hypothalamus and is entrained by two kinds of signal: light (the dominant zeitgeber) and behaviour (bedtime, wake time, meal timing, activity). Regular behavioural timing feeds the clock a clean, coherent phase signal, which in turn improves both the quantity and quality of sleep downstream. Irregular timing fragments the signal — the clock drifts, sleep pressure and melatonin rhythms fall out of phase, and both sleep architecture and downstream metabolic regulation suffer.</p>
+
+  <h2 id="s5">5. Timing — Light, Behaviour and Circadian Alignment</h2>
+
+  <p><strong>The dark-deprivation problem.</strong> Modern indoor lighting delivers what Walker calls "junk light" — low-intensity but biologically active artificial illumination that fools the SCN into reading evening as daytime. Suppressed melatonin onset delays sleep and shallows it.</p>
+
+  <p><strong>The 1-hour dimming protocol.</strong> Walker's prescription: one hour before bed, drop all home lighting to &lt; 30 lux and prefer warm (red-shifted) over cool light. A free lux-meter app makes this measurable. Intervention studies show that 90 minutes of &lt; 30-lux warm light before bed increased REM sleep by 18%.</p>
+
+  <p><strong>The blue-light myth (partially).</strong> Walker revises earlier blue-light alarmism. Michael Gradisar's work shows that the primary sleep-disruptive effect of evening devices is not spectral (blue-wavelength melatonin suppression) but behavioural — attention capture, dopaminergic engagement, and "bed rotting" that delays sleep onset. The problematic population is narrower than once thought: individuals high in neuroticism, impulsivity, or anxiety are most vulnerable. For most people, the 1-hour digital detox is a behavioural intervention, not a spectral one.</p>
+
+  <p><strong>Temperature.</strong> Walker recommends a bedroom target of 18 °C (67 °F). Core body temperature must drop ~0.5–1 °C to initiate and maintain sleep; a cool environment facilitates this drop. Pairs well with dimming and digital detox as a cheap, reversible, evidence-supported protocol.</p>
+
+  <h2 id="s6">6. Sleep Banking — Prospective Credit Works; Retrospective Repayment Does Not</h2>
+
+  <p><strong>The bidirectional finding.</strong> Walker presents two distinct datasets that together redefine the "sleep bank" metaphor.</p>
+
+  <h3>(a) Weekend catch-up — partial credit, only for the heart</h3>
+
+  <p>A UK Biobank analysis of ~90,000 participants compared three groups: (1) consistent short sleep all week; (2) short sleep on weekdays plus catch-up sleep on weekends; (3) consistent sufficient sleep. The catch-up group had 20% lower cardiovascular risk than the chronically short group — but both were worse than the consistent-sufficient group. Weekend catch-up cannot repay cognitive, immune, or metabolic debt (work by Kenneth Wright at CU Boulder). Cardiovascular system is the apparent exception, and the metaphor <em>does not</em> generalise to the rest of physiology.</p>
+
+  <h3>(b) Sleep banking — prospective credit works well</h3>
+
+  <p>Thomas Balkin's group at the Walter Reed Army Institute of Research flipped the direction of the question. Instead of asking whether past debt can be repaid, they asked whether future debt can be pre-funded. Army personnel given the opportunity to extend sleep from ~7.5 to ~8.5–9 hours per night for a week before a sleep-deprivation bout suffered <strong>40% less</strong> cognitive impairment than controls who entered the bout at net-neutral sleep. Prospective sleep credit is real.</p>
+
+  <p><strong>Clinical and operational relevance.</strong> Directly applicable to physicians about to go on call, new parents approaching a birth, athletes facing competition travel, aviators, military operators, and knowledge workers facing a work sprint. If you know a sleep deficit is coming, extending sleep in the week prior measurably attenuates its impact.</p>
+
+  <h2 id="s7">7. Sleep Architecture — Why the Last Two Hours Carry Most of Your REM</h2>
+
+  <p><strong>The 90-minute cycle — but not really 90.</strong> The familiar "90-minute NREM/REM cycle" is a population average. Individuals vary from 70 to 120 minutes. Consumer devices that claim to wake you at the "ideal point of your 90-minute cycle" are using a hard-coded average and cannot know your personal cycle length.</p>
+
+  <p><strong>Ratio shifts across the night.</strong> Within each cycle, the ratio of deep non-REM sleep to REM sleep inverts across the night. The first half of the night is deep-NREM-dominant (physical restoration, growth hormone, glymphatic clearance, memory consolidation). The second half is REM-dominant (emotional processing, creativity, memory integration).</p>
+
+  <p><strong>The 25% → 60–70% problem.</strong> If you cut 2 hours off the end of an 8-hour night (waking at 6 am instead of 8 am), you lose 25% of total sleep but 60–70% of your REM — because REM is disproportionately concentrated in those final hours. This is why sleeping 15 minutes later is one of the most efficient single interventions for increasing REM.</p>
+
+  <h3>What REM sleep does</h3>
+
+  <p><strong>Two functions, both essential.</strong> REM provides (1) emotional first-aid — during REM, the stress-related neurochemical noradrenaline is completely shut off (the only time in the 24-hour cycle this happens), which allows emotional memories to be reprocessed in a neurochemically safe state. Walker's "overnight therapy" hypothesis predicts that failure of this process underlies PTSD. And (2) informational alchemy — REM performs non-obvious associative linking across the back-catalogue of memory, producing the "sleep on it" effect that is a cross-cultural linguistic universal.</p>
+
+  <h2 id="s8">8. Insomnia — Conditioned Arousal and the 20-Minute Rule</h2>
+
+  <p><strong>The maintenance principle.</strong> Whatever triggered a bout of insomnia (bereavement, work stress, illness, jet lag) is rarely what maintains it. The maintaining mechanism is <em>conditioned arousal</em> — the brain's associative learning binds "bed" to "wakefulness" after repeated failed sleep attempts, the way a dental chair becomes associated with pain after repeated bad visits.</p>
+
+  <p><strong>The 20-minute rule.</strong> If sleep hasn't come within ~20 minutes, leave the bed. Move to a different room in dim light. Read, listen to a podcast or audiobook, do something low-stimulation. Return to bed only when sleepy. This breaks the bed–wakefulness association and rebuilds the bed–sleep association. It is the core behavioural mechanism of CBT-I, the first-line evidence-based treatment for chronic insomnia.</p>
+
+  <h3>3 am awakenings</h3>
+
+  <p><strong>Do not look at the clock.</strong> Two reasons: (1) looking increases anxiety and cortisol; (2) the brain learns that 3 am is the designated wake time and reinforces the pattern.</p>
+
+  <p><strong>Get the mind off itself.</strong> Evidence-supported techniques share the principle of redirecting attention away from the attempt to sleep (which, like trying to remember a name, pushes the target further away). Options: guided meditation, box breathing (e.g. 4-7-8), body scan, or vivid mental walk through a familiar route. Allison Harvey's UC Berkeley group showed the mental-walk technique significantly reduced sleep-onset latency. Sleep stories (Calm's commercial application of this principle) work for the same reason.</p>
+
+  <p><strong>An anecdotal caveat about dark content.</strong> Walker speculates that true-crime or violent content used for sleep induction may impair deep-sleep architecture. The evidence base here is thin; low-arousal, non-violent content is the safer default.</p>
+
+  <h2 id="s9">9. Supplements — Magnesium, Ashwagandha, Phosphatidylserine, and the Melatonin Problem</h2>
+
+  <p><strong>The meta-principle.</strong> If a supplement genuinely produced robust sleep, pharma would have commercialised it long ago. Ambien reached ~$4B in revenue in 22 months, a scale George Lucas took 30 years to reach with Star Wars. The absence of a blockbuster supplement is itself evidence that none of them works with pharmaceutical-grade efficacy.</p>
+
+  <h3>Magnesium</h3>
+
+  <p><strong>The blood-brain barrier problem.</strong> The common supplemental forms — magnesium oxide, magnesium citrate — do not meaningfully cross the blood-brain barrier. Sleep is produced in the brain; magnesium that cannot enter the brain cannot directly influence sleep generation. Walker's phrase: "expensive urine."</p>
+
+  <p><strong>Magnesium L-threonate.</strong> The one form with CNS penetration. Small RCTs show effects on cognition and sleep, but the effect appears restricted to individuals who are magnesium-deficient at baseline. In magnesium-replete individuals the benefit is minimal — the oxygen-saturation analogy: if you are already at 98.6% you cannot be pushed past 100%.</p>
+
+  <p><strong>Indirect benefit.</strong> Magnesium relaxes skeletal muscle, which signals via vagal afferents to promote parasympathetic tone. This may indirectly aid sleep initiation without requiring CNS penetration. Realistic framing: a small, adjunctive effect, not a sleep generator.</p>
+
+  <h3>Ashwagandha and phosphatidylserine</h3>
+
+  <p><strong>Target: HPA-axis overactivity.</strong> Both compounds reduce cortisol and shift autonomic tone toward the parasympathetic branch. Useful for the <em>"tired but wired"</em> phenotype — the person who is exhausted but cannot fall asleep because sympathetic activation remains high (common after stage performances, stressful workdays, late evening exercise).</p>
+
+  <p><strong>The cortisol caveat.</strong> Cortisol is not intrinsically bad. The normal diurnal rhythm peaks mid-morning and troughs at bedtime; this pattern is adaptive and necessary for morning alertness. Blanket cortisol suppression with ashwagandha or phosphatidylserine is appropriate only when the night-time cortisol curve is elevated. Insomnia patients often show precisely this pattern — cortisol that rises inappropriately before bed and spikes again mid-night, mirroring their sleep-onset and sleep-maintenance difficulties.</p>
+
+  <h3>Melatonin</h3>
+
+  <p><strong>Not a sleep drug.</strong> Melatonin is the neurochemical signal of darkness — the "starting official at the 100-metre race," not a runner in it. Meta-analyses of RCTs show melatonin reduces sleep-onset latency by only ~3.4 minutes and improves sleep efficiency by ~2.2% — effect sizes barely distinguishable from placebo. The placebo effect itself is the most reliable effect in pharmacology.</p>
+
+  <p><strong>Appropriate indications — narrow.</strong> (1) jet lag, where it provides an artificial darkness signal to shift circadian phase, and (2) circadian rhythm disorders such as advanced or delayed sleep-phase syndrome. Outside these, evidence of benefit is weak.</p>
+
+  <p><strong>Dosing — far below what is sold.</strong> Physiological dose: 0.1–3 mg. Commercial products commonly contain 5–20 mg — supra-physiological doses that produce a morning "melatonin hangover" because residual signalling persists into waking hours. Walker links this to excess morning caffeine consumption as a downstream consequence.</p>
+
+  <p><strong>Paediatric risk.</strong> US melatonin poisoning admissions in children rose 530% over a decade (JAMA-reported analysis). Melatonin is a bioactive hormone with developmental effects — juvenile-rat studies (1970s) showed testicular atrophy at high doses, and while human long-term data at pharmacological doses are absent, the precautionary principle favours conservative use in minors.</p>
+
+  <h2 id="s10">10. The DORAs — A Genuinely New Class of Sleep Medication</h2>
+
+  <p><strong>The evolution of sleep pharmacology.</strong> Sleep drugs have moved through three generations:</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Generation</th><th>Class</th><th>Mechanism</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>1.0</td><td>Benzodiazepines (Valium, Xanax)</td><td>GABA-A receptor agonism — cortical sedation</td><td>Not true sleep; high dependence/tolerance</td></tr>
+      <tr><td>2.0</td><td>Z-drugs (Ambien, Lunesta, Sonata)</td><td>Selective GABA-A agonism — cortical sedation</td><td>Still sedation, not sleep; impairs glymphatic clearance ~30–40%</td></tr>
+      <tr><td>3.0</td><td>DORAs — suvorexant, lemborexant, daridorexant</td><td>Dual orexin receptor antagonism — dials down wakefulness drive in the brainstem</td><td>First drugs to allow naturalistic sleep architecture</td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>The mechanism — by way of narcolepsy.</strong> Patients with narcolepsy are orexin-deficient — they fall asleep inappropriately during the day because their wakefulness drive cannot be sustained. Insomnia is conceptually the inverse: wakefulness drive is pathologically maintained at night. The DORAs selectively antagonise the orexin receptors OX1R and OX2R in the brainstem, attenuating wakefulness signalling without cortical sedation. Sleep is permitted rather than induced.</p>
+
+  <p><strong>The glymphatic finding — the "so what?" answered.</strong> A landmark study gave adults ≥ 50 years either a DORA or placebo, with lumbar punctures before and after sleep to measure cerebrospinal-fluid clearance of beta-amyloid and tau (the Alzheimer's pathology proteins). Not only did total sleep time and efficiency improve with the DORA — glymphatic clearance of beta-amyloid and tau was <em>greater</em> than with placebo. This is the first demonstration of a sleep medication producing sleep that is functionally superior, not merely quantitatively additive. Ambien, by contrast, reduces glymphatic pulsatile flow by 30–40%.</p>
+
+  <p><strong>Access and cost.</strong> In the US, coverage varies by payer; out-of-pocket pricing can reach $400/month. EU and UK availability is incomplete across the three agents. For the right patient — refractory insomnia in a middle-aged or older adult with cognitive-decline risk factors — the DORAs are the most rational pharmacological option currently available, and worth pursuing despite cost barriers.</p>
+
+  <h2 id="s11">11. Nightmares — A Suicidality Biomarker and the Case for Image Rehearsal Therapy</h2>
+
+  <p><strong>Definition.</strong> Nightmare disorder (not ordinary bad dreams) requires frequent (≥ 2×/week) vivid, emotionally disturbing dreams that wake the sleeper, produce daytime distress, and cannot be attributed to substance use. Ordinary bad dreams (once/month or less) are normal and probably adaptive.</p>
+
+  <p><strong>The suicidality signal.</strong> Short sleep (&lt; 6 h) predicts a 100–150% higher risk of suicidal ideation, attempts, and completion. Nightmares, independently, predict an <strong>800% higher</strong> risk. This is not thought to be causal — nightmares are not inducing suicidality — but they are an unusually sensitive distress beacon. A patient reporting repetitive nightmares warrants active screening for suicidal ideation and mood disorder.</p>
+
+  <h3>Treatment 1 — Image Rehearsal Therapy (IRT)</h3>
+
+  <p><strong>Mechanism: memory reconsolidation.</strong> Memories, once activated, become fragile and editable before being re-saved the following night. IRT exploits this: the patient, in session with a therapist, recalls the trauma-derived nightmare out loud and then deliberately rewrites its ending — typically, to a neutral or positive resolution. The rewritten version is rehearsed during wakefulness, reactivating and modifying the original memory trace. Over weeks, the repetitive nightmare attenuates or remits. IRT is probably more effective than prazosin for most non-combat populations and is first-line per current guidelines.</p>
+
+  <h3>Treatment 2 — Prazosin</h3>
+
+  <p><strong>The VA discovery.</strong> Prazosin, an α1-adrenergic antagonist originally prescribed as a blood-pressure medication, crosses the blood-brain barrier and lowers central noradrenaline. VA physicians observed that combat veterans with PTSD treated with prazosin reported cessation of repetitive nightmares — fitting Walker's theoretical model that repetitive PTSD nightmares reflect failed REM-sleep emotional processing under too-high noradrenaline. The drug is not universally effective (a recent large VA RCT was negative in its primary population), but for appropriately selected patients it remains a useful adjunct.</p>
+
+  <h2 id="s12">12. Fasting, Ketosis and Sleep</h2>
+
+  <p><strong>The bidirectional relationship.</strong> Short sleep impairs appetite regulation (leptin falls, ghrelin rises, net +30–40% hunger drive) and biases caloric disposal toward fat storage rather than lean-tissue maintenance. In a controlled dieting study, sleep-deprived dieters lost as much total weight as well-slept dieters, but <em>70% of their weight loss came from lean muscle mass rather than fat</em> — exactly the opposite of what dieters want.</p>
+
+  <p><strong>Fasting and ketosis shorten sleep — by design.</strong> When people enter caloric deficit or ketosis, they frequently report shorter sleep (5–6 h instead of their usual 7–8) with preserved or heightened daytime alertness. Mechanism: caloric deprivation upregulates orexin — the same wakefulness neurochemical the DORAs antagonise. Evolutionarily, this is adaptive: during food scarcity, staying awake longer to forage is selected for. The brain does not distinguish voluntary fasting from food scarcity.</p>
+
+  <p><strong>Practical guidance.</strong> The 5–6 hour fasting-state sleep is typically physiologically appropriate, not pathological. If adaptation is incomplete (first 1–3 weeks of ketogenic transition), sleep tracker scores commonly dip and recover. The primary concern is not the duration reduction itself but ensuring that fasting-induced sleep restriction does not become chronic baseline — the orexin-driven short sleep during fasting is a state, not a trait.</p>
+
+  <h2 id="bottom-line">Bottom Line</h2>
+  <div class="bottom-line-box">
+    <p>The updated sleep science since Walker's 2017 <em>Why We Sleep</em> converges on a more precise, more actionable prescription. The core reframing is that sleep is not one variable but four — Quantity, Quality, Regularity, Timing — and regularity has emerged as the dominant mortality predictor, surprising the field. The single cheapest, highest-yield intervention is fixing the bedtime and wake time to a ±15-minute window, seven days a week. The dimming-and-cooling protocol (&lt; 30 lux, 18 °C, 1 hour before bed) delivers measurable REM and quality gains at zero cost. Sleep banking is real prospectively, even though debt repayment is mostly a myth. Most supplements (magnesium, melatonin at commercial doses) do less than their marketing suggests; ashwagandha and phosphatidylserine are defensible only for the "tired but wired" HPA-overactive phenotype. The genuinely transformative development on the pharmacology side is the DORA class — the first sleep medication that produces functional rather than junk sleep, with added benefit on glymphatic clearance of Alzheimer's proteins.</p>
+    <p>For clinicians — anaesthesiologists included — the practical synthesis is that before one reaches for pharmacology, fixing regularity, dimming, cooling, and conditioned-arousal extinction (the 20-minute rule) addresses the large majority of non-pathological sleep complaints. For refractory insomnia, DORAs are now the most rational first pharmacological choice over Z-drugs given the glymphatic signal. For patients presenting with repetitive nightmares, screen for suicidality — the 8-fold risk elevation is clinically consequential — and refer for Image Rehearsal Therapy or, if unavailable, a prazosin trial.</p>
+  </div>
+
+  <h2 id="refs">Selected References</h2>
+  <div class="refs">
+    <h3>Sleep regularity and mortality</h3>
+    <p>Windred DP, Burns AC, Lane JM, Saxena R, Rutter MK, Cain SW, Phillips AJK. Sleep regularity is a stronger predictor of mortality risk than sleep duration: a prospective cohort study. <em>Sleep.</em> 2024;47(1):zsad253.</p>
+    <p>Cribb L, Sha R, Yiallourou S, Grima NA, Cavuoto M, Baril AA, Pase MP. Sleep regularity and mortality: a prospective analysis in the UK Biobank. <em>eLife.</em> 2023;12:RP88359.</p>
+    <p>Chung J, Goodman MO, Huang T, et al. Objectively regular sleep patterns and mortality in a prospective cohort: the Multi-Ethnic Study of Atherosclerosis. <em>J Sleep Res.</em> 2024;33(3):e14048.</p>
+    <p>Zuraikat FM, Makarem N, Redline S, et al. Sleep regularity and cardiometabolic health. <em>Curr Diab Rep.</em> 2020;20(8):38.</p>
+
+    <h3>Sleep banking and catch-up sleep</h3>
+    <p>Rupp TL, Wesensten NJ, Bliese PD, Balkin TJ. Banking sleep: realization of benefits during subsequent sleep restriction and recovery. <em>Sleep.</em> 2009;32(3):311–21.</p>
+    <p>Depner CM, Melanson EL, Eckel RH, et al. Ad libitum weekend recovery sleep fails to prevent metabolic dysregulation during a repeating pattern of insufficient sleep and weekend recovery sleep. <em>Curr Biol.</em> 2019;29(6):957–967.e4.</p>
+
+    <h3>Melatonin, evening light, and circadian entrainment</h3>
+    <p>Ferracioli-Oda E, Qawasmi A, Bloch MH. Meta-analysis: melatonin for the treatment of primary sleep disorders. <em>PLoS One.</em> 2013;8(5):e63773.</p>
+    <p>Gradisar M, Wolfson AR, Harvey AG, et al. The sleep and technology use of Americans: findings from the National Sleep Foundation's 2011 Sleep in America poll. <em>J Clin Sleep Med.</em> 2013;9(12):1291–9.</p>
+    <p>Lelak K, Vohra V, Neuman MI, Toce MS, Sethuraman U. Pediatric melatonin ingestions — United States, 2012–2021. <em>MMWR Morb Mortal Wkly Rep.</em> 2022;71(22):725–9.</p>
+
+    <h3>DORAs (dual orexin receptor antagonists) and Alzheimer's-related clearance</h3>
+    <p>Lucey BP, Liu H, Toedebusch CD, et al. Suvorexant acutely decreases tau phosphorylation and Aβ in the human CNS. <em>Ann Neurol.</em> 2023;94(1):27–40.</p>
+    <p>Herring WJ, Ceesay P, Snyder E, et al. Polysomnographic assessment of suvorexant in patients with probable Alzheimer's disease dementia and insomnia: a randomized trial. <em>Alzheimers Dement.</em> 2020;16(3):541–51.</p>
+    <p>Mignot E, Mayleben D, Fietze I, et al. Safety and efficacy of daridorexant in patients with insomnia disorder: results from two multicentre, randomised, double-blind, placebo-controlled, phase 3 trials. <em>Lancet Neurol.</em> 2022;21(2):125–39.</p>
+
+    <h3>Nightmares, PTSD and image rehearsal therapy</h3>
+    <p>Krakow B, Hollifield M, Johnston L, et al. Imagery rehearsal therapy for chronic nightmares in sexual assault survivors with posttraumatic stress disorder: a randomized controlled trial. <em>JAMA.</em> 2001;286(5):537–45.</p>
+    <p>Raskind MA, Peskind ER, Chow B, et al. Trial of prazosin for post-traumatic stress disorder in military veterans. <em>N Engl J Med.</em> 2018;378(6):507–17.</p>
+    <p>Pigeon WR, Bishop TM, Krueger KM. Insomnia as a precipitating factor in new onset mental illness: a systematic review of recent findings. <em>Curr Psychiatry Rep.</em> 2017;19(8):44.</p>
+    <p>Sjöström N, Wærn M, Hetta J. Nightmares and sleep disturbances in relation to suicidality in suicide attempters. <em>Sleep.</em> 2007;30(1):91–5.</p>
+  </div>
+
+  <footer>
+    Show: The Diary of a CEO with Steven Bartlett · Guest: Dr. Matthew Walker, PhD — UC Berkeley · Prepared from podcast transcript, April 2026.
+  </footer>
+
+</main>
+
+</div>
+</body>
+</html>
