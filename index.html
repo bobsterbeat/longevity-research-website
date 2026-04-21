@@ -210,18 +210,49 @@
                 width: 100% !important;
             }
         }
+
+        /* Welcome mode: hide sidebar/mobile chrome and let the hero fill the viewport */
+        body.welcome-mode {
+            background-color: #0a0f1e;
+        }
+        body.welcome-mode .sidebar,
+        body.welcome-mode .mobile-sidebar,
+        body.welcome-mode .mobile-overlay,
+        body.welcome-mode #mobile-header {
+            display: none !important;
+        }
+        body.welcome-mode .main-content {
+            margin-left: 0 !important;
+            width: 100% !important;
+            padding-top: 0 !important;
+        }
+        body.welcome-mode #welcome {
+            max-width: none;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body.welcome-mode #welcome > #hero {
+            width: 100%;
+            max-width: 1200px;
+            margin: 24px;
+            border: none;
+        }
     </style>
 </head>
 <body class="bg-white">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         <div class="sidebar hidden md:flex flex-col w-64 fixed h-screen overflow-y-auto">
-            <div class="p-6 border-b border-gray-700">
+            <a href="#welcome" class="p-6 border-b border-gray-700 block hover:bg-gray-800 transition-colors">
                 <h2 class="text-xl font-bold text-white">Longevity</h2>
                 <p class="text-xs text-gray-400 mt-1">Research & Protocols</p>
-            </div>
+            </a>
 
             <nav class="flex-1 p-4 space-y-2">
+                <a href="#welcome" class="sidebar-link block py-2 text-sm font-medium">Welcome</a>
                 <a href="#home" class="sidebar-link block py-2 text-sm font-medium">Home</a>
                 <a href="#section-1" class="sidebar-link block py-2 text-sm font-medium">Biology of Aging</a>
                 <a href="#section-2" class="sidebar-link block py-2 text-sm font-medium">Exercise</a>
@@ -259,7 +290,7 @@
         </div>
 
         <!-- Mobile Header -->
-        <div class="md:hidden fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 flex justify-between items-center">
+        <div id="mobile-header" class="md:hidden fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 z-40 flex justify-between items-center">
             <h2 class="text-lg font-bold">Longevity Research</h2>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -274,6 +305,7 @@
         <!-- Mobile Sidebar -->
         <div class="mobile-sidebar md:hidden bg-gray-900" id="mobile-sidebar">
             <nav class="p-4 space-y-2">
+                <a href="#welcome" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Welcome</a>
                 <a href="#home" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Home</a>
                 <a href="#section-1" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Biology of Aging</a>
                 <a href="#section-2" class="sidebar-link block py-2 text-sm font-medium text-gray-300" onclick="closeMobileSidebar()">Exercise</a>
@@ -309,21 +341,138 @@
         <!-- Main Content -->
         <div class="main-content md:ml-64 w-full md:w-[calc(100%-256px)]">
             <div class="md:pt-0 pt-20">
-                <!-- Home Section -->
-                <section id="home" class="content-section p-8 md:p-12 max-w-4xl mx-auto">
-                    <h1 class="text-4xl font-bold mb-2">Longevity Research</h1>
-                    <p class="text-xl text-gray-600 mb-8">Evidence-Based Review of the Science of Aging, Intervention Strategies & Practical Protocols</p>
+                <!-- Welcome Section (landing) -->
+                <section id="welcome" class="content-section p-8 md:p-12 max-w-4xl mx-auto">
 
-                    <div class="mb-4 text-gray-700">
-                        <p><strong>By R. Aldwinckle</strong></p>
-                        <p class="text-sm text-gray-600">Last Updated: April 4, 2026</p>
-                    </div>
+                    <!-- ================== HERO SECTION START ================== -->
+                    <section id="hero" style="position: relative; padding: 64px 48px 56px; margin-bottom: 48px; background: radial-gradient(ellipse at top right, rgba(45, 212, 191, 0.08), transparent 60%), #0a0f1e; border-radius: 12px; border: 1px solid #243056; overflow: hidden;">
 
-                    <div class="mb-12 p-4 bg-gray-50 border-l-4 border-accent rounded">
-                        <p class="text-gray-700">This comprehensive review synthesizes current evidence on the biology of aging, evidence-based interventions, and practical protocols for promoting healthspan and longevity. Navigate through sections using the sidebar to explore specific topics, or use the provider finder to locate testing services in your area.</p>
-                    </div>
+                      <!-- DNA helix decorative pattern, top-right -->
+                      <svg style="position: absolute; top: 0; right: 0; width: 340px; height: 340px; opacity: 0.35; pointer-events: none;" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <g stroke="#2dd4bf" stroke-width="1" fill="none" opacity="0.6">
+                          <path d="M 60 40 Q 180 100 60 160 Q 180 220 60 280" />
+                          <path d="M 140 40 Q 20 100 140 160 Q 20 220 140 280" />
+                        </g>
+                        <g fill="#2dd4bf">
+                          <circle cx="60" cy="40" r="3"/>
+                          <circle cx="140" cy="40" r="3"/>
+                          <circle cx="100" cy="100" r="2.5"/>
+                          <circle cx="60" cy="160" r="3"/>
+                          <circle cx="140" cy="160" r="3"/>
+                          <circle cx="100" cy="220" r="2.5"/>
+                          <circle cx="60" cy="280" r="3"/>
+                          <circle cx="140" cy="280" r="3"/>
+                        </g>
+                        <g stroke="#2dd4bf" stroke-width="0.6" opacity="0.4">
+                          <line x1="60" y1="40" x2="140" y2="40"/>
+                          <line x1="60" y1="160" x2="140" y2="160"/>
+                          <line x1="60" y1="280" x2="140" y2="280"/>
+                        </g>
+                        <g stroke="#5eead4" stroke-width="1" fill="none" opacity="0.3">
+                          <path d="M 260 80 Q 200 140 260 200 Q 320 140 260 80 Z"/>
+                          <circle cx="260" cy="140" r="4" fill="#5eead4"/>
+                        </g>
+                      </svg>
 
-                    <h2 class="text-2xl font-bold mb-8">Research Topics</h2>
+                      <!-- Two-column layout: headline left, recent-items right -->
+                      <div class="hero-grid" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; position: relative; z-index: 2;">
+
+                        <!-- LEFT: Headline, byline, CTAs -->
+                        <div>
+                          <div style="display: inline-block; padding: 5px 12px; border: 0.5px solid rgba(45, 212, 191, 0.3); border-radius: 999px; margin-bottom: 20px;">
+                            <span style="color: #2dd4bf; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;">Evidence-based research · Last updated April 2026</span>
+                          </div>
+
+                          <h1 style="font-size: 44px; font-weight: 500; color: #f1f5f9; margin: 0 0 16px; line-height: 1.1; letter-spacing: -0.015em;">Longevity Research<br/>&amp; Protocols</h1>
+
+                          <p style="font-size: 17px; color: #94a3b8; margin: 0 0 20px; line-height: 1.55; max-width: 520px;">A synthesis of aging biology, intervention strategies, and practical protocols — drawn from peer-reviewed literature and structured for clinical and self-directed application.</p>
+
+                          <p style="margin: 0 0 32px; font-size: 13px; color: #94a3b8; letter-spacing: 0.02em;">Curated by <span style="color: #e2e8f0; font-weight: 500;">R. Aldwinckle</span> <span style="color: #64748b;">BMedSci BMBS FRCA</span></p>
+
+                          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="#section-1" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #2dd4bf; color: #0a0f1e; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.15s ease;">Start with Biology of Aging <span style="font-size: 11px;">→</span></a>
+                            <a href="#home" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: transparent; color: #e2e8f0; border: 0.5px solid #243056; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.15s ease;">Browse all topics</a>
+                          </div>
+                        </div>
+
+                        <!-- RIGHT: Recently Added panel -->
+                        <div style="background: rgba(19, 26, 46, 0.6); border: 0.5px solid #243056; border-radius: 8px; padding: 18px 20px;">
+                          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 0.5px solid #243056;">
+                            <span style="color: #2dd4bf; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;">Recently added</span>
+                            <span style="color: #64748b; font-size: 11px;">3 new</span>
+                          </div>
+
+                          <a href="walker-sleep-briefing.html" style="display: block; padding: 10px 0; text-decoration: none; border-bottom: 0.5px solid rgba(36, 48, 86, 0.5);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                              <span style="font-size: 11px; color: #5eead4; font-weight: 500;">Podcast · Sleep</span>
+                              <span style="font-size: 11px; color: #64748b;">Apr 20</span>
+                            </div>
+                            <p style="margin: 0 0 2px; font-size: 14px; color: #e2e8f0; font-weight: 500; line-height: 1.3;">Walker: Sleep Science</p>
+                            <p style="margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.4;">Four sleep macros, regularity beats duration, DORAs</p>
+                          </a>
+
+                          <a href="harris-omega3-briefing.html" style="display: block; padding: 10px 0; text-decoration: none; border-bottom: 0.5px solid rgba(36, 48, 86, 0.5);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                              <span style="font-size: 11px; color: #5eead4; font-weight: 500;">Podcast · Nutrition</span>
+                              <span style="font-size: 11px; color: #64748b;">Apr 20</span>
+                            </div>
+                            <p style="margin: 0 0 2px; font-size: 14px; color: #e2e8f0; font-weight: 500; line-height: 1.3;">Harris: Omega-3s</p>
+                            <p style="margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.4;">Omega-3 Index, EPA vs DHA, the omega-6 myth</p>
+                          </a>
+
+                          <a href="rhonda-patrick-doac-briefing.html" style="display: block; padding: 10px 0 0; text-decoration: none;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                              <span style="font-size: 11px; color: #5eead4; font-weight: 500;">Podcast · Multi</span>
+                              <span style="font-size: 11px; color: #64748b;">Apr 13</span>
+                            </div>
+                            <p style="margin: 0 0 2px; font-size: 14px; color: #e2e8f0; font-weight: 500; line-height: 1.3;">Rhonda Patrick: DOAC</p>
+                            <p style="margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.4;">Visceral fat, endocrine disruptors, peak span</p>
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- Stats strip -->
+                      <div class="hero-stats" style="display: flex; gap: 32px; margin-top: 40px; padding-top: 24px; border-top: 0.5px solid #243056; position: relative; z-index: 2; flex-wrap: wrap;">
+                        <div>
+                          <p style="margin: 0; font-size: 22px; color: #5eead4; font-weight: 500;">12</p>
+                          <p style="margin: 0; font-size: 12px; color: #94a3b8;">Topic chapters</p>
+                        </div>
+                        <div>
+                          <p style="margin: 0; font-size: 22px; color: #5eead4; font-weight: 500;">5</p>
+                          <p style="margin: 0; font-size: 12px; color: #94a3b8;">Podcast briefings</p>
+                        </div>
+                        <div>
+                          <p style="margin: 0; font-size: 22px; color: #5eead4; font-weight: 500;">1</p>
+                          <p style="margin: 0; font-size: 12px; color: #94a3b8;">Evidence review</p>
+                        </div>
+                        <div>
+                          <p style="margin: 0; font-size: 22px; color: #5eead4; font-weight: 500;">200+</p>
+                          <p style="margin: 0; font-size: 12px; color: #94a3b8;">Peer-reviewed refs</p>
+                        </div>
+                      </div>
+
+                      <!-- Responsive behavior: stack on mobile -->
+                      <style>
+                        @media (max-width: 768px) {
+                          #hero { padding: 40px 24px 32px !important; }
+                          #hero .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+                          #hero h1 { font-size: 32px !important; }
+                          #hero h1 br { display: none; }
+                          #hero .hero-stats { gap: 20px !important; }
+                        }
+                      </style>
+
+                    </section>
+                    <!-- ================== HERO SECTION END ================== -->
+
+                </section>
+
+                <!-- Home Section (topic cards) -->
+                <section id="home" class="content-section p-8 md:p-12 max-w-4xl mx-auto hidden">
+                    <h1 class="text-3xl font-bold mb-2">Longevity Research</h1>
+                    <p class="text-lg text-gray-600 mb-8">Choose a topic to explore, or jump into a podcast briefing or evidence review.</p>
+
+                    <h2 id="topics" class="text-2xl font-bold mb-8">Research Topics</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="section-card" onclick="window.location.hash='#section-1'">
                             <div class="section-card-icon">🧬</div>
@@ -1951,6 +2100,7 @@
                 section.classList.add('hidden');
             });
             document.getElementById(sectionId).classList.remove('hidden');
+            document.body.classList.toggle('welcome-mode', sectionId === 'welcome');
             window.scrollTo(0, 0);
         }
 
@@ -1983,7 +2133,7 @@
 
         // Hash routing
         function handleRoute() {
-            const hash = window.location.hash || '#home';
+            const hash = window.location.hash || '#welcome';
             const sectionId = hash.slice(1);
             const section = document.getElementById(sectionId);
             if (section) {
